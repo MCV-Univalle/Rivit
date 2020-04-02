@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - UIAudio
+  - Frog
+  - Background
+  - leaf
+  - Hoja2
+  - Hoja8
+  - Hoja5
+  - Hoja4
+  - Hoja3
+  - Hoja0
+  - Hoja6
+  - Hoja7
+  - Hoja1
+  - Destroyer
+  - lengua
+  - Negra
+  - Cafe
+  - Mariposa_dorada
+  - Roja
+  - Blanca
+  - GeneralGameManager
+  - PlayerSaltos
+  - ComSaltos
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
