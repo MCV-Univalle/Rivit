@@ -1,0 +1,226 @@
+fileFormatVersion: 2
+guid: 23daf0f12f6ec5a49a67dddf68f63e11
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8601179938620351442
+    second: Dragonfly-idl-2-transp 1_0
+  - first:
+      213: 5590903345250582527
+    second: Dragonfly-idl-2-transp 1_1
+  - first:
+      213: 1315863717172437938
+    second: Dragonfly-idl-2-transp 1_2
+  - first:
+      213: 2547108909295216754
+    second: Dragonfly-idl-2-transp 1_3
+  - first:
+      213: -4210211396213458627
+    second: Dragonfly-idl-2-transp 1_4
+  - first:
+      213: 3657865674350859370
+    second: Dragonfly-idl-2-transp 1_5
+  - first:
+      213: 8998821543003426490
+    second: Dragonfly-idl-2-transp 1_6
+  - first:
+      213: -3461676050575968702
+    second: Dragonfly-idl-2-transp 1_7
+  - first:
+      213: -1711168815096805364
+    second: Dragonfly-idl-2-transp 1_8
+  - first:
+      213: 4260497061042412746
+    second: Dragonfly-idl-2-transp 1_9
+  - first:
+      213: 4406444648532293190
+    second: Dragonfly-idl-2-transp 1_10
+  - first:
+      213: -4491339060757995236
+    second: Dragonfly-idl-2-transp 1_11
+  - first:
+      213: -3184789995842601733
+    second: Dragonfly-idl-2-transp 1_12
+  - first:
+      213: 1905067335508492770
+    second: Dragonfly-idl-2-transp 1_13
+  - first:
+      213: -6118528884310214329
+    second: Dragonfly-idl-2-transp 1_14
+  - first:
+      213: 1733551114780742006
+    second: Dragonfly-idl-2-transp 1_15
+  - first:
+      213: -1187280584524750806
+    second: Dragonfly-idl-2-transp 1_16
+  - first:
+      213: 2319267085557201942
+    second: Dragonfly-idl-2-transp 1_17
+  - first:
+      213: 2805432977277646652
+    second: Dragonfly-idl-2-transp 1_18
+  - first:
+      213: -2044283025847260801
+    second: Dragonfly-idl-2-transp 1_19
+  - first:
+      213: -7728512688861625006
+    second: Dragonfly-idl-2-transp 1_20
+  - first:
+      213: -8690457321168404679
+    second: Dragonfly-idl-2-transp 1_21
+  - first:
+      213: 8584531342956360509
+    second: Dragonfly-idl-2-transp 1_22
+  - first:
+      213: -4517173762204925318
+    second: Dragonfly-idl-2-transp 1_23
+  - first:
+      213: -9053401862389338460
+    second: Dragonfly-idl-2-transp 1_24
+  - first:
+      213: -930157546889171575
+    second: Dragonfly-idl-2-transp 1_25
+  - first:
+      213: 4031794023689258075
+    second: Dragonfly-idl-2-transp 1_26
+  - first:
+      213: 3029426951471506991
+    second: Dragonfly-idl-2-transp 1_27
+  - first:
+      213: 1820275186763015758
+    second: Dragonfly-idl-2-transp 1_28
+  - first:
+      213: -1125161545735360096
+    second: Dragonfly-idl-2-transp 1_29
+  - first:
+      213: -3940585174127761500
+    second: Dragonfly-idl-2-transp 1_30
+  - first:
+      213: 7486790819889976602
+    second: Dragonfly-idl-2-transp 1_31
+  - first:
+      213: -240514571127020679
+    second: Dragonfly-idl-2-transp 1_32
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 350
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
