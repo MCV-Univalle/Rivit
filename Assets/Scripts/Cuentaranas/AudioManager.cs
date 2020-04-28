@@ -30,6 +30,10 @@ namespace Cuentaranas
         private AudioClip _correct;
         [SerializeField]
         private AudioClip _wrong;
+        [SerializeField]
+        private AudioClip _pop;
+        [SerializeField]
+        private AudioClip _falling;
 
         void Awake()
         {
@@ -45,6 +49,16 @@ namespace Cuentaranas
         public void PlayWrong()
         {
             _audioSource.clip = _wrong;
+            _audioSource.Play();
+        }
+        public void PlayPop()
+        {
+            _audioSource.clip = _pop;
+            _audioSource.Play();
+        }
+        public void PlayFalling()
+        {
+            _audioSource.clip = _falling;
             _audioSource.Play();
         }
 

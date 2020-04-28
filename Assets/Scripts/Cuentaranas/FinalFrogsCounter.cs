@@ -6,22 +6,6 @@ namespace Cuentaranas
 {
     public class FinalFrogsCounter : MonoBehaviour
     {
-        private static FinalFrogsCounter _instance;
-            public static FinalFrogsCounter Instance
-            {
-                get
-                {
-                    //Logic to create the instance
-                    if(_instance == null)
-                    {
-                        GameObject go = new GameObject("FinalFrogsCounter");
-                        go.AddComponent<FinalFrogsCounter>();
-                        _instance = go.GetComponent<FinalFrogsCounter>(); 
-                    }
-                    return _instance;
-                }
-            }
-
         [SerializeField]
         private GameObject _layoutA;
         [SerializeField]
@@ -32,10 +16,7 @@ namespace Cuentaranas
         [SerializeField]
         private GameObject _frogPrefab;
 
-        void Awake()
-        {
-            _instance = this;
-        }
+        public bool IsCountingFinished {get; set;}
 
         public void PutActualFrogs(int num)
         //Assuming the maximun number of frogs is 9
@@ -67,28 +48,30 @@ namespace Cuentaranas
             foreach (Transform frog in childrenListC)
             {
                 frog.gameObject.gameObject.SetActive(true);
+                AudioManager.Instance.PlayPop();
                 yield return new WaitForSeconds(0.25f);
             }
             foreach (Transform frog in childrenListB)
             {
                 frog.gameObject.gameObject.SetActive(true);
+                AudioManager.Instance.PlayPop();
                 yield return new WaitForSeconds(0.25f);
             }
             foreach (Transform frog in childrenListA)
             {
                 frog.gameObject.gameObject.SetActive(true);
+                AudioManager.Instance.PlayPop();
                 yield return new WaitForSeconds(0.25f);
             }
+            yield return new WaitForSeconds(0.25f);
+            GameManager.Instance.PlayCorrectSound();
+            UIManager.Instance.ChangeCorrecText();
+            yield return new WaitForSeconds(1.4f);
+
+            IsCountingFinished = true;
             
-            yield return new WaitForSeconds(1.5f);
-
-            FinishDisplay();
-        }
-
-        public void FinishDisplay()
-        {
+            yield return new WaitForSeconds(1f);
             DestroyFrogs();
-            GameManager.Instance.StartNewIteration();
         }
 
         public void DestroyFrogs()

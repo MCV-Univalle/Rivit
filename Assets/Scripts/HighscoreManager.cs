@@ -93,7 +93,10 @@ public class HighScoreManager
         List<int> copy = new List<int>();
         for(int i = 0; i < _modesNum * 5; i++)
         {
+            if(i < list.Count)
             copy.Add(list[i]);
+            else
+            copy.Add(0);
         }
         return copy;
     }

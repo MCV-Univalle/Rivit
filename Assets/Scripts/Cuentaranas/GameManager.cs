@@ -25,6 +25,9 @@ namespace Cuentaranas
         private int _iterationNumber;
         [SerializeField]
         private GameObject _bush;
+        private IEnumerator _currentCoroutine;
+        public bool IsCorrect {get; set;}
+        public int Lifes {get; set;}
 
         void Awake()
         {
@@ -38,14 +41,18 @@ namespace Cuentaranas
             base.Start();
         }
         
-
         public override void StartGame()
         {
             StartNewIteration();
         }
         public override void FinishGame()
         {
-            Debug.Log("xD");
+            AdaptGameParameters();
+            FrogsManager.Instance.SetActiveEveryFrog(true);
+            StartCoroutine(FrogsManager.Instance.ReturnEveryFrogToOriginalPosition());
+            StopCoroutine(_currentCoroutine);
+            Score = 0;
+            UIManager.Instance.TimerText.gameObject.SetActive(false);
         }
         public override void AdaptGameParameters()
         {
@@ -53,6 +60,7 @@ namespace Cuentaranas
 
             if(GameMode == 0)
             {
+                Lifes = 3;
                 _iterationNumber = 5;
                 FrogsManager.Instance.RemainingJumps = 7;
                 FrogsManager.Instance.ActiveFrogsNumber = 1;
@@ -63,6 +71,7 @@ namespace Cuentaranas
             }
             if(GameMode == 1)
             {
+                Lifes = 3;
                 _iterationNumber = 10;
                 FrogsManager.Instance.RemainingJumps = 9;
                 FrogsManager.Instance.ActiveFrogsNumber = 1;
@@ -73,26 +82,31 @@ namespace Cuentaranas
             }
             if(GameMode == 2)
             {
-                Debug.Log("xD");
+                Lifes = 3;
+                _iterationNumber = 5;
+                FrogsManager.Instance.RemainingJumps = 7;
+                FrogsManager.Instance.ActiveFrogsNumber = 1;
+                FrogsManager.Instance.NormalSpeed = 0.35f;
+                FrogsManager.Instance.SpeedVariance = 0.04f;
+                FrogsManager.Instance.WaitTime = 2.03f;
+                FrogsManager.Instance.JumpingRatio = 10;
             }
         }
         public override void ShowResults()
         {
             base.ShowResults();
-            Score = 0;
         }
 
         public void StartNewIteration()
         {
             FrogsManager.Instance.SetActiveEveryFrog(true);
-            UIManager.Instance._userAnswer.gameObject.SetActive(false);
-            FrogsManager.Instance.ReturnEveryFrogToOriginalPosition();
-            if(_iterationNumber > 0)
+            StartCoroutine(FrogsManager.Instance.ReturnEveryFrogToOriginalPosition());
+            if((_iterationNumber > 0) && (Lifes > 0)) 
             {
                 IncreaseDifficulty();
-                _bush.SetActive(false);
                 _iterationNumber--;
-                StartCoroutine(BeginCountdown());
+                _currentCoroutine = BeginCountdown();
+                StartCoroutine(_currentCoroutine);
             }
             else ShowResults();
         }
@@ -148,26 +162,78 @@ namespace Cuentaranas
                     FrogsManager.Instance.WaitTime -= 0.25f;
                 }
             }
+
+            if(GameMode == 2)
+            {
+                if(_iterationNumber == 5)
+                {
+                    FrogsManager.Instance.RemainingJumps = 7;
+                    FrogsManager.Instance.ActiveFrogsNumber = 1;
+                    FrogsManager.Instance.NormalSpeed = 0.35f;
+                    FrogsManager.Instance.SpeedVariance = 0.04f;
+                    FrogsManager.Instance.WaitTime = 2.03f;
+                    FrogsManager.Instance.JumpingRatio = 10;
+                }
+                else if(_iterationNumber == 4)
+                {
+                    FrogsManager.Instance.RemainingJumps = 9;
+                    FrogsManager.Instance.ActiveFrogsNumber = 1;
+                    FrogsManager.Instance.NormalSpeed = 0.38f;
+                    FrogsManager.Instance.SpeedVariance = 0.04f;
+                    FrogsManager.Instance.WaitTime = 1.5f;
+                }
+                else if(_iterationNumber == 3)
+                {
+                    FrogsManager.Instance.RemainingJumps = 12;
+                    FrogsManager.Instance.ActiveFrogsNumber = 2;
+                    FrogsManager.Instance.NormalSpeed = 0.41f;
+                    FrogsManager.Instance.SpeedVariance = 0.045f;
+                    FrogsManager.Instance.WaitTime = 1.2f;
+                }
+                else if(_iterationNumber == 2)
+                {
+                    FrogsManager.Instance.RemainingJumps = 14;
+                    FrogsManager.Instance.ActiveFrogsNumber = 2;
+                    FrogsManager.Instance.NormalSpeed = 0.5f;
+                    FrogsManager.Instance.SpeedVariance = 0.05f;
+                    FrogsManager.Instance.WaitTime = 1.0f;
+
+                }
+                else if(_iterationNumber == 1)
+                {
+                    _iterationNumber = 5;
+                    FrogsManager.Instance.RemainingJumps = 18;
+                    FrogsManager.Instance.ActiveFrogsNumber = 3;
+                    FrogsManager.Instance.NormalSpeed = 0.6f;
+                    FrogsManager.Instance.SpeedVariance = 0.06f;
+                    FrogsManager.Instance.WaitTime = 0.9f;
+                }
+            }
         }
 
         public IEnumerator BeginCountdown()
         {
-
+            yield return new WaitForSeconds(0.2f);
+            _bush.SetActive(false);
             UIManager.Instance.TimerText.gameObject.SetActive(true);
             FrogsManager.Instance.SetActiveEveryFrog(true);
+            UIAudio.Instance.PlayCountingClip();
             for(int i = 3; i > 0; i--)
             {
                 UIManager.Instance.TimerText.text = "" + i;
                 yield return new WaitForSeconds(1f);
                 UIManager.Instance.TimerText.GetComponent<Animator>().SetTrigger("blink");
+                UIAudio.Instance.PlayCountingClip();
             }
+            AudioManager.Instance.PlayFalling();
             _bush.SetActive(true);
             UIManager.Instance.TimerText.gameObject.SetActive(false);
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(FrogsManager.Instance.DetermineFrogs());
+            yield return new WaitForSeconds(0.65f);
+            _currentCoroutine = FrogsManager.Instance.DetermineFrogs();
+            StartCoroutine(_currentCoroutine);
         }
 
-        public string CompareUserInput(int num)
+        public int CompareUserInput(int num)
         {
             int realNum = FrogsManager.Instance.CountFrogs();
             _bush.SetActive(false);
@@ -175,14 +241,22 @@ namespace Cuentaranas
             if(num == realNum)
             {
                 Score++;
-                AudioManager.Instance.PlayCorrect();
-                return "Correcto. :D";
+                IsCorrect = true;
             }
             else
             {
-                AudioManager.Instance.PlayWrong();
-                return "Sorry bro. :^(";
+                IsCorrect = false;
+                Lifes--;
             }
+            return realNum;
+        }
+
+        public void PlayCorrectSound()
+        {
+            if(IsCorrect)
+            AudioManager.Instance.PlayCorrect();
+            if(!IsCorrect)
+            AudioManager.Instance.PlayWrong();
         }
 
         // Update is called once per frame

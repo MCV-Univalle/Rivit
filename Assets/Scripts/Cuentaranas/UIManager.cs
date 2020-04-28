@@ -26,19 +26,17 @@ namespace Cuentaranas
         [SerializeField]
         private GameObject _questionPanel;
         [SerializeField]
-        private GameObject _correctPanel;  
+        private FinalFrogsCounter _finalFrogsCounter; 
         [SerializeField]
         private TMP_InputField _numberInputField;
         [SerializeField]
-        private TextMeshProUGUI _correctText;
-        [SerializeField]
-        private TextMeshProUGUI _numberText;
-        [SerializeField]
-        public TextMeshProUGUI _userAnswer; //Corregir
+        private GameObject _acceptButton;
 
         [SerializeField]
         private TextMeshProUGUI _timerText;
         public TextMeshProUGUI TimerText {get {return _timerText;}}
+        [SerializeField]
+        private TextMeshProUGUI _correctText;
 
         void Awake()
         {
@@ -52,46 +50,54 @@ namespace Cuentaranas
             base.Start();
         }
 
-        public void TemporalStartButton()
+        public void AcceptUserInput()
         {
-            GameManager.Instance.StartGame();
-        }
-
-        public void Accept()
-        {
-            _questionPanel.gameObject.SetActive(false);
             int num = int.Parse(_numberInputField.text);
-            _correctText.text = GameManager.Instance.CompareUserInput(num);
-            //_numberText.text = "" + FrogsManager.Instance.CountFrogs();
-            int realNumber = FrogsManager.Instance.CountFrogs();
-            Debug.Log(realNumber);
-            //StartCoroutine(ShowCorrectPanel());
-            FinalFrogsCounter.Instance.PutActualFrogs(realNumber);
-            _numberInputField.text = "";
-            _userAnswer.text = "" + num;
-            _userAnswer.gameObject.SetActive(true);
+            int realNumber = GameManager.Instance.CompareUserInput(num);
+            StartCoroutine(FadeElement(_acceptButton, false));
+            _finalFrogsCounter.PutActualFrogs(realNumber);
+            _numberInputField.interactable = false;
+            UIAudio.Instance.PlayConfirmationClip();
         }
 
-        public IEnumerator ShowCorrectPanel()
+        public void ChangeCorrecText()
         {
-            _correctPanel.gameObject.SetActive(true);
-            yield return new WaitForSeconds(3f);
-            _correctPanel.gameObject.SetActive(false);
+            if(GameManager.Instance.IsCorrect)
+            _correctText.text = "¡Correcto!";
+            else
+            _correctText.text = "Fallaste :(";
+            StartCoroutine(FadeElement(_correctText.gameObject, true));
+        }
+
+        public void FinishQuestion()
+        {
+            StartCoroutine(FadeElement(_questionPanel, false));
+            StartCoroutine(FadeElement(_topElements, true));
+            _blurSuperfice.gameObject.SetActive(false);
+            _finalFrogsCounter.IsCountingFinished = false;
             GameManager.Instance.StartNewIteration();
+            _numberInputField.text = "";
         }
 
         public IEnumerator MakeQuestion()
         {
+            _correctText.gameObject.SetActive(false);
+            _numberInputField.interactable = true;
             yield return new WaitForSeconds(2f);
-            _questionPanel.gameObject.SetActive(true);
-            _numberInputField.GetComponent<TMP_InputField>().Select();
+            StartCoroutine(FadeElement(_acceptButton, true));
+            _blurSuperfice.gameObject.SetActive(true);
+            StartCoroutine(FadeElement(_questionPanel, true));
+            StartCoroutine(FadeElement(_topElements, false));
+            yield return new WaitForSeconds(0.1f);
+            _numberInputField.gameObject.SetActive(true);
             _numberInputField.GetComponent<TMP_InputField>().ActivateInputField();
+            _numberInputField.GetComponent<TMP_InputField>().Select();
         }
 
-        // Update is called once per frame
         void Update()
         {
-            
+            if(_finalFrogsCounter.IsCountingFinished)
+            FinishQuestion();
         }
     }   
 }

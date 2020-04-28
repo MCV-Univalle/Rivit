@@ -36,6 +36,9 @@ namespace Cuentaranas
         public int JumpingRatio = 10; //If jumping ratio is 10, every frog will jump
         public bool MakeQuestion {get; set;}
 
+        [SerializeField]
+        private GameObject _collider; //When a frog enter, the jumping sound triggers
+
         void Awake()
         {
             _instance = this;
@@ -66,13 +69,13 @@ namespace Cuentaranas
                 int selectedFrog = Random.Range(0, 9);
                 int randNum = Random.Range(0, 10);
                 
-                if(!_frogsList[selectedFrog].GetComponent<CurvePath>().IsJumping)
+                if(!_frogsList[selectedFrog].GetComponent<JumpingFrogScript>().IsJumping)
                 {
                     if(!alreadySelected.Contains(selectedFrog))
                     {
                         float spd = Random.Range(NormalSpeed - SpeedVariance, NormalSpeed + SpeedVariance);
                         alreadySelected.Add(selectedFrog);
-                        _frogsList[selectedFrog].GetComponent<CurvePath>().MakeJump(spd);
+                        _frogsList[selectedFrog].GetComponent<JumpingFrogScript>().MakeJump(spd);
                         
                     }
                 }
@@ -85,16 +88,17 @@ namespace Cuentaranas
             foreach (var frog in _frogsList)
             {
                 Vector3 vec = new Vector3(0, 0, 0);
-                if(frog.GetComponent<CurvePath>().transform.position == vec) cont++;
+                if(frog.GetComponent<JumpingFrogScript>().transform.position == vec) cont++;
             }
             return cont;
         }
 
-        public void ReturnEveryFrogToOriginalPosition()
+        public IEnumerator ReturnEveryFrogToOriginalPosition()
         {
+            yield return new WaitForSeconds(0.2f);
             foreach(var frog in _frogsList)
             {
-                frog.GetComponent<CurvePath>().ReturnToOriginalPosition();
+                frog.GetComponent<JumpingFrogScript>().ReturnToOriginalPosition();
             }
         }
 
@@ -104,13 +108,6 @@ namespace Cuentaranas
             {
                 frog.gameObject.SetActive(value);
             }
-        }
-       
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
     }   
 }

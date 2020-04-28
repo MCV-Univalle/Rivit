@@ -46,6 +46,7 @@ public abstract class GameController : MonoBehaviour
         RestartGame = false;
         IsGameStarted = false;
         Fail = false;
+        Score = 0;
         InitializeHighScoreTables();
     }
 

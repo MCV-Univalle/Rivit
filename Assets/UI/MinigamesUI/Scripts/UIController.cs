@@ -57,7 +57,7 @@ public abstract class UIController : MonoBehaviour
     public TextMeshProUGUI Description {get {return _descriptionText;}}
     public int NumberOfModes {get { return _gameModeCarousel.NumberOfModes;}}
     [SerializeField]
-    private float timeToStartFading = 0.07F;
+    protected float timeToStartFading = 0.07F;
 
 
     //void Awake()
@@ -129,6 +129,7 @@ public abstract class UIController : MonoBehaviour
         StartCoroutine(FadeElement(_gameModeScreen, value));
         StartCoroutine(ShowBlurSuperfice(value));
         StartCoroutine(FadeElement(_topElements, !value));
+        StartCoroutine(FadeInAndOutWhiteScreen());
 
         int modeNum = _gameModeCarousel.Index;
         _gameManager.GameMode = modeNum;
@@ -280,6 +281,7 @@ public abstract class UIController : MonoBehaviour
 
     public virtual void ExecuteQuitButton()
     {
+        StartCoroutine(FadeInAndOutWhiteScreen());
         bool value = false;     
         _gameManager.IsPaused = value; 
         _gameManager.FinishGame();
@@ -291,6 +293,7 @@ public abstract class UIController : MonoBehaviour
 
     public virtual void ExecuteRestartButton()
     {
+        StartCoroutine(FadeInAndOutWhiteScreen());
         bool value = false;
         /*_gameManager.IsPaused = value;
         _gameManager.PauseGame(value);*/
@@ -322,5 +325,15 @@ public abstract class UIController : MonoBehaviour
         _whiteScreen.gameObject.GetComponent<UIFader>().FadeOut(1, true);
         StartCoroutine(_sceneSwitcher.GetComponent<SceneSwitcher>().GoToHomeScreen());
     }
+
+    public IEnumerator FadeInAndOutWhiteScreen() //Fade out and fade in
+        {
+            _whiteScreen.gameObject.SetActive(true);
+            CanvasGroup cg = _whiteScreen.gameObject.GetComponent<CanvasGroup>();
+            cg.alpha = 1;
+            //_whiteScreen.gameObject.GetComponent<UIFader>().FadeOut(1, true);
+            yield return new WaitForSeconds(0.15f);
+            StartCoroutine(FadeElement(_whiteScreen, false));
+        }
     
 } 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Cuentaranas
 {
-    public class CurvePath : MonoBehaviour
+    public class JumpingFrogScript : MonoBehaviour
     {
         //This script makes the traslation of an gameobject following a Bezier Curve with three points.
 
@@ -49,7 +49,9 @@ namespace Cuentaranas
 
         public void ReturnToOriginalPosition()
         {
+            IsJumping = false;
             transform.position = _originalPosition;
+            
         }
         
 
@@ -59,19 +61,17 @@ namespace Cuentaranas
             _count = 0.0f;
             _isInitialPoint = DetermineDirection();
             _speed = speed;
-            //StartCoroutine(PlaySound());
+            PlaySound(false);
         }
 
-        public IEnumerator PlaySound()
+        public void PlaySound(bool val)
         {
             if(_isInitialPoint)
             {
-                yield return new WaitForSeconds(0.1f);
                 GetComponent<AudioSource>().Play();
             }
-            else
+            else if(val)
             {
-                yield return new WaitForSeconds(_speed * 2);
                 GetComponent<AudioSource>().Play();
             }
         }
