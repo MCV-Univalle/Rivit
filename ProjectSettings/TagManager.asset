@@ -27,6 +27,9 @@ TagManager:
   - GeneralGameManager
   - PlayerSaltos
   - ComSaltos
+  - FirePoint
+  - 12
+  - 13
   layers:
   - Default
   - TransparentFX

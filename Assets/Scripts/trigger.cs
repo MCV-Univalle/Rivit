@@ -30,18 +30,20 @@ public class trigger : MonoBehaviour
 
     public GameObject leaf;
     public Color colorLeaf;
-    public string ubicacion;
+    private control manejador;
 
     // Start is called before the first frame update
     void Start()
     {
+        manejador = control.Instance();
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -50,7 +52,8 @@ public class trigger : MonoBehaviour
         {
 
             colorLeaf = leaf.GetComponent<SpriteRenderer>().color;
-            ubicacion = leaf.gameObject.tag;
+            manejador.posActualJugador = leaf.gameObject.tag;
+    
 
         }
     }

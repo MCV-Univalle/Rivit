@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0389e56b8079633409904900495c3ec6, type: 3}
+  m_Name: Mode Game
+  m_EditorClassIdentifier: 
+  image: {fileID: -4477398174307103122, guid: 92ad5018b6eb6ac4392fca023266bfec, type: 3}
+  modeName: Eat Frog
+  description: devora la mayor cantidad de insectos posibles antes que se acabe la
+    energia

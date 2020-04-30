@@ -27,7 +27,7 @@ namespace Prueba
 
         void Start()
         {
-            _gameManager = GameManager.Instance;
+            
             base.Start();
         }
 

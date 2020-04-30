@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbejaMove : MonoBehaviour
+namespace Eat_frog_Game
+{
+    public class AbejaMove : MonoBehaviour
 {
     // Start is called before the first frame updat
     private int ZigZagMove,TypeMove;
-    public int Resistencia;
-
+    public int Resistencia; 
     public float Timee;
     public float vel;
-    private Objectivo objectivo;
-    private ControlScore score;
-    private FrogController frog;
+    private Objectivo objectivo; 
     private bool Change_Direction,Invisiblee;
 
     void Awake() {
-        score = FindObjectOfType<ControlScore>();
+        
         objectivo = FindObjectOfType<Objectivo>();
-        frog = FindObjectOfType<FrogController>();
         
     }
 
@@ -88,7 +86,7 @@ public class AbejaMove : MonoBehaviour
     }
 
     void aumVel(){
-        if(score.score >= 150){
+        if(GameManager.Instance.Score >= 150){
             vel+=0.5f;
         }
     }
@@ -123,30 +121,31 @@ public class AbejaMove : MonoBehaviour
 
         if(other.gameObject.tag == "lengua")
         {
-            if(!frog.notoco){
-            if(gameObject.tag == "Blanca"){
-                Resistencia++;
-                print(Resistencia);
-                objectivo.Resistencia = Resistencia;
-                if(Resistencia == 3){
+            bool lim = GameManager.Instance.limitreached;
+            if(!lim){
+                Debug.Log(GameManager.Instance.limitreached+"abeja"); 
+                if(gameObject.tag == "Blanca"){
+                    //Resistencia++;
+                    print(Resistencia);
+                    objectivo.Resistencia = Resistencia;
                     Destroy(gameObject);
                 }
-            }
-            
-            if(gameObject.tag == "Roja"){
-                Resistencia++;
-                objectivo.Resistencia = Resistencia;
-                if(Resistencia == 2){
+                
+                if(gameObject.tag == "Roja"){
+                    //Resistencia++;
+                    objectivo.Resistencia = Resistencia;
                     Destroy(gameObject);
                 }
-            }
 
-            if(gameObject.tag == "Negra" || gameObject.tag =="Cafe" || gameObject.tag == "Mariposa_dorada")
-            {
-               Destroy(gameObject);
+                if(gameObject.tag == "Negra" || gameObject.tag =="Cafe" || gameObject.tag == "Mariposa_dorada")
+                {
+                Destroy(gameObject);
+                }
+                
             }
-            }
+                
         }
+
         if(other.gameObject.tag ==  "Destroyer")
         {
         
@@ -155,4 +154,6 @@ public class AbejaMove : MonoBehaviour
         }
 
         }
+}
+
 }

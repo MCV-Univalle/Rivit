@@ -1,47 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class estirolengua : MonoBehaviour
+namespace Eat_frog_Game
 {
-    private LineRenderer lineRenderer;
+    public class estirolengua : MonoBehaviour
+{
+    private LineRenderer _lineRenderer;
     private float lineWhit = 0.15f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startWidth = lineWhit;
-        lineRenderer.enabled = false;
-
-        
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.startWidth = lineWhit; 
+        _lineRenderer.enabled = false;
     }
 
-    public void RenderLine(Vector3 endposition, bool enablerender){
+    public void RenderLine(Vector3 endposition, bool enablerender, Transform startposicion){
+        
         if(enablerender){
-            if(!lineRenderer.enabled){
-                lineRenderer.enabled = true;
+            if(!_lineRenderer.enabled){
+                _lineRenderer.enabled = true;   
             }
         } else {
-            if(lineRenderer.enabled){
-                lineRenderer.enabled = false;
+            if(_lineRenderer.enabled){
+               _lineRenderer.enabled = false;
             }else{
-                 lineRenderer.enabled = true;
+                _lineRenderer.enabled = true;
             }
         }
 
+        if(_lineRenderer.enabled){
+            _lineRenderer.sortingOrder = 3;
+            _lineRenderer.positionCount = 2;
 
-        if(lineRenderer.enabled){
-            lineRenderer.sortingOrder = 4;
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0,transform.position);
-            lineRenderer.SetPosition(1,endposition);
-            if(endposition.y <= transform.position.y){
+            Vector3 temp = startposicion.position;
+            temp.z = -1;
+            startposicion.position = temp;
+
+            _lineRenderer.SetPosition(0,startposicion.position);
+            _lineRenderer.SetPosition(1,endposition);
+            if(endposition.y <= startposicion.position.y){
                 
-                lineRenderer.sortingOrder = 0;
-                lineRenderer.positionCount = 0;
+                _lineRenderer.sortingOrder = 0;
+                _lineRenderer.positionCount = 0;
             }
         }
     }
@@ -49,6 +52,7 @@ public class estirolengua : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
+}
+
 }

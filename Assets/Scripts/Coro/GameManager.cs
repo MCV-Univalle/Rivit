@@ -55,6 +55,7 @@ namespace CoroMelodia
             LightingManager.Instance.TurnLightsOn();
             FrogsManager.Instance.AreFrogsBlocked = true;
             Tempo = 0.8F;
+            Score = 0;
             AnimationController.Instance.ResetSurprise();
             AnimationController.Instance.ToDirectorFailPose(false);
             AnimationController.Instance.ToDirectorCorrectPose(false);
@@ -82,7 +83,6 @@ namespace CoroMelodia
             IsRuningMelodyCoroutine = false;
             IsRuningPreparationCoroutine = false;
             MelodyManager.Instance.EmptyMelody();
-            Score = 0;
         }
 
         public override void ShowResults()

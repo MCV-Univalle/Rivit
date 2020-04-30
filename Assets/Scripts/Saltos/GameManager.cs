@@ -35,8 +35,6 @@ namespace Saltos
             // Nueva version V2 de los saltos de la rana amarilla
 
             Shuffle(arrayRutaRanaAmarilla); // Reordena el orden de los elementos de un array
-                                            //--------------------------------
-
 
             // Genera numeros aleatorios y los guarda en una lista
             numeroAleatorio = 0;
@@ -112,7 +110,7 @@ namespace Saltos
 
         public Touch touch;
 
-        Vector3 posLeaveReturn;
+        Vector3 posLeaveReturn = new Vector3(-0.8f, 3.38f, 0);
 
         public List<int> rutaIniRana = new List<int>();
 
@@ -156,10 +154,9 @@ namespace Saltos
             timerStart = true;
 
             iniciarJuego = false;
-
             StartCoroutine(ExampleCoroutine());
 
-            Debug.Log("Empezó el juego");
+            //Debug.Log("Empezó el juego");
         }
 
         public override void FinishGame()
@@ -300,6 +297,23 @@ namespace Saltos
                     sigSaltoComAct = true;
                     if (contRutaRana <= (arrayRutaRanaAmarilla.Length - 1)) contRutaRana += 1;
                     //Debug.Log("contRutaRana =" + contRutaRana);
+
+
+                    if (TouchAndGo.Instance.player.name == "Player")
+                    {
+                        int angulo = (int) TouchAndGo.Instance.AngleInDeg(TouchAndGo.Instance.player.transform.position, posLeaveReturn);
+                        int numSalto = 0;
+
+                        if (angulo < 20 && angulo > -20) numSalto = 5; // derecha
+                        if (angulo > 160 && angulo > -160) numSalto = 3; // izquierda
+                        if (angulo > -120 && angulo < -60) numSalto = 7; //abajo
+                        if (angulo > 60 && angulo < 120) numSalto = 1; // arriba
+
+                        AnimationManager.Instance.SetDireccionSaltoPlayer(numSalto);
+                        Debug.Log("Angulo de salto de " + TouchAndGo.Instance.player.name + " = " + angulo + ", Animacion Numero = " + numSalto);
+                    }
+                    
+
 
                     //validacionDeListas2();
                 }

@@ -32,6 +32,7 @@ public class control : MonoBehaviour
     private trigger disparador;
     private int randColor;
     public string posActualJugador;
+    public string pos;
 
     public void Game(int numLeaf, Color color, Color color2, Color color3, Color color4, Color color5, Color color6, Color color7, Color color8, Color color9, Color hoja, Color arrow,  GameObject flecha)
     {
@@ -175,6 +176,7 @@ public class control : MonoBehaviour
     void Start()
     {
         disparador = trigger.Instance();
+        posActualJugador = "";
 
         /*
         int[] colores = new int[9];
@@ -192,7 +194,7 @@ public class control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        posActualJugador = disparador.ubicacion;
+
         
     }
 

@@ -1,19 +1,20 @@
 ﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class createinsect : MonoBehaviour
+namespace Eat_frog_Game
+{
+    public class createinsect : MonoBehaviour
 {
     public GameObject[] bees;
     public GameObject frog;
 
-    private ControlScore score;
+
     private int cont;
     
     public float tiempocreate = 2f, rango = 2f;
 
     void Awake() {
-        score = FindObjectOfType<ControlScore>();
+        
         
     }
     // Start is called before the first frame update
@@ -35,20 +36,38 @@ public class createinsect : MonoBehaviour
         Vector3 spawsposition = new Vector3(0,0,0);
         spawsposition = this.transform.position + Random.onUnitSphere * rango;
         spawsposition = new Vector3(this.transform.position.x,spawsposition.y,0);
-        if(frog.transform.position.y+1 <= spawsposition.y)
+        List<int> numberinsects = new List<int>{};
+        Random ra = new Random();
+        if(frog.transform.position.y+1 <= spawsposition.y && GameManager.Instance.Active)
         {
-            if(score.score >= 1500){
+            if(GameManager.Instance.Score >= 1500){
                 GameObject insecto = Instantiate(bees[Random.Range(0,5)], transform.position, Quaternion.identity);
             }else
             {
-                if(score.score >= 1500){
+                if(GameManager.Instance.Score >= 1500){
                     GameObject insecto = Instantiate(bees[Random.Range(0,4)], transform.position, Quaternion.identity);
                 }else
                 {
-                    if(score.score >= 50){
-                        GameObject insecto = Instantiate(bees[Random.Range(0,3)], spawsposition, Quaternion.identity);
+                    if(GameManager.Instance.Score >= 50){
+                        numberinsects.Clear();
+                       if(numberinsects.Count==0){
+                            numberinsects.Add(0);
+                            numberinsects.Add(1);
+                            numberinsects.Add(2);
+                        }
+                        int numb = Random.Range(0,numberinsects.Count);
+                        GameObject insecto = Instantiate(bees[numb], spawsposition, Quaternion.identity);
+                        numberinsects.Remove(numberinsects[numb]);   
+
+                        
                     }else{
-                        GameObject insecto = Instantiate(bees[Random.Range(0,2)], spawsposition, Quaternion.identity);
+                        if(numberinsects.Count==0){
+                            numberinsects.Add(0);
+                            numberinsects.Add(1);
+                        }
+                        int numb = Random.Range(0,numberinsects.Count);
+                        GameObject insecto = Instantiate(bees[numb], spawsposition, Quaternion.identity);
+                        numberinsects.Remove(numberinsects[numb]);   
                     }
                 }
             }
@@ -57,4 +76,6 @@ public class createinsect : MonoBehaviour
         }
     }
    
+}
+
 }

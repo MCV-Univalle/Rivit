@@ -22,6 +22,13 @@ namespace Cuentaranas
                 return _instance;
             }
         }
+        [SerializeField]
+        private GameObject _lifesCosito;
+        public GameObject LifesCosito {get {return _lifesCosito;}}
+        [SerializeField]
+        private TextMeshProUGUI _lifesCounter;
+
+        public TextMeshProUGUI LifesCounter {get {return _lifesCounter;}}
 
         [SerializeField]
         private GameObject _questionPanel;

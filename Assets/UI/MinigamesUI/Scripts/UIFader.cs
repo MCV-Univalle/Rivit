@@ -10,7 +10,6 @@ public class UIFader : MonoBehaviour
     private float _defaultAlpha = 1;
     [SerializeField]
     private bool _executeOnEnable = true;
-    public bool ExecuteOnEnable {get {return _executeOnEnable;} set {_executeOnEnable = value;}}
     private IEnumerator _fadeCanvas;
     private bool _isFading = false;
     public float DefaultAlpha { set {_defaultAlpha = value;}}

@@ -1,0 +1,331 @@
+fileFormatVersion: 2
+guid: 4f70d73d0d82caa4f94197499f383e9d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8899735244294256949
+    second: salto rana protoripo v2  1_0
+  - first:
+      213: 1847987330861763130
+    second: salto rana protoripo v2  1_1
+  - first:
+      213: -5094540862714709945
+    second: salto rana protoripo v2  1_2
+  - first:
+      213: 7536189345245497615
+    second: salto rana protoripo v2  1_3
+  - first:
+      213: 3083131541224026122
+    second: salto rana protoripo v2  1_4
+  - first:
+      213: -3289584943051751965
+    second: salto rana protoripo v2  1_5
+  - first:
+      213: 4706264869946049422
+    second: salto rana protoripo v2  1_6
+  - first:
+      213: -1131409712128027686
+    second: salto rana protoripo v2  1_7
+  - first:
+      213: -6031027837742465525
+    second: salto rana protoripo v2  1_8
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1333.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.3675145, y: 0.7543722}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 539fe274d06328b70800000000000000
+      internalID: 8899735244294256949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_1
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 1333.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.59538937, y: 0.574192}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3a0075bfae55a910800000000000000
+      internalID: 1847987330861763130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_2
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 1333.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.68547964, y: 0.727875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7487d20d31e8c49b0800000000000000
+      internalID: -5094540862714709945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 667.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.36221507, y: 0.5105987}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f090173f74ce59860800000000000000
+      internalID: 7536189345245497615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_4
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 667.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.5105987, y: 0.37281388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a00f5763dcb79ca20800000000000000
+      internalID: 3083131541224026122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_5
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 667.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.701378, y: 0.5052994}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ed3dea5ceb0952d0800000000000000
+      internalID: -3289584943051751965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.333313
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.44170636, y: 0.45760468}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e83c800e6f2005140800000000000000
+      internalID: 4706264869946049422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_7
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 1.333313
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.47350276, y: 0.45760468}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad39e2d7cdc6c40f0800000000000000
+      internalID: -1131409712128027686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salto rana protoripo v2  1_8
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 1.333313
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.6218868, y: 0.48410174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e3ed4a22c7d4ca0800000000000000
+      internalID: -6031027837742465525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

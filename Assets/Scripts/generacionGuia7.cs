@@ -30,7 +30,7 @@ public class generacionGuia7 : MonoBehaviour
             adentro = false;
         }
 
-        if (GameObject.Find("leaf6").GetComponent<trigger>().ubicacion == "leaf6")
+        if (GameObject.Find("Main Camera").GetComponent<control>().posActualJugador == "leaf6")
         {
             if (adentro)
             {

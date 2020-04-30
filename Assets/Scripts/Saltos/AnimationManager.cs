@@ -22,6 +22,7 @@ namespace Saltos
 
         private Animator _playerObjectTouchAndGo;
         private Animator _comLibelulaAnim;
+        private int direcionSaltoPlayer = 0;
 
         void Awake()
         {
@@ -41,8 +42,17 @@ namespace Saltos
         public void PalyerSaltroTriger(bool isMovingFrog, GameObject player)
         {
             _playerObjectTouchAndGo = player.GetComponent<Animator>();
+
+            //Debug.Log("direccion player = " + direcionSaltoPlayer);
+            _playerObjectTouchAndGo.SetInteger("NumeroSalto", direcionSaltoPlayer);
+
             _playerObjectTouchAndGo.SetBool("isMovingFrog", player.GetComponent<TouchAndGo>().isMoving);
             //Debug.Log("entro en la enimacion: rana" + TouchAndGo.Instance.player.name);
+        }
+
+        public void SetDireccionSaltoPlayer(int valor)
+        {
+            direcionSaltoPlayer = valor;
         }
 
         

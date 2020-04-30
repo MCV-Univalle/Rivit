@@ -1,0 +1,331 @@
+fileFormatVersion: 2
+guid: 7eedda7b46bcfb9438eb771ccba9f086
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1439553441929973908
+    second: rana_0
+  - first:
+      213: -5964910045936377646
+    second: rana_1
+  - first:
+      213: -5746014986164739822
+    second: rana_2
+  - first:
+      213: -5039448797537720904
+    second: rana_3
+  - first:
+      213: -4346727361287646796
+    second: rana_4
+  - first:
+      213: 9202119726262157334
+    second: rana_5
+  - first:
+      213: -8920292521945194783
+    second: rana_6
+  - first:
+      213: 4877626650929826410
+    second: rana_7
+  - first:
+      213: -1643954227371317122
+    second: rana_8
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rana_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1333.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.399311, y: 0.6536832}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4905d657a325af310800000000000000
+      internalID: 1439553441929973908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_1
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 1333.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.5847905, y: 0.600689}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d0adcaaae1683da0800000000000000
+      internalID: -5964910045936377646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_2
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 1333.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.6112879, y: 0.6748808}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211649350dd0240b0800000000000000
+      internalID: -5746014986164739822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 667.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.37811333, y: 0.49999994}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b5aefec408401ab0800000000000000
+      internalID: -5039448797537720904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_4
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 667.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b19afeae725da3c0800000000000000
+      internalID: -4346727361287646796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_5
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 667.3333
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.56359315, y: 0.49470052}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6108878d22f74bf70800000000000000
+      internalID: 9202119726262157334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.333313
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.46820343, y: 0.4417062}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ee12e88631c43480800000000000000
+      internalID: -8920292521945194783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_7
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 1
+        width: 667
+        height: 667
+      alignment: 9
+      pivot: {x: 0.4788022, y: 0.45230523}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6a86a3a89fc0b340800000000000000
+      internalID: 4877626650929826410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_8
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 1.333313
+        width: 666.6667
+        height: 666.6667
+      alignment: 9
+      pivot: {x: 0.5317967, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e78e78a17508f29e0800000000000000
+      internalID: -1643954227371317122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

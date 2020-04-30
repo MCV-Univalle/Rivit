@@ -27,7 +27,16 @@ namespace Cuentaranas
         private GameObject _bush;
         private IEnumerator _currentCoroutine;
         public bool IsCorrect {get; set;}
-        public int Lifes {get; set;}
+        private int _lifes;
+        public int Lifes 
+        {
+            get {return _lifes;} 
+            set 
+            {
+                _lifes = value;
+                UIManager.Instance.LifesCounter.text = "" + value;
+            }
+        }
 
         void Awake()
         {
@@ -60,6 +69,7 @@ namespace Cuentaranas
 
             if(GameMode == 0)
             {
+                UIManager.Instance.LifesCosito.gameObject.SetActive(false);
                 Lifes = 3;
                 _iterationNumber = 5;
                 FrogsManager.Instance.RemainingJumps = 7;
@@ -71,6 +81,7 @@ namespace Cuentaranas
             }
             if(GameMode == 1)
             {
+                UIManager.Instance.LifesCosito.gameObject.SetActive(false);
                 Lifes = 3;
                 _iterationNumber = 10;
                 FrogsManager.Instance.RemainingJumps = 9;
@@ -82,6 +93,7 @@ namespace Cuentaranas
             }
             if(GameMode == 2)
             {
+                UIManager.Instance.LifesCosito.gameObject.SetActive(true);
                 Lifes = 3;
                 _iterationNumber = 5;
                 FrogsManager.Instance.RemainingJumps = 7;
@@ -213,7 +225,7 @@ namespace Cuentaranas
 
         public IEnumerator BeginCountdown()
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.25f);
             _bush.SetActive(false);
             UIManager.Instance.TimerText.gameObject.SetActive(true);
             FrogsManager.Instance.SetActiveEveryFrog(true);

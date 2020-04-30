@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class FrogController : MonoBehaviour
+namespace  Eat_frog_Game
+{
+    public class FrogController : MonoBehaviour
 {
     // Start is called before the first frame update
    
-    public float distancia = 10f;
+    public float distancia =     10f;
     public GameObject camaraover,live,liveup;
 
     public float maxhealth = 100f;
     public float curhealth;
-    private ControlScore control;
 
 
     public Image healthlive, healthliveup;
@@ -22,7 +22,6 @@ public class FrogController : MonoBehaviour
     public bool notoco,LiveMAx,move;
     private float angle;
     public int vel_lengua;
-    public int con;
     public string obe;
     private Vector3 lookPos;
 
@@ -31,19 +30,22 @@ public class FrogController : MonoBehaviour
     private Vector3 lengua;
     private Rigidbody2D rd2;
     private LayerMask mask;
-    private Animator animator;
+    public  Animator animator;
     private SpriteRenderer sprite;
 
     private estirolengua estiro;
 
     public Canvas canvas;
+
+    private Transform _firepoint;
+
+    public bool Tongue;
     
 
 
      void Awake()
     {
-        estiro = GetComponent<estirolengua>();
-        control = FindObjectOfType<ControlScore>();
+        _firepoint = transform.Find("FirePoint");
     }
 
     void Start()
@@ -59,28 +61,34 @@ public class FrogController : MonoBehaviour
         healthlive.fillAmount = curhealth/maxhealth;
         notoco = false;
         LiveMAx = false;
+        Tongue = true;
         //lineRenderer.enabled = false;  
         lol = true;
         vel_lengua = 20;
+         print(Tongue);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         Getinput();
-        movelengua();
         healthmin();
         FrogHungry();
     }
 
     void FrogHungry(){
         if(healthlive.fillAmount == 0){
-           camaraover.SetActive(true);
+            GameManager.Instance.Active = false;
+            Tongue = true;
+            GameManager.Instance.paused = false;
+            animator.SetBool("Volver",false);
+            GameManager.Instance.ShowResults();
         }
     }
 
     void healthmin(){
-        if(control.score >= 200){
+        if(GameManager.Instance.Score >= 200){
             
             if((curhealth/maxhealth) > 1.1f){
                 curhealth = 100f;
@@ -91,72 +99,56 @@ public class FrogController : MonoBehaviour
             healthlive.fillAmount = curhealth/maxhealth;
 
         }else{
-            
-            if((curhealth/maxhealth) > 1.1f){
-                curhealth = 100f;
+            if(!GameManager.Instance.paused){
+
+                if(GameManager.Instance.Active){
+                    live.SetActive(true);
+                     
+                if((curhealth/maxhealth) > 1.1f){
+                    curhealth = 100f;
+                    healthlive.fillAmount = curhealth/maxhealth;
+                    return;
+                }
+                curhealth -= 0.1f;
                 healthlive.fillAmount = curhealth/maxhealth;
-                return;
+                }else
+                {
+                    healthlive.fillAmount = 1;
+                    live.SetActive(false);
+                }
             }
-            curhealth -= 0.1f;
-            healthlive.fillAmount = curhealth/maxhealth;
             }
     }
 
 
     public void Getinput(){
-        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown("up")){
-            if(lol){
-                lengua = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if(lengua.y <=(transform.position.y+1)){
-                    return;
-                }else{
+        
+        //Debug.Log(GameManager.Instance.paused);
+        if(GameManager.Instance.Active){
+            
+            if(Input.GetMouseButtonDown(0) || Input.GetKeyDown("up")){
+                Debug.Log(GameManager.Instance.paused+"Click");
+                if(Tongue)
+                {
+                    lengua = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     UpdateState("frog-eat");
-                    animator.SetBool("Volver",true);
-                    lol = false;
-                    move = true;    
+                    if(!GameManager.Instance.paused){
+                        animator.SetBool("Volver",true);
+                    }
+                    Tongue = false;
                     Debug.DrawLine(transform.position,lengua,Color.blue);
-                    len.transform.rotation = Quaternion.LookRotation(Vector3.forward, lengua - len.transform.position);
-                    
                 }
-              
-                //RaycastHit2D hit = Physics2D.Raycast(transform.position, lengua - transform.position,distancia,mask);
-                //transform.Translate(0,0, 10*Time.deltaTime);
             }
-        }
-    }
-    private void movelengua(){
-        if(lol){
-            return;
-        }
-
-        if(!lol){
-            Vector3 temp = len.transform.position;
-            Vector3 temp2 = len.transform.position;
-            estiro.RenderLine(temp, false);
-            len.GetComponent<SpriteRenderer>().sortingOrder = 2;
-            if(move){
-                temp += len.transform.up * Time.deltaTime *vel_lengua;
-            }else{
-                temp -= len.transform.up * Time.deltaTime *vel_lengua;
-                
-            }
-
-            len.transform.position = temp;
-
-            if(temp.y >= lengua.y){
-                move = false;
-                notoco = true;
-            }
-            if(temp.y <= transform.position.y){
-                len.transform.position=transform.position;
+            if(!GameManager.Instance.Active||GameManager.Instance.paused){
+                Tongue = true;
                 animator.SetBool("Volver",false);
-                len.GetComponent<SpriteRenderer>().sortingOrder = 0;
-                lol = true;
-                notoco = false;
             }
-            estiro.RenderLine(temp, true);
+            
         }
+            
+           
     }
+
     
 
     public void UpdateState(string state = null){
@@ -165,5 +157,19 @@ public class FrogController : MonoBehaviour
         }
     }
 
+    public void CreateTongue(){
+        GameObject tounge = Instantiate(len,_firepoint.transform.position,Quaternion.LookRotation(Vector3.forward,lengua - _firepoint.transform.position));
+        TongueControl toungeComponent = tounge.GetComponent<TongueControl>();
+        toungeComponent.start = _firepoint.transform.position.y;   
+        toungeComponent.limit = lengua.y;   
+        toungeComponent._firepoint = _firepoint;
+        if(GameManager.Instance.paused){
+            Destroy(tounge);
+            animator.SetBool("Volver",false);
+        }
+    }
+
+
+}
 
 }

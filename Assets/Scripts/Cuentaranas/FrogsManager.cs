@@ -95,7 +95,7 @@ namespace Cuentaranas
 
         public IEnumerator ReturnEveryFrogToOriginalPosition()
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.25f);
             foreach(var frog in _frogsList)
             {
                 frog.GetComponent<JumpingFrogScript>().ReturnToOriginalPosition();

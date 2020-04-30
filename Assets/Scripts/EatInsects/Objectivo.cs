@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Objectivo : MonoBehaviour
+namespace  Eat_frog_Game
+{
+    public class Objectivo : MonoBehaviour
 {
 
     public GameObject[] Insects;
-    private GameObject insecto;
+    public  GameObject insecto;
     private FrogController frog;
 
     public string objet;
@@ -14,18 +16,15 @@ public class Objectivo : MonoBehaviour
     private int numb;
 
     public int Resistencia;
-
-    private ControlScore control;
-    public int Score;
     // Start is called before the first frame update
-     void Awake() {
-        control = FindObjectOfType<ControlScore>();
-        
-        
-    }
-    void Start()
+
+    void Awake()
     {
         frog = FindObjectOfType<FrogController>();
+    }
+
+    void Start()
+    {
         insecto = GetComponent<GameObject>();
         numb = 0;
     }
@@ -33,18 +32,28 @@ public class Objectivo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(numb == 0)
+        if(!GameManager.Instance.Active){
+            Destroy(insecto);
+            numb =0;
+        }   
+        if(GameManager.Instance.limitreached){
+            GameManager.Instance.limitreached = false;
+            frog.curhealth -= 10f;
+            frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
+            
+        }
+        if(numb == 0 && GameManager.Instance.Active)
         {
-            if(control.score >= 1500){
+            if(GameManager.Instance.Score >= 1500){
                  insecto = Instantiate(Insects[Random.Range(0,5)], transform.position, Quaternion.identity);
 
             }else
             {
-                    if(control.score >= 1500){
+                    if(GameManager.Instance.Score >= 1500){
                     insecto = Instantiate(Insects[Random.Range(0,4)], transform.position, Quaternion.identity);
                 }else
                 {
-                    if(control.score >= 50)
+                    if(GameManager.Instance.Score >= 50)
                     {
                         insecto = Instantiate(Insects[Random.Range(0,3)], transform.position, Quaternion.identity);
                     }else
@@ -57,38 +66,33 @@ public class Objectivo : MonoBehaviour
             }
             numb = 1;
         }
-        
+    
     }
 
     public void se(string ds){
-        if(ds == insecto.gameObject.tag && frog.con == 0){
-
+        if(ds == insecto.gameObject.tag){
             if(insecto.gameObject.tag == "Blanca"){
-                if(Resistencia == 3){
                     frog.move = false;
                     frog.curhealth += 20f;
                     frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                    control.score +=20;
+                    GameManager.Instance.Score +=20;
                     Destroy(insecto);
                     numb = 0;
-                }
             }
             
             if(insecto.gameObject.tag == "Roja"){
-                if(Resistencia == 2){
                     frog.move = false;
                     frog.curhealth += 15f;
                     frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                    control.score +=15;
+                    GameManager.Instance.Score +=15;
                     Destroy(insecto);   
                     numb = 0;
-                }
             }
             if( insecto.gameObject.tag == "Mariposa_dorada"){
                 frog.move = false;
-                frog.curhealth += 25f;
-                frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                control.score +=25;
+                //frog.curhealth += 25f;
+                //frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
+                GameManager.Instance.Score +=25;
                 Destroy(insecto);
                 numb = 0;
 
@@ -96,15 +100,22 @@ public class Objectivo : MonoBehaviour
 
             if(insecto.gameObject.tag == "Negra"|| insecto.gameObject.tag =="Cafe")
             {
-                frog.move = false;
                 frog.curhealth += 10f;
                 frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                control.score +=10;
+                GameManager.Instance.Score +=10;
                 Destroy(insecto);
                 numb = 0;
             }
            
+        }else{
+            frog.curhealth -= 10f;
+            frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
+            Destroy(insecto);
+            numb = 0;
         }
     }
 
 }
+
+}
+
