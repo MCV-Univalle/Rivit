@@ -97,6 +97,14 @@ namespace Saltos
                 */
 
             }
+
+
+            float dist =  Vector3.Distance(targetPos, objectPos);
+
+            if ((dist <= 1 && dist >= 0.9) && player.name == "Libelula")
+            {
+                AudioManagerSaltos.Instance.PlayVueloLibelulaCom();
+            }
             
 
             // Mueve la rana de posicion

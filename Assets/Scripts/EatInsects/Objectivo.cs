@@ -8,8 +8,10 @@ namespace  Eat_frog_Game
 {
 
     public GameObject[] Insects;
-    public  GameObject insecto;
+    public  GameObject insecto,soundfallo;
     private FrogController frog;
+
+    public bool fallo;
 
     public string objet;
     
@@ -108,7 +110,10 @@ namespace  Eat_frog_Game
             }
            
         }else{
+            Instantiate(soundfallo); 
+            frog.animator.SetBool("fallo",true);
             frog.curhealth -= 10f;
+            fallo = true;
             frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
             Destroy(insecto);
             numb = 0;

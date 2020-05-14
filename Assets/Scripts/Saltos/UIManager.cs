@@ -41,6 +41,8 @@ namespace Saltos
         [SerializeField]
         GameObject timerText;
         [SerializeField]
+        GameObject panelTimerText;
+        [SerializeField]
         TextMeshProUGUI canSaltosText;
         public float targetTime;
 
@@ -126,6 +128,7 @@ namespace Saltos
         {
             if(tiempo >= 0.5)
             {
+                panelTimerText.SetActive(true);
                 SetVisibilidadTextTimer(true);
                 AudioManagerSaltos.Instance.PlayTimerPop();
 
@@ -138,7 +141,7 @@ namespace Saltos
             else
             {
                 SetVisibilidadTextTimer(false);
-                //timerText.text = "";
+                panelTimerText.SetActive(false);
             }      
         }
 

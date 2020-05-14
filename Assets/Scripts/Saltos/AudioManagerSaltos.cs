@@ -25,11 +25,18 @@ namespace Saltos
         private AudioSource _audioSource;
 
         [SerializeField]
+        private AudioSource _audioSourceLibelula;
+
+        [SerializeField]
         private AudioClip _timerPop;
         [SerializeField]
         private AudioClip _saltoRanaPlayer;
         [SerializeField]
         private AudioClip _vueloLibelulaCom;
+        [SerializeField]
+        private AudioClip _gameOverSound;
+        [SerializeField]
+        private AudioClip _gameWinSound;
 
         void Awake()
         {
@@ -49,10 +56,21 @@ namespace Saltos
         }
         public void PlayVueloLibelulaCom()
         {
-            _audioSource.clip = _vueloLibelulaCom;
+            _audioSourceLibelula.clip = _vueloLibelulaCom;
+            _audioSourceLibelula.Play();
+        }
+
+        public void PlayGameOver()
+        {
+            _audioSource.clip = _gameOverSound;
             _audioSource.Play();
         }
 
+        public void PlayWinGame()
+        {
+            _audioSource.clip = _gameWinSound;
+            _audioSource.Play();
+        }
 
     }
 }

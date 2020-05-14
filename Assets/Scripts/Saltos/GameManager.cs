@@ -30,7 +30,6 @@ namespace Saltos
         {
             UIManager.Instance.SetVisibilidadTextTimer(false);
 
-            //Time.timeScale = 0;
 
             // Nueva version V2 de los saltos de la rana amarilla
 
@@ -53,12 +52,10 @@ namespace Saltos
             contRutaRana = 9; // Hace que no inicie el recorido la rana amarilla
                               //tAG.isMoving = true;
 
-            // posiciona la rana amarilla en la posicion de la hoja que esta primera en la secuencia del recorrido
-            //tAG.setPosPLayer(leafController.getPositionLeave(rutaIniRana[0]));
-            base.Start();
-
-
             
+            //tAG.setPosPLayer(leafController.getPositionLeave(rutaIniRana[0]));
+
+            base.Start();
         }
         //------------------------------------------------------------Update -------------------------------------------------------
         // Update is called once per frame
@@ -66,8 +63,6 @@ namespace Saltos
         {
             if(iniciarJuego)
             {
-                //Debug.Log("Entrooooo eh eh eh epa colombia!!!!");
-
                 // Verifiaca si se ha tocado el boton "inicio"
                 if (UIc.isClikButtonInicio() || empezarJuego)
                 {
@@ -83,6 +78,7 @@ namespace Saltos
                     UIc.buttonVisible(false);
                 }
 
+
                 RecorridoInicialRanaAmarilla();
 
                 if (arrayRutaRanaAmarilla.Length >= 4)
@@ -90,13 +86,17 @@ namespace Saltos
                     //entradaTouch();
                     ImputClick();
 
-
-
                     // Mueve la rana hacia un punto especifico
                     playerTAG.moveToPoint(posLeaveReturn);
                     SigSaltoCom(sigSaltoComAct);
                 }
-                //validacionDeListas2();
+
+                validacionDeListas2();
+
+                if (finJuego == 1)
+                {
+                    ShowResults();
+                }
 
                 UIManager.Instance.SetCanSaltosText(touchHistory.Count);
             }
@@ -110,7 +110,7 @@ namespace Saltos
 
         public Touch touch;
 
-        Vector3 posLeaveReturn = new Vector3(-0.8f, 3.38f, 0);
+        Vector3 posLeaveReturn = new Vector3(-0.78f, 3f, 0);
 
         public List<int> rutaIniRana = new List<int>();
 
@@ -134,10 +134,19 @@ namespace Saltos
 
         private bool timerStart = false;
         private bool iniciarJuego = false;
+        private int finJuego = 0;
+
+        [SerializeField]
+        private float tiempoEsperaSaltoCom;
+        private float tiempo = 0.0f;
         //--------------------------------------------------------------------
 
         public override void StartGame()
         {
+            GameManager.Instance.Score = 0;
+            finJuego = 0;
+            AnimationManager.Instance.SetDireccionSaltoPlayer(100);
+
             contRutaRana = 0;
             comTAG.isMoving = true;
 
@@ -156,16 +165,35 @@ namespace Saltos
             iniciarJuego = false;
             StartCoroutine(ExampleCoroutine());
 
-            //Debug.Log("Empezó el juego");
+            GenerarListaAleatoriaRutaLibelula();
+
+            Debug.Log("StartGame");
         }
 
         public override void FinishGame()
         {
+            Debug.Log("touchHistory.count = "+ touchHistory.Count);
+            if (touchHistory.Count == 8)
+            {
+                AudioManagerSaltos.Instance.PlayWinGame();
+            }
+            else
+            {
+                AudioManagerSaltos.Instance.PlayGameOver();
+            }
+
+            iniciarJuego = false;
+            playerTAG.setPosPLayer(new Vector3(-0.78f, 3f, 0));
+            AnimationManager.Instance.SetDireccionSaltoPlayer(100);  // posicion de la animacion inicial
+            comTAG.setPosPLayer(new Vector3(-5.5f, 1f, 0));
+
             Debug.Log("FinishGame");
         }
 
         public override void ShowResults()
         {
+            FinishGame();
+            base.ShowResults();
             Debug.Log("ShowResults");
         }
 
@@ -178,6 +206,7 @@ namespace Saltos
         public void RecorridoInicialRanaAmarilla()
         {
             int cantSaltos = 4;
+            tiempo += Time.deltaTime;
 
             // Realiza el recorrido de la rana de color amarillo
             if (comTAG.isMoving && contRutaRana <= cantSaltos - 1)
@@ -191,24 +220,33 @@ namespace Saltos
             }
             else
             {
-                if (contRutaRana <= cantSaltos - 1)
+                //Verifica si ha trancurrido el tiempo de retraso
+                //para despues 
+                if (tiempo > tiempoEsperaSaltoCom)
                 {
-                    comTAG.isMoving = true;
-                    contRutaRana += 1;
-                }
-                else
-                {
-                    comTAG.isMoving = false;
+                    if (contRutaRana <= cantSaltos - 1)
+                    {
+
+                        comTAG.isMoving = true;
+                        contRutaRana += 1;
+                    }
+                    else
+                    {
+                        comTAG.isMoving = false;
+                    }
+
+                    // Remove the recorded 2 seconds.
+                    tiempo = tiempo - tiempoEsperaSaltoCom;
+
                 }
             }
 
             //Debug.Log("var isMoving: " + tAG.isMoving + ", count: " + contRutaRana);
-
         }
 
         private void SigSaltoCom(bool activar)
         {
-            if (activar && contRutaRana <= arrayRutaRanaAmarilla.Length)
+            if (activar && contRutaRana <= arrayRutaRanaAmarilla.Length && contRutaRana >= 1)
             {
                 int num = arrayRutaRanaAmarilla[contRutaRana - 1];
                 comTAG.moveToPoint(leafController.getPositionLeave(num));
@@ -222,7 +260,7 @@ namespace Saltos
             }
         }
 
-
+        /*
         public void entradaTouch()
         {
             // Detecta si ha realizado un toque en la pantalla tactil
@@ -256,7 +294,7 @@ namespace Saltos
 
             }
         }
-
+        */
 
         void ImputClick()
         {
@@ -291,6 +329,9 @@ namespace Saltos
 
                 if (leafController.seTocoLeave(wp))
                 {
+                    // Refresca el valor del Score
+                    GameManager.Instance.Score += (touchHistory.Count +1) * 3;
+
                     touchHistory.Add(leafController.getIndexLeave(wp)); // agrega a la lista el indice de la planta tocada
 
                     //Realiza el siguiente salto de la rana amarilla
@@ -302,18 +343,22 @@ namespace Saltos
                     if (TouchAndGo.Instance.player.name == "Player")
                     {
                         int angulo = (int) TouchAndGo.Instance.AngleInDeg(TouchAndGo.Instance.player.transform.position, posLeaveReturn);
-                        int numSalto = 0;
+                        int numSalto = 100;
 
-                        if (angulo < 20 && angulo > -20) numSalto = 5; // derecha
-                        if (angulo > 160 && angulo > -160) numSalto = 3; // izquierda
-                        if (angulo > -120 && angulo < -60) numSalto = 7; //abajo
-                        if (angulo > 60 && angulo < 120) numSalto = 1; // arriba
+                        if (angulo > 120 && angulo < 160) numSalto = 0;    // arriba izquierda
+                        if (angulo > 60 && angulo < 120) numSalto = 1;    // arriba
+                        if (angulo > 20 && angulo < 60) numSalto = 2;    // arriba derecha
+
+                        if (angulo > 160 && angulo > -160) numSalto = 3;  // izquierda
+                        if (angulo < 20 && angulo > -20) numSalto = 5;    // derecha
+
+                        if (angulo < -120 && angulo > -160) numSalto = 6;  // abajo izquierda
+                        if (angulo > -120 && angulo < -60) numSalto = 7;  // abajo
+                        if (angulo < -20 && angulo > -60) numSalto = 8;  // abajo derecha
 
                         AnimationManager.Instance.SetDireccionSaltoPlayer(numSalto);
-                        Debug.Log("Angulo de salto de " + TouchAndGo.Instance.player.name + " = " + angulo + ", Animacion Numero = " + numSalto);
+                        //Debug.Log("Angulo de salto de " + TouchAndGo.Instance.player.name + " = " + angulo + ", Animacion Numero = " + numSalto);
                     }
-                    
-
 
                     //validacionDeListas2();
                 }
@@ -322,42 +367,9 @@ namespace Saltos
 
         }
 
-        public void validacionDeListas()
-        {
-            bool activacion = false;
-            bool ecual = false;
-            int count = 0;
-
-            if (touchHistory.Count == arrayRutaRanaAmarilla.Length && contRutaRana < arrayRutaRanaAmarilla.Length)
-            {
-                foreach (int element in arrayRutaRanaAmarilla)
-                {
-                    if (element == touchHistory[count])
-                    {
-                        ecual = true;
-                    }
-                    else
-                    {
-                        ecual = false;
-                        break;
-                    }
-                    count += 1;
-                }
-
-                Debug.Log("Fin del juego: " + ecual);
-                UIc.activeCheckTrueOrFalse(true, ecual);
-                UIc.buttonVisible(true);
-
-                UIc.buttonRecargarVisible(true);
-
-                Time.timeScale = 0;
-            }
-
-        }
-
+ 
         public void validacionDeListas2()
         {
-            bool activacion = false;
             bool ecual = false;
             int count = 0;
 
@@ -379,13 +391,8 @@ namespace Saltos
 
                 if (ecual == false || (ecual == true && touchHistory.Count == arrayRutaRanaAmarilla.Length))
                 {
-                    Debug.Log("Fin del juego: " + ecual);
-                    UIc.activeCheckTrueOrFalse(true, ecual);
-                    UIc.buttonVisible(true);
-
-                    UIc.buttonRecargarVisible(true);
-
-                    Time.timeScale = 0;
+                    finJuego += 1;
+                    Debug.Log("[ValidacionDeListas2] Fin del juego: " + ecual);
                 }
 
             }
@@ -428,6 +435,28 @@ namespace Saltos
 
             iniciarJuego = true;
 
+        }
+
+        private void GenerarListaAleatoriaRutaLibelula()
+        {
+            Shuffle(arrayRutaRanaAmarilla); // Reordena el orden de los elementos de un array
+
+            /*
+            // Genera numeros aleatorios y los guarda en una lista
+            numeroAleatorio = 0;
+            rutaIniRana.Clear();
+
+            while (rutaIniRana.Count <= 3)
+            {
+                numeroAleatorio = Random.Range(1, 8);
+
+                //Sólo si el número generado no existe en lalista se agrega
+                if (!rutaIniRana.Contains(numeroAleatorio))
+                {
+                    rutaIniRana.Add(numeroAleatorio);
+                }
+            }
+            */
         }
 
 

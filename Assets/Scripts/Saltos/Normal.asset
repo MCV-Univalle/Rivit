@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0389e56b8079633409904900495c3ec6, type: 3}
   m_Name: Normal
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 449ab4bb34ce27f43b3cf8e51e721557, type: 3}
-  modeName: Nivel 0
-  description: Descripcion
+  image: {fileID: 21300000, guid: 3e3408c96cf7fcc4cb2f8de194f608a9, type: 3}
+  modeName: Demo
+  description: Debes perseguir la livelula para que Rivit se pueda alimentar de ella

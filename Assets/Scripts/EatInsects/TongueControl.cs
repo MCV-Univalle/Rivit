@@ -80,7 +80,7 @@ namespace Eat_frog_Game
                     _estirolengua.RenderLine(temp, true,_firepoint);
                 }
             }else{
-                Destroy(gameObject);
+                
             }
         }
             

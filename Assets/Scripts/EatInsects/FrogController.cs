@@ -41,8 +41,6 @@ namespace  Eat_frog_Game
 
     public bool Tongue;
     
-
-
      void Awake()
     {
         _firepoint = transform.Find("FirePoint");
@@ -71,7 +69,6 @@ namespace  Eat_frog_Game
     // Update is called once per frame
     void Update()
     {
-        
         Getinput();
         healthmin();
         FrogHungry();
@@ -128,7 +125,7 @@ namespace  Eat_frog_Game
             
             if(Input.GetMouseButtonDown(0) || Input.GetKeyDown("up")){
                 Debug.Log(GameManager.Instance.paused+"Click");
-                if(Tongue)
+                if(Tongue && !animator.GetBool("fallo"))
                 {
                     lengua = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     UpdateState("frog-eat");
@@ -157,6 +154,11 @@ namespace  Eat_frog_Game
         }
     }
 
+    public void cambio(){
+        animator.SetBool("fallo",false);
+    }
+
+    
     public void CreateTongue(){
         GameObject tounge = Instantiate(len,_firepoint.transform.position,Quaternion.LookRotation(Vector3.forward,lengua - _firepoint.transform.position));
         TongueControl toungeComponent = tounge.GetComponent<TongueControl>();
