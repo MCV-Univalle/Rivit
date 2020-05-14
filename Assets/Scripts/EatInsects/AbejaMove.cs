@@ -152,8 +152,7 @@ namespace Eat_frog_Game
             print(Resistencia);
             Destroy(gameObject);   
         }
-
-        }
+    }
 }
 
 }

@@ -5,16 +5,18 @@ namespace Eat_frog_Game
 {
     public class TongueControl : MonoBehaviour
     {
+        
         public float limit,start;
         private bool activate,move,l;
         public bool limitTounge;
         private SpriteRenderer tongue;
         private LineRenderer lineRenderer;
         private estirolengua _estirolengua;
-
         private Objectivo objectivo;
         private FrogController frog;    
         public Transform _firepoint;
+
+        public float vel_tongue;
 
         void Awake()
         {
@@ -25,6 +27,7 @@ namespace Eat_frog_Game
         }
         void Start()
         {
+            vel_tongue = 20f;
             GameManager.Instance.limitreached = false;
             activate = true;
             move = true;
@@ -54,7 +57,7 @@ namespace Eat_frog_Game
                         temp += this.transform.up * Time.deltaTime*15f;
                     }else
                     {
-                        temp -= this.transform.up * Time.deltaTime*15f;
+                        temp -= this.transform.up * Time.deltaTime*35f;
                     }
 
                     this.transform.position = temp;
@@ -63,7 +66,6 @@ namespace Eat_frog_Game
                     {
                         move = false;
                         GameManager.Instance.limitreached = true;
-                        Debug.Log(GameManager.Instance.limitreached);
                     }
 
                     if(temp.y < start)
@@ -71,7 +73,7 @@ namespace Eat_frog_Game
                         tongue.sortingOrder = 2;
                         activate = false;
                         frog.Tongue = true;
-                         GameManager.Instance.limitreached = false;
+                        GameManager.Instance.limitreached = false;
                         frog.animator.SetBool("Volver",false);
                         //notoco = false;
                         Destroy(gameObject);
@@ -89,10 +91,8 @@ namespace Eat_frog_Game
             if(other.gameObject.tag == "Negra" || other.gameObject.tag == "Cafe" || other.gameObject.tag == "Roja"
             ||other.gameObject.tag == "Blanca" || other.gameObject.tag == "Mariposa_dorada")
             {
-                if(!GameManager.Instance.limitreached){
-                    move = false;
-                    objectivo.se(other.gameObject.tag);
-                }
+                move = false;
+                objectivo.se(other.gameObject.tag,GameManager.Instance.limitreached);    
             }
         
         }

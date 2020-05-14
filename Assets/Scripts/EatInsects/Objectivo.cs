@@ -8,7 +8,7 @@ namespace  Eat_frog_Game
 {
 
     public GameObject[] Insects;
-    public  GameObject insecto,soundfallo;
+    public  GameObject insecto,soundfallo,soundcorrect;
     private FrogController frog;
 
     public bool fallo;
@@ -38,12 +38,12 @@ namespace  Eat_frog_Game
             Destroy(insecto);
             numb =0;
         }   
-        if(GameManager.Instance.limitreached){
-            GameManager.Instance.limitreached = false;
-            frog.curhealth -= 10f;
-            frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
+        //if(GameManager.Instance.limitreached){
+          //  GameManager.Instance.limitreached = false;
+          //  frog.curhealth -= 10f;
+          //  frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
             
-        }
+        //}
         if(numb == 0 && GameManager.Instance.Active)
         {
             if(GameManager.Instance.Score >= 1500){
@@ -71,53 +71,58 @@ namespace  Eat_frog_Game
     
     }
 
-    public void se(string ds){
-        if(ds == insecto.gameObject.tag){
-            if(insecto.gameObject.tag == "Blanca"){
+    public void se(string ds,bool limitreached){
+        if(!limitreached){
+            if(ds == insecto.gameObject.tag){
+                if(insecto.gameObject.tag == "Blanca"){
+                        frog.move = false;
+                        frog.curhealth += 20f;
+                        frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
+                        GameManager.Instance.Score +=20;
+                        Destroy(insecto);
+                        numb = 0;
+                }
+                
+                if(insecto.gameObject.tag == "Roja"){
+                        frog.move = false;
+                        frog.curhealth += 15f;
+                        frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
+                        GameManager.Instance.Score +=15;
+                        Destroy(insecto);   
+                        numb = 0;
+                }
+                if( insecto.gameObject.tag == "Mariposa_dorada"){
                     frog.move = false;
-                    frog.curhealth += 20f;
+                    frog.curhealth += 25f;
                     frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                    GameManager.Instance.Score +=20;
+                    GameManager.Instance.Score +=25;
+                    Instantiate(soundcorrect); 
                     Destroy(insecto);
                     numb = 0;
-            }
-            
-            if(insecto.gameObject.tag == "Roja"){
-                    frog.move = false;
-                    frog.curhealth += 15f;
+
+                }
+
+                if(insecto.gameObject.tag == "Negra"|| insecto.gameObject.tag =="Cafe")
+                {
+                    frog.curhealth += 10f;
                     frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                    GameManager.Instance.Score +=15;
-                    Destroy(insecto);   
+                    GameManager.Instance.Score +=10;
+                    Instantiate(soundcorrect); 
+                    Destroy(insecto);
                     numb = 0;
-            }
-            if( insecto.gameObject.tag == "Mariposa_dorada"){
-                frog.move = false;
-                //frog.curhealth += 25f;
-                //frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                GameManager.Instance.Score +=25;
-                Destroy(insecto);
-                numb = 0;
-
-            }
-
-            if(insecto.gameObject.tag == "Negra"|| insecto.gameObject.tag =="Cafe")
-            {
-                frog.curhealth += 10f;
+                }
+                
+            }else{
+                Instantiate(soundfallo); 
+                frog.animator.SetBool("fallo",true);
+                frog.curhealth -= 2f;
+                fallo = true;
                 frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-                GameManager.Instance.Score +=10;
                 Destroy(insecto);
                 numb = 0;
             }
-           
-        }else{
-            Instantiate(soundfallo); 
-            frog.animator.SetBool("fallo",true);
-            frog.curhealth -= 10f;
-            fallo = true;
-            frog.healthlive.fillAmount =frog.curhealth/frog.maxhealth;
-            Destroy(insecto);
-            numb = 0;
         }
+        
     }
 
 }

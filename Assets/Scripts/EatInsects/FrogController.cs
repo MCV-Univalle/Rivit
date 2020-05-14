@@ -22,8 +22,11 @@ namespace  Eat_frog_Game
     public bool notoco,LiveMAx,move;
     private float angle;
     public int vel_lengua;
+
+    private int aument;
     public string obe;
     private Vector3 lookPos;
+    public float vel;
 
     private int Cont;
     private BoxCollider2D box;
@@ -37,6 +40,7 @@ namespace  Eat_frog_Game
 
     public Canvas canvas;
 
+    private GameObject tounge;
     private Transform _firepoint;
 
     public bool Tongue;
@@ -49,7 +53,8 @@ namespace  Eat_frog_Game
     void Start()
     
     {
-        
+        vel = 0.1f;
+        aument = 25;
         sprite = GetComponent<SpriteRenderer>();
         rd2 = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
@@ -77,6 +82,7 @@ namespace  Eat_frog_Game
     void FrogHungry(){
         if(healthlive.fillAmount == 0){
             GameManager.Instance.Active = false;
+            Destroy(tounge);
             Tongue = true;
             GameManager.Instance.paused = false;
             animator.SetBool("Volver",false);
@@ -85,15 +91,9 @@ namespace  Eat_frog_Game
     }
 
     void healthmin(){
-        if(GameManager.Instance.Score >= 200){
-            
-            if((curhealth/maxhealth) > 1.1f){
-                curhealth = 100f;
-                healthlive.fillAmount = curhealth/maxhealth;
-                return;
-            }
-            curhealth -= 0.4f;
-            healthlive.fillAmount = curhealth/maxhealth;
+        if(GameManager.Instance.Score >= aument){
+            vel = vel+0.1f;
+            aument = aument+25;
 
         }else{
             if(!GameManager.Instance.paused){
@@ -106,10 +106,13 @@ namespace  Eat_frog_Game
                     healthlive.fillAmount = curhealth/maxhealth;
                     return;
                 }
-                curhealth -= 0.1f;
-                healthlive.fillAmount = curhealth/maxhealth;
+                if(!animator.GetBool("fallo")){
+                    curhealth -= vel;
+                    healthlive.fillAmount = curhealth/maxhealth;
+                }
                 }else
                 {
+                    
                     healthlive.fillAmount = 1;
                     live.SetActive(false);
                 }
@@ -160,12 +163,15 @@ namespace  Eat_frog_Game
 
     
     public void CreateTongue(){
-        GameObject tounge = Instantiate(len,_firepoint.transform.position,Quaternion.LookRotation(Vector3.forward,lengua - _firepoint.transform.position));
+        tounge = Instantiate(len,_firepoint.transform.position,Quaternion.LookRotation(Vector3.forward,lengua - _firepoint.transform.position));
         TongueControl toungeComponent = tounge.GetComponent<TongueControl>();
+        if (lengua.y >= 60){
+            toungeComponent.vel_tongue = 30f;
+        }
         toungeComponent.start = _firepoint.transform.position.y;   
         toungeComponent.limit = lengua.y;   
         toungeComponent._firepoint = _firepoint;
-        if(GameManager.Instance.paused){
+        if(GameManager.Instance.paused || healthlive.fillAmount ==0){
             Destroy(tounge);
             animator.SetBool("Volver",false);
         }

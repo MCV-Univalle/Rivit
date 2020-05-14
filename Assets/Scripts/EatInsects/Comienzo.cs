@@ -42,6 +42,7 @@ namespace Eat_frog_Game
     public void reiniciar(){
         GameManager.Instance.Score = 0;
         GameManager.Instance.Active = false;
+        frog.vel = 0.1f;
         frog.Tongue = true;
         createinsect.SetActive(false);
         createinsect2.SetActive(false);
