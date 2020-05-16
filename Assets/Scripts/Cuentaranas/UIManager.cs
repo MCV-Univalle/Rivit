@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Cuentaranas
 {
@@ -41,6 +42,7 @@ namespace Cuentaranas
 
         [SerializeField]
         private TextMeshProUGUI _timerText;
+        [SerializeField]
         public TextMeshProUGUI TimerText {get {return _timerText;}}
         [SerializeField]
         private TextMeshProUGUI _correctText;
@@ -101,10 +103,19 @@ namespace Cuentaranas
             _numberInputField.GetComponent<TMP_InputField>().Select();
         }
 
+        public void ActiveAcceptButton()
+        {
+            if(_numberInputField.text == "")
+            _acceptButton.GetComponent<Button>().interactable = false;
+            else
+            _acceptButton.GetComponent<Button>().interactable = true;
+        }
+
         void Update()
         {
             if(_finalFrogsCounter.IsCountingFinished)
             FinishQuestion();
+            ActiveAcceptButton();
         }
     }   
 }

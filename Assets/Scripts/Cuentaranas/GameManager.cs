@@ -52,6 +52,7 @@ namespace Cuentaranas
         
         public override void StartGame()
         {
+            Score = 0;
             StartNewIteration();
         }
         public override void FinishGame()
