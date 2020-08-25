@@ -1,0 +1,12 @@
+public class $ClassName
+{
+	/// <summary>
+	/// The class constructor is called when the class instance is created.
+	/// </summary>
+	public $ClassName()
+	{
+		
+	}
+	
+	$Functions
+}

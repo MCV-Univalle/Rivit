@@ -30,6 +30,8 @@ TagManager:
   - FirePoint
   - 12
   - 13
+  - LineRenderer
+  - Button
   layers:
   - Default
   - TransparentFX
@@ -39,8 +41,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - LineRenderer
+  - BackgoundElements
   - 
   - 
   - 

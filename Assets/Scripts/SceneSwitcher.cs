@@ -11,7 +11,7 @@ public class SceneSwitcher : MonoBehaviour
     }
     public IEnumerator GoToHomeScreen()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.4f);
         SceneManager.LoadScene("Home");
     }
 

@@ -1752,7 +1752,12 @@ PrefabInstance:
     - target: {fileID: 274434460652680045, guid: cebf3715e0af72544a82739cdfcfca28,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 56.90039
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 274434460652680045, guid: cebf3715e0af72544a82739cdfcfca28,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 274434460930929851, guid: cebf3715e0af72544a82739cdfcfca28,
         type: 3}
@@ -1884,10 +1889,20 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MoveCarousel
       objectReference: {fileID: 0}
+    - target: {fileID: 274434462096180674, guid: cebf3715e0af72544a82739cdfcfca28,
+        type: 3}
+      propertyPath: _lerpTime
+      value: 0.075
+      objectReference: {fileID: 0}
     - target: {fileID: 274434462096180703, guid: cebf3715e0af72544a82739cdfcfca28,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 350519204569452214, guid: cebf3715e0af72544a82739cdfcfca28,
+        type: 3}
+      propertyPath: _lerpTime
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 474649806737525116, guid: cebf3715e0af72544a82739cdfcfca28,
         type: 3}

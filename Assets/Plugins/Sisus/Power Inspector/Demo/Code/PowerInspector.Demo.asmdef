@@ -1,0 +1,17 @@
+{
+    "name": "PowerInspector.Demo",
+    "references": [
+        "Sisus.Attributes",
+        "PowerInspector.Runtime",
+        "PowerInspector.Editor",
+        "Sisus.FastReflection"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

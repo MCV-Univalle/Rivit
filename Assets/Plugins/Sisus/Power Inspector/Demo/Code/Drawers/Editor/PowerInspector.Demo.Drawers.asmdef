@@ -1,0 +1,20 @@
+{
+    "name": "PowerInspector.Demo.Drawers",
+    "references": [
+        "Sisus.Attributes",
+        "PowerInspector.Runtime",
+        "PowerInspector.Editor",
+        "Sisus.FastReflection",
+        "PowerInspector.Demo"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
