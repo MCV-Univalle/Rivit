@@ -23,6 +23,11 @@ namespace Home
                 return _instance;
             }
         }
+
+        [SerializeField]
+        private AudioManager bgmManager;
+
+
         public bool IsBlocked {get; set;}
         [SerializeField]
         private GameObject _sceneSwitcher;
@@ -64,6 +69,12 @@ namespace Home
         {
             _instance = this;
             IsBlocked = false;
+        }
+
+        private void Start()
+        {
+            bgmManager.PlayAudio("Home");
+            bgmManager.FadeIn(0.5F);
         }
 
         public IEnumerator BlockUI()
@@ -171,6 +182,7 @@ namespace Home
         public void SwitchScene(string sceneName)
         {
             UIAudio.Instance.PlayConfirmationClip();
+            bgmManager.FadeOut(0.5F);
             _whiteScreen.gameObject.SetActive(true);
             StartCoroutine(_sceneSwitcher.GetComponent<SceneSwitcher>().GoToGame(sceneName));
         }

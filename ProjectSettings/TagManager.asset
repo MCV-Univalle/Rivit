@@ -32,6 +32,16 @@ TagManager:
   - 13
   - LineRenderer
   - Button
+  - leaf7
+  - leaf1
+  - leaf6
+  - leaf2
+  - leaf4
+  - leaf3
+  - leaf8
+  - leaf5
+  - guia
+  - contador
   layers:
   - Default
   - TransparentFX

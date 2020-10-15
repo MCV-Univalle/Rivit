@@ -14,6 +14,16 @@ public class AudioManager : MonoBehaviour
         _audioFader = new AudioFader();
     }
 
+    public void Play()
+    {
+        _audioSource.Play();
+    }
+
+    public void Stop()
+    {
+        _audioSource.Stop();
+    }
+
     public void PlayAudio(string audioName)
     {
         AudioClip currentClip = audioDictionary[audioName];
@@ -21,8 +31,13 @@ public class AudioManager : MonoBehaviour
         _audioSource.Play();
     }
 
+    public void FadeIn(float fadeTime)
+    {
+        StartCoroutine(_audioFader.FadeIn(fadeTime, _audioSource));
+    }
+
     public void FadeOut(float fadeTime)
     {
-        _audioFader.FadeOut(fadeTime, _audioSource);
+        StartCoroutine(_audioFader.FadeOut(fadeTime, _audioSource));
     }
 }

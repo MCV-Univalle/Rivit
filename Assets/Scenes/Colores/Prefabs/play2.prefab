@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 3025586528661380025}
   - component: {fileID: 3025586528661380022}
   - component: {fileID: 3025586528661380023}
-  - component: {fileID: 3025586528661380020}
-  - component: {fileID: 5455280006493744364}
+  - component: {fileID: 1356354591996302789}
   m_Layer: 0
   m_Name: play2
   m_TagString: guia
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2e9cfa7cb93284f48bb60d3ca69ffc34, type: 3}
-  m_Color: {r: 0.6627451, g: 0.027450982, b: 0.08627451, a: 1}
+  m_Color: {r: 1, g: 0.03137255, b: 0.21176471, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -139,22 +138,7 @@ CircleCollider2D:
   m_Offset: {x: 0.23517254, y: 0}
   serializedVersion: 2
   m_Radius: 0.08096933
---- !u!114 &3025586528661380020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3025586528661380029}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa29de059093474893d556ee81f7371, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidad: 2
-  contador: 0
-  adentro: 0
---- !u!114 &5455280006493744364
+--- !u!114 &1356354591996302789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,9 +147,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3025586528661380029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d941a7bbfe18644397aedb26110e681, type: 3}
+  m_Script: {fileID: 11500000, guid: 6aa29de059093474893d556ee81f7371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   velocidad: 2
   contador: 0
+  contador1: 0
+  contador2: 0
+  contador3: 0
+  contador4: 0
+  contador5: 0
+  contador6: 0
+  contador7: 0
+  contador8: 0
   adentro: 0
+  adentro1: 0
+  adentro2: 0
+  adentro3: 0
+  adentro4: 0
+  adentro5: 0
+  adentro6: 0
+  adentro7: 0
+  adentro8: 0
+  colorLeaf1: {r: 0, g: 0, b: 0, a: 0}

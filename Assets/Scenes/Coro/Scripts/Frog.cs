@@ -34,6 +34,8 @@ namespace CoroMelodia
             GameManager.endGame += TriggerOffSurprise;
             UIManager.executePauseButton += PauseSing;
             UIManager.executeResumeFromPause += PauseSing;
+
+            
             Enable = true;
         }
         private void OnDisable()
@@ -79,9 +81,13 @@ namespace CoroMelodia
             StartCoroutine(fadingCoroutine);
         }
 
-        void OnEnable()
+        public void Appear()
         {
             _frogAnimation.AppearFrog(true);
+        }
+
+        void OnEnable()
+        {
             StartCoroutine(Blink());
             StartCoroutine(Breath());
         }

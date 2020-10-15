@@ -6,25 +6,28 @@ namespace CoroMelodia
 {
     public class IllimitedMode : MelodyChorusGameMode
     {
-        public override void SetVariables()
+        public override void InitializeSettings()
         {
+            var gameManager = (MelodyChorusGameManager)_gameManager;
             Limit = 10000;
-            _gameManager.Speed = 0.8F;
+            gameManager.Speed = 0.8F;
         }
         public override void IncreaseDifficulty(int score)
         {
+            var gameManager = (MelodyChorusGameManager)_gameManager;
             if (score > 100)
-                _gameManager.Speed = 0.5F;
+                gameManager.Speed = 0.5F;
             else if (score > 40)
-                _gameManager.Speed = 0.6F;
+                gameManager.Speed = 0.6F;
             else if (score > 15)
-                _gameManager.Speed = 0.7F;
+                gameManager.Speed = 0.7F;
             else if (score > 3)
-                _gameManager.Speed = 0.75F;
+                gameManager.Speed = 0.75F;
         }
         public override string IncrementMelody()
         {
-            _gameManager.AddNote();
+            var gameManager = (MelodyChorusGameManager)_gameManager;
+            gameManager.AddNote();
 
             return "Memoriza esta melodía";
         }

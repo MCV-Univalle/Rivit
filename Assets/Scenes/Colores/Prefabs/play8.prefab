@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3025586528661380022}
   - component: {fileID: 3025586528661380023}
   - component: {fileID: 3025586528661380020}
-  - component: {fileID: -221096668505381862}
   m_Layer: 0
   m_Name: play8
   m_TagString: guia
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2e9cfa7cb93284f48bb60d3ca69ffc34, type: 3}
-  m_Color: {r: 0.3529412, g: 0.22352943, b: 0.007843138, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,7 +145,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3025586528661380029}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6aa29de059093474893d556ee81f7371, type: 3}
   m_Name: 
@@ -154,18 +153,6 @@ MonoBehaviour:
   velocidad: 2
   contador: 0
   adentro: 0
---- !u!114 &-221096668505381862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3025586528661380029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0087f0ea9905534ba80833aa8a1db86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidad: 2
-  contador: 0
-  adentro: 0
+  colorFijo: {r: 0, g: 0, b: 0, a: 0}
+  colorLeaf1: {r: 0, g: 0, b: 0, a: 0}
+  fallo: 

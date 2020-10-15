@@ -40,6 +40,11 @@ public class RankingManager
         return ranking;
     }
 
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteKey(GameName);
+    }
+
     public List<int> LoadData(int gameMode)
     {
         string name = GameName + gameMode;

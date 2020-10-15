@@ -6,31 +6,32 @@ namespace Cuentaranas
 {
     public class EasyMode : GameMode
     {
-        [SerializeField] FrogsCounterGameManager _gameManager;
-        public override void SetVariables()
+        public override void InitializeSettings()
         {
-            _gameManager.Rounds = 5;
-            _gameManager.IterationNumber = 7;
-            _gameManager.WaitTime = 2.03f;
-            _gameManager.NormalSpeed = 0.35f;
-            _gameManager.SpeedVariance = 0.04f;
-            _gameManager.ActiveFrogsNumber = 1;
+            var gameManager = (FrogsCounterGameManager)_gameManager;
+            gameManager.Rounds = 5;
+            gameManager.IterationNumber = 7;
+            gameManager.WaitTime = 2.03f;
+            gameManager.NormalSpeed = 0.35f;
+            gameManager.SpeedVariance = 0.04f;
+            gameManager.ActiveFrogsNumber = 1;
         }
         public override void IncreaseDifficulty(int round)
         {
+            var gameManager = (FrogsCounterGameManager)_gameManager;
             if (round > 2)
             {
-                _gameManager.NormalSpeed += 0.01f;
-                _gameManager.SpeedVariance += 0.001f;
-                _gameManager.WaitTime -= 0.02f;
+                gameManager.NormalSpeed += 0.01f;
+                gameManager.SpeedVariance += 0.001f;
+                gameManager.WaitTime -= 0.02f;
             }
             else
             {
-                _gameManager.IterationNumber++;
-                _gameManager.ActiveFrogsNumber = 2;
-                _gameManager.NormalSpeed += 0.02f;
-                _gameManager.SpeedVariance += 0.003f;
-                _gameManager.WaitTime -= 0.05f;
+                gameManager.IterationNumber++;
+                gameManager.ActiveFrogsNumber = 2;
+                gameManager.NormalSpeed += 0.02f;
+                gameManager.SpeedVariance += 0.003f;
+                gameManager.WaitTime -= 0.05f;
             }
         }
 

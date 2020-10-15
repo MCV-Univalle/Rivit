@@ -50,16 +50,10 @@ public abstract class GameManager : MonoBehaviour
         _gameMode.IncreaseDifficulty(_score);
     }
 
-    public void AdjustDifficulty(GameMode mode)
+    public void InitializeGame(GameMode mode)
     {
         _gameMode = mode;
-        AdjustDifficulty();
-        //startGame();
-    }
-
-    public void AdjustDifficulty()
-    {
-        _gameMode.SetVariables();
+        _gameMode.InitializeSettings();
         Score = 0;
         StartGame();
     }
@@ -73,6 +67,17 @@ public abstract class GameManager : MonoBehaviour
     {
         int highScorePos = _rankingManager.RecordScore(_gameMode, Score);
         return highScorePos;
+    }
+
+    public bool IsRecordEmpty()
+    {
+        foreach (var mode in gameModes)
+        {
+            print(mode);
+            if(mode.HighScores[0] == 0)
+            return true;
+        }
+        return false;
     }
 
     public List<int> GetCurrentRanking()
@@ -98,11 +103,11 @@ public abstract class GameManager : MonoBehaviour
         endGame();
     }
 
-    public void RestartGame()
+    public virtual void RestartGame()
     {
         EndGame();
         Score = 0;
-        AdjustDifficulty();
+        InitializeGame(this._gameMode);   
         StartGame();
     }
 

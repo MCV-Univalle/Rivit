@@ -27,6 +27,7 @@ namespace CoroMelodia
             UIManager.executeGameOver += BlockFrogs;
             UIManager.executeStartGame += UnlockFrogs;
             StartCoroutine(AppearEveryFrog(0.1F));
+            
         }
 
         private void OnDestroy()
@@ -83,8 +84,16 @@ namespace CoroMelodia
             foreach (var frog in _frogsList)
             {
                 _SFXManager.PlayAudio("Boing");
-                frog.gameObject.SetActive(true);
+                frog.GetComponent<Frog>().Appear();
                 yield return new WaitForSeconds(waitTime);
+            }
+        }
+
+        public void HideEveryFrog()
+        {
+            foreach (var frog in _frogsList)
+            {
+                frog.gameObject.SetActive(false);
             }
         }
 

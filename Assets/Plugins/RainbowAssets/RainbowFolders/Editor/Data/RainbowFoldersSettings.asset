@@ -517,3 +517,21 @@ MonoBehaviour:
     BackgroundType: 0
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
+  - Type: 1
+    Key: Assets/Home
+    IconType: 1
+    SmallIcon: {fileID: 2800000, guid: f7b8ccf801d46184bac744eb3effe6c1, type: 3}
+    LargeIcon: {fileID: 2800000, guid: f7b8ccf801d46184bac744eb3effe6c1, type: 3}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+  - Type: 1
+    Key: Assets/UI
+    IconType: 60
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0

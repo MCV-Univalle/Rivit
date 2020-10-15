@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public void PaLaCasitaUwU() //Luego elimino esta función
-    {
-        SceneManager.LoadScene("Home");
-    }
     public IEnumerator GoToHomeScreen()
     {
         yield return new WaitForSeconds(0.4f);
