@@ -5,5 +5,5 @@ using UnityEngine;
 [System.Serializable]
 public class HighScoreData
 {
-    public List<int> highScores;
+    public List<List<int>> highScores;
 }

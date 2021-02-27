@@ -62,7 +62,7 @@ namespace Cuentaranas
 
         public override void EndGame()
         {
-            CallEndGameEvent();
+            RaiseEndGameEvent();
             StopAllCoroutines();
         }
 

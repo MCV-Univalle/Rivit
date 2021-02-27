@@ -14,7 +14,7 @@ public abstract class GameManager : MonoBehaviour
         set
         {
             _score = value;
-            updateScore(_score);
+            updateScore?.Invoke(_score);
             IncreaseDifficulty();
         }
     }
@@ -27,6 +27,7 @@ public abstract class GameManager : MonoBehaviour
     public GameMode[] GameModes { get => gameModes; set => gameModes = value; }
 
     protected GameMode _gameMode;
+    public int CurrentGameMode {get; set;}
 
     protected int _gameModeNumber;
 
@@ -53,54 +54,46 @@ public abstract class GameManager : MonoBehaviour
     public void InitializeGame(GameMode mode)
     {
         _gameMode = mode;
+        CurrentGameMode = mode.ModeID;
         _gameMode.InitializeSettings();
         Score = 0;
         StartGame();
     }
 
-    public void LoadScoresInMode(GameMode mode)
-    {
-        mode.HighScores = _rankingManager.LoadData(mode.ModeID);
-    }
-
     public int RecordScore()
     {
-        int highScorePos = _rankingManager.RecordScore(_gameMode, Score);
+        int highScorePos = _rankingManager.RecordScore(_gameMode.ModeID, Score);
         return highScorePos;
     }
 
     public bool IsRecordEmpty()
     {
-        foreach (var mode in gameModes)
-        {
-            print(mode);
-            if(mode.HighScores[0] == 0)
+        if (_rankingManager.Ranking[0][0] == 0)
             return true;
-        }
-        return false;
+        else return false;
     }
 
-    public List<int> GetCurrentRanking()
+    public List<List<int>> GetCurrentRanking()
     {
-        return _gameMode.HighScores;
+        return _rankingManager.Ranking;
     }
 
-    public void NotifyGameOver()
+    public virtual void NotifyGameOver()
     {
         showResults();
         EndGame();
     }
 
     public abstract void StartGame();
-    public void CallStartGameEvent()
+    public void RaiseStartGameEvent()
     {
-        startGame();
+        startGame?.Invoke();
     }
 
     public abstract void EndGame();
-    public void CallEndGameEvent()
+    public void RaiseEndGameEvent()
     {
-        endGame();
+        endGame?.Invoke();
     }
 
     public virtual void RestartGame()

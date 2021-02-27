@@ -29,7 +29,7 @@ public class ModeSelectionScreen : UIComponent
         FadeInMoveY();
     }
 
-    public void UpdateModeDetails(string name, string description, int highScore)
+    public void UpdateModeDetails(string name, string description, string highScore)
     {
         modeNameText.text = name;
         gameModeTopScoreText.text = highScore + "";

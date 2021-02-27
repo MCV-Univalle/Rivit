@@ -36,43 +36,43 @@ namespace Cuentaranas
             {
                 case 0:
                     gameManager.IterationNumber = 8;
-                    gameManager.WaitTime = 1.9f;
+                    gameManager.WaitTime = 1.7f;
                     gameManager.NormalSpeed = 0.4f;
-                    gameManager.SpeedVariance = 0.04f;
+                    gameManager.SpeedVariance = 0.045f;
                     gameManager.ActiveFrogsNumber = 1;
                     break;
                 case 1:
                     gameManager.IterationNumber = 10;
-                    gameManager.WaitTime = 1.7F;
-                    gameManager.NormalSpeed = 0.45f;
+                    gameManager.WaitTime = 1.5F;
+                    gameManager.NormalSpeed = 0.5f;
                     gameManager.SpeedVariance = 0.045f;
                     gameManager.ActiveFrogsNumber = 1;
                     break;
                 case 2:
-                    gameManager.IterationNumber = 12;
-                    gameManager.WaitTime = 1.5f;
-                    gameManager.NormalSpeed = 0.5f;
+                    gameManager.IterationNumber = 14;
+                    gameManager.WaitTime = 1.4f;
+                    gameManager.NormalSpeed = 0.55f;
                     gameManager.SpeedVariance = 0.05f;
                     gameManager.ActiveFrogsNumber = 2;
                     break;
                 case 3:
-                    gameManager.IterationNumber = 14;
-                    gameManager.WaitTime = 1.3f;
-                    gameManager.NormalSpeed = 0.6f;
+                    gameManager.IterationNumber = 16;
+                    gameManager.WaitTime = 1.2f;
+                    gameManager.NormalSpeed = 0.61f;
                     gameManager.SpeedVariance = 0.055f;
                     gameManager.ActiveFrogsNumber = 2;
                     break;
                 case 4:
-                    gameManager.IterationNumber = 18;
-                    gameManager.WaitTime = 1.1f;
-                    gameManager.NormalSpeed = 0.65f;
+                    gameManager.IterationNumber = 20;
+                    gameManager.WaitTime = 1f;
+                    gameManager.NormalSpeed = 0.67f;
                     gameManager.SpeedVariance = 0.06f;
                     gameManager.ActiveFrogsNumber = 3;
                     break;
                 case 5:
-                    gameManager.IterationNumber = 20;
+                    gameManager.IterationNumber = 22;
                     gameManager.WaitTime = 0.8f;
-                    gameManager.NormalSpeed = 0.7f;
+                    gameManager.NormalSpeed = 0.72f;
                     gameManager.SpeedVariance = 0.065f;
                     gameManager.ActiveFrogsNumber = 3;
                     break;

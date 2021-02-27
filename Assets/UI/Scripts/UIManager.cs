@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 
@@ -19,13 +21,12 @@ public class UIManager : MonoBehaviour
     public static event OnButtonClickDelegate executeQuitGame;
     public static event OnButtonClickDelegate executeStartGame;
 
-    [SerializeField] private SceneSwitcher sceneSwitcher;
-    [SerializeField] private AudioManager _UIaudioManager;
     [SerializeField] private WhiteScreen whiteScreen;
     [Inject] private GameManager _gameManager;
 
     void Start()
     {
+        whiteScreen.FadeAlpha(1, 0, 0.35F, 0.75F);
         GameManager.showResults += EndGame;
         if(_gameManager.IsRecordEmpty())  LeanTween.delayedCall(gameObject, 0.5F, () => OnHelpButton());
     }
@@ -33,7 +34,17 @@ public class UIManager : MonoBehaviour
     void OnDestroy()
     {
         GameManager.showResults -= EndGame;
-    }
+        executePlayButton = null;
+        executeHelpButton = null;
+        executeCloseInstructions = null ;
+        executeCloseModeSelectionButton = null;
+        executePlayAgainButton = null;
+        executePauseButton = null;
+        executeResumeFromPause = null;
+        executeGameOver = null;
+        executeQuitGame = null;
+        executeStartGame = null;
+}
 
     public IEnumerator LockTemporally(float delayTime)
     {
@@ -42,81 +53,51 @@ public class UIManager : MonoBehaviour
         _isLocked = false;
     }
 
-    public void PlayAudio(string name)
+    public void RiseEvent(Action evnt, float delayTime)
     {
-        _UIaudioManager.PlayAudio(name);
+        if (!_isLocked)
+        {
+            evnt?.Invoke();
+            StartCoroutine(LockTemporally(delayTime));
+        }
     }
 
     public void OnPlayButton()
     {
-        if (!_isLocked)
-        {
-            StartCoroutine(LockTemporally(0.3F));
-            executePlayButton();
-            _UIaudioManager.PlayAudio("Confirmation");
-        }
+        RiseEvent(() => executePlayButton(), 0.15F);
     }
 
     public void OnHelpButton()
     {
-        if (!_isLocked)
-        {
-            StartCoroutine(LockTemporally(0.3F));
-            executeHelpButton();
-            _UIaudioManager.PlayAudio("Confirmation");
-        }
+        RiseEvent(() => executeHelpButton(), 0.15F);
     }
 
     public void OnCloseInstructionsScreen()
     {
-        if (!_isLocked)
-        {
-            StartCoroutine(LockTemporally(0.3F));
-            executeCloseInstructions();
-            _UIaudioManager.PlayAudio("Back");
-        }
+        RiseEvent(() => executeCloseInstructions(), 0.15F);
     }
 
     public void OnCloseModeSelectionButton()
     {
-        if (!_isLocked)
-        {
-            StartCoroutine(LockTemporally(0.3F));
-            executeCloseModeSelectionButton();
-            _UIaudioManager.PlayAudio("Back");
-        }
+        RiseEvent(() => executeCloseModeSelectionButton(), 0.15F);
     }
 
     public void OnPlayAgainButton()
     {
-        if (!_isLocked)
-        {
-            StartCoroutine(LockTemporally(0.3F));
-            executePlayAgainButton();
-            _UIaudioManager.PlayAudio("Confirmation");
-        }
+        RiseEvent(() => executePlayAgainButton(), 0.15F);
     }
 
     public void OnPauseButton()
     {
-        if (!_isLocked)
-        {
-            _gameManager.ChangePauseState(0.15F);
-            StartCoroutine(LockTemporally(0.075F));
-            executePauseButton();
-            _UIaudioManager.PlayAudio("Pause");
-        }
+        RiseEvent(() => executePauseButton(), 0.15F);
+        _gameManager.ChangePauseState(0.25F);
     }
 
     public void ResumeFromPause()
     {
-        if (!_isLocked)
-        {
-            _gameManager.ChangePauseState(0.15F);
-            StartCoroutine(LockTemporally(0.3F));
-            executeResumeFromPause();
-            _UIaudioManager.PlayAudio("Confirmation");
-        }
+        _gameManager.ChangePauseState(0.15F);
+        RiseEvent(() => executeResumeFromPause(), 0.3F);
+        
     }
 
     public void OnResumeButton()
@@ -132,14 +113,10 @@ public class UIManager : MonoBehaviour
 
     public void OnQuitButton()
     {
-        if (!_isLocked)
-        {
-            _gameManager.ChangePauseState(0.15F);
-            StartCoroutine(whiteScreen.FadeInAndOut(() => _gameManager.EndGame()));
-            StartCoroutine(LockTemporally(0.3F));
-            LeanTween.delayedCall(gameObject, 0.2F, () => executeQuitGame());
-            _UIaudioManager.PlayAudio("Confirmation");
-        }
+        _gameManager.ChangePauseState(0.15F);
+        _gameManager.EndGame();
+        RiseEvent(() => executeQuitGame(), 0.3F); 
+        whiteScreen.FadeInAndOut(0, 1, 0.25F, 0.5F);
     }
 
     public void OnReturnToHomeButton()
@@ -148,9 +125,8 @@ public class UIManager : MonoBehaviour
         {
             whiteScreen.gameObject.SetActive(true);
             whiteScreen.FadeIn();
-            StartCoroutine(sceneSwitcher.GoToHomeScreen());
+            LeanTween.delayedCall(gameObject, 0.3F, () => SceneManager.LoadScene("Home"));
             StartCoroutine(LockTemporally(0.3F));
-            _UIaudioManager.PlayAudio("Back");
         }
     }
 
@@ -163,9 +139,9 @@ public class UIManager : MonoBehaviour
     {
         if (!_isLocked)
         {
-            LeanTween.delayedCall(gameObject, 0.2F, () => executeStartGame());
-            _UIaudioManager.PlayAudio("Confirmation");
-            StartCoroutine(whiteScreen.FadeInAndOut(() => _gameManager.InitializeGame(mode)));
+            LeanTween.delayedCall(gameObject, 0.4F, () => executeStartGame());
+            whiteScreen.FadeInAndOut(0, 1, 0.25F, 0.5F);
+            LeanTween.delayedCall(gameObject, 0.41F, () => _gameManager.InitializeGame(mode));
             StartCoroutine(LockTemporally(0.3F));
         }
     }

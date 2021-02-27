@@ -10,10 +10,10 @@ public class UIComponent : MonoBehaviour
     protected float _delay = 0.07f;
     [SerializeField] protected float positionX = 0;
     [SerializeField] protected float positionY = 0;
-    //public float PositionY{get {return positionY;} set {positionY = value;}}
 
     public void FadeOut()
     {
+
         LeanTween.alphaCanvas(gameObject.GetComponent<CanvasGroup>(), 0, _fadeTime)
             .setDelay(_delay);
         gameObject.GetComponent<CanvasGroup>().interactable = false;

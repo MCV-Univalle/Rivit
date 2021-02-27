@@ -10,9 +10,9 @@ namespace Cuentaranas
         {
             var gameManager = (FrogsCounterGameManager)_gameManager;
             gameManager.Rounds = 5;
-            gameManager.IterationNumber = 15;
-            gameManager.WaitTime = 1.3F;
-            gameManager.NormalSpeed = 0.5f;
+            gameManager.IterationNumber = 16;
+            gameManager.WaitTime = 1.2F;
+            gameManager.NormalSpeed = 0.55f;
             gameManager.SpeedVariance = 0.05f;
             gameManager.ActiveFrogsNumber = 2;
         }

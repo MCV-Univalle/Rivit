@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿/*
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 namespace Eat_frog_Game
 {
@@ -30,7 +33,7 @@ namespace Eat_frog_Game
         void Start()
         {
             
-            _gameManager = GameManager.Instance;
+            //_gameManager = _gameManager;
             Debug.Log(_gameManager);
             base.Start();
         }
@@ -48,4 +51,5 @@ namespace Eat_frog_Game
         }
     }
 }
+*/
 

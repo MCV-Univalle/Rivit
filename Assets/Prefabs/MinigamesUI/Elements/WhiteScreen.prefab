@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 468379730728770373}
   - component: {fileID: 468379730728770374}
   - component: {fileID: 468379730728770375}
-  - component: {fileID: 468379730728770372}
+  - component: {fileID: 1545904928825852678}
   - component: {fileID: 468379730728770363}
   m_Layer: 5
   m_Name: WhiteScreen
@@ -95,7 +95,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &468379730728770372
+--- !u!114 &1545904928825852678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,12 +104,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 468379730728770369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7b2b0b0c8b7f3849aefa2da7ff0ba75, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a91efa2fc5932249a6bf833f3f9890c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lerpTime: 0.2
-  _defaultAlpha: 1
-  _executeOnEnable: 1
+  positionX: 0
+  positionY: 0
 --- !u!225 &468379730728770363
 CanvasGroup:
   m_ObjectHideFlags: 0

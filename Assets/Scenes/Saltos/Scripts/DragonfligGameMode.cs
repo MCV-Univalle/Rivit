@@ -6,6 +6,6 @@ namespace saltos
 {
     public abstract class DragonfligGameMode : GameMode
     {
-        [SerializeField] protected DragoflyChasingGameManager _gameManager;
+
     }
 }

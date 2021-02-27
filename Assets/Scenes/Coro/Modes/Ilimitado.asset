@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 607aad73655f5ed469ef84a6ca163241, type: 3}
   modeName: "Il\xEDmitado"
-  description: Pollo
+  description: "El juego terminar\xE1 hasta que te equivoques"

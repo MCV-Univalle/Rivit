@@ -1106,6 +1106,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameModes:
   - {fileID: 778256039}
+  leafController: {fileID: 0}
+  comTAG: {fileID: 0}
+  playerTAG: {fileID: 0}
+  UIc: {fileID: 0}
+  rutaIniRana: 
+  contRutaRana: 0
+  touchHistory: 
+  arrayRutaRanaAmarilla: 0100000002000000030000000400000005000000060000000700000008000000
+  sigSaltoComAct: 0
+  empezarJuego: 0
+  tiempoEsperaSaltoCom: 0
+  LineRendererRoute: {fileID: 0}
+  mostarAyudaRuta: 0
+  contadorVueloLibelula: 0
+  cantAyudasLineas: 0
 --- !u!1 &410219839 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 274434460652680040, guid: cebf3715e0af72544a82739cdfcfca28,

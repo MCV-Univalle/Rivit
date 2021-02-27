@@ -24,7 +24,7 @@ public class DefaultInstaller : MonoInstaller
     private void InstallGameManager()
     {
         Container.Bind<GameManager>().FromInstance(gameManager).AsSingle();
-        Container.Bind<RankingManager>().AsSingle().WithArguments(gameManager.Name);
+        Container.Bind<RankingManager>().AsSingle().WithArguments(gameManager.Name, gameManager.GameModes.Length);
         Container.Bind<PauseManager>().AsSingle();
     }
 }

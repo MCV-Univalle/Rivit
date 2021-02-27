@@ -138,7 +138,7 @@ namespace CoroMelodia
 
             StopAllCoroutines();
             IsGameStarted = false;
-            CallEndGameEvent();
+            RaiseEndGameEvent();
         }
 
         public void EmptyMelody()

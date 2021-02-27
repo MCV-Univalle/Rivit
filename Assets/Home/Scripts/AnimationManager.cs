@@ -6,21 +6,6 @@ namespace Home
 {
    public class AnimationManager : MonoBehaviour
     {
-        private static AnimationManager _instance;
-        public static AnimationManager Instance
-        {
-            get
-            {
-                //Logic to create the instance
-                if(_instance == null)
-                {
-                    GameObject go = new GameObject("AnimationManager");
-                    go.AddComponent<AnimationManager>();
-                    _instance = go.GetComponent<AnimationManager>();
-                }
-                return _instance;
-            }
-        }
         [SerializeField]
         private GameObject _eyes;
         private Animator _eyesAnimator;
@@ -32,7 +17,6 @@ namespace Home
 
         void Awake()
         {
-            _instance = this;
             _eyesAnimator = _eyes.gameObject.GetComponent<Animator>();
             _mouthAnimator = _mouth.gameObject.GetComponent<Animator>();
         }
@@ -61,8 +45,5 @@ namespace Home
         {
             _mouthAnimator.SetBool("active", value);
         }
-
-
-
-    } 
+    }
 }

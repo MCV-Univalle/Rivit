@@ -6,6 +6,8 @@ using Zenject;
 
 public class ResultsScreen : UIComponent
 {
+    [SerializeField] bool isScoreRepresentedAsTime = false;
+
     [Inject] private GameManager _gameManager;
     [SerializeField] private TextMeshProUGUI finalScore;
     [SerializeField] private TextMeshProUGUI newRecordText;
@@ -45,7 +47,18 @@ public class ResultsScreen : UIComponent
         rankingPanel.GetComponent<CanvasGroup>().alpha = 0;
         rankingPanel.GetComponent<CanvasGroup>().interactable = false;
         finalScorePanel.GetComponent<CanvasGroup>().alpha = 0;
-        StartCoroutine(CountFinalScore(score, 0.025F));
+        if (isScoreRepresentedAsTime)
+        {
+            score = -score + 100000;
+            float minutes = Mathf.FloorToInt(score / 60);
+            float seconds = Mathf.FloorToInt(score % 60);
+
+            finalScore.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            StartCoroutine(ShowHighScore());
+        }
+
+        else
+            StartCoroutine(CountFinalScore(score, 0.025F));
     }
 
     public IEnumerator CountFinalScore(int score, float waitTime)
@@ -57,6 +70,11 @@ public class ResultsScreen : UIComponent
             finalScore.text = i + "";
             yield return new WaitForSeconds(waitTime);
         }
+        StartCoroutine(ShowHighScore());
+    }
+
+    public IEnumerator ShowHighScore()
+    {
         yield return new WaitForSeconds(0.08F);
         int newRecordPos = _gameManager.RecordScore();
         DisplayNewRecordText(newRecordPos);
@@ -67,7 +85,7 @@ public class ResultsScreen : UIComponent
 
     public void ShowRanking(int newRecordPos)
     {
-        List<int> ranking = _gameManager.GetCurrentRanking();
+        List<int> ranking = _gameManager.GetCurrentRanking()[_gameManager.CurrentGameMode];
         DestroyRanking();
         GenerateRankingTable(ranking, newRecordPos);
         rankingPanel.GetComponent<UIComponent>().FadeIn();
@@ -99,8 +117,21 @@ public class ResultsScreen : UIComponent
         GameObject go = Instantiate(_scorePrefab);
         go.transform.SetParent(_rankingContainer.transform, false);
         go.transform.Find("Number").GetComponent<TextMeshProUGUI>().text = num + 1 + ".";
-        go.transform.Find("Score").GetComponent<TextMeshProUGUI>().text = "" + score;
+        if (isScoreRepresentedAsTime)
+            ShowScoreAsTime(go, score);
+        else 
+            go.transform.Find("Score").GetComponent<TextMeshProUGUI>().text = "" + score;
         return go;
+    }
+
+    public void ShowScoreAsTime(GameObject go, int score)
+    {
+        if (score == 0) score = 100000;
+        score = 100000 - score;
+        float minutes = Mathf.FloorToInt(score / 60);
+        float seconds = Mathf.FloorToInt(score % 60);
+
+        go.transform.Find("Score").GetComponent<TextMeshProUGUI>().text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     public void HighligthScore(GameObject go, Color32 color)

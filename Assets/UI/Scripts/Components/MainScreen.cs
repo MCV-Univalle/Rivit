@@ -20,6 +20,6 @@ public class MainScreen : UIComponent
         UIManager.executeCloseModeSelectionButton -= FadeIn;
         UIManager.executeHelpButton -= FadeOut;
         UIManager.executeCloseInstructions -= FadeIn;
-        UIManager.executeQuitGame += FadeIn;
+        UIManager.executeQuitGame -= FadeIn;
     }
 }

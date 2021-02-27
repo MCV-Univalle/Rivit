@@ -6,11 +6,11 @@ namespace Eat_frog_Game
     public class Controllengua : MonoBehaviour
 {
     
-    private Objectivo objectivo;
+    private Objective Objective;
     private FrogController frog;
     // Start is called before the first frame update
     private void Awake() {
-        objectivo = FindObjectOfType<Objectivo>();
+        Objective = FindObjectOfType<Objective>();
         frog = FindObjectOfType<FrogController>();
     }
     void Start()

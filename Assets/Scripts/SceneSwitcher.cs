@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSwitcher : MonoBehaviour
+public static class SceneSwitcher
 {
-    public IEnumerator GoToHomeScreen()
+    public static void GoToHomeScreen()
     {
-        yield return new WaitForSeconds(0.4f);
         SceneManager.LoadScene("Home");
     }
 
-    public IEnumerator GoToGame(string gameName)
+    public static void GoToGame(string gameName)
     {
-        yield return new WaitForSeconds(0.35f);
         SceneManager.LoadScene(gameName);
     }
 }

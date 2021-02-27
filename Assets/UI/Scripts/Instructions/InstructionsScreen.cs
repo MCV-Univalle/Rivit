@@ -25,7 +25,6 @@ public class InstructionsScreen : UIComponent
 
     public void MovePage(int direction)
     {
-        _uiManager.PlayAudio("Arrow");
         Transform pages = pagesContainer.transform;
         pages.GetChild(_index).GetComponent<InstructionPage>().MovePageOut(direction);
         _index += direction;

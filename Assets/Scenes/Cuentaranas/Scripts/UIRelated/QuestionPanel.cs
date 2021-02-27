@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Zenject;
+using UnityEngine.UI;
 
 namespace Cuentaranas
 {
@@ -21,6 +22,15 @@ namespace Cuentaranas
         [Inject (Id="SFXManager")] private AudioManager _SFXManager;
 
         bool _isCorrect = false;
+
+        private void Update()
+        {
+            var button = _acceptButton.GetComponent<Button>();
+            if (_numberInputField.text == "")
+                button.interactable = false;
+            else
+                button.interactable = true;
+        }
 
         private void OnEnable()
         {

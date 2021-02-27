@@ -7,7 +7,6 @@ public abstract class GameMode : MonoBehaviour
 {
     protected GameManager _gameManager;
     public int ModeID {get; set;}
-    public List<int> HighScores {get; set;}
     [SerializeField] GameModeButton _modeButton;
     public GameModeButton ModeButton { get => _modeButton; set => _modeButton = value; }
     public abstract void InitializeSettings();

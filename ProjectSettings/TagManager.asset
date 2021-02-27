@@ -42,6 +42,11 @@ TagManager:
   - leaf5
   - guia
   - contador
+  - tableroTuberias
+  - generador
+  - boton
+  - Asteroid
+  - Trigger
   layers:
   - Default
   - TransparentFX

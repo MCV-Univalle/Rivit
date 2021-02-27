@@ -19,6 +19,6 @@ public class PausePanel : UIComponent
     {
         UIManager.executePauseButton -= FadeInMoveY;
         UIManager.executeResumeFromPause -= FadeOutMoveY;
-        UIManager.executeResumeFromPause -= FadeOutMoveY;
+        UIManager.executeQuitGame -= FadeOutMoveY;
     }
 }

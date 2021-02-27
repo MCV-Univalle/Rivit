@@ -2,42 +2,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 public class RankingManager
 {
-    private int _recordedScores = 5;
-    public string GameName {get; set;}
+    private int _rankedScoresNumber = 5;
+    private int _modesNumber;
 
-    public RankingManager(string name)
-    {
-        GameName = name;
-    }
-
-    public int RecordScore(GameMode mode, int score)
+    public int RecordScore(int mode, int score)
     {
         int posInRanking = -1;
-        for (int i = 0; i < _recordedScores; i++)
+        for (int i = 0; i < _rankedScoresNumber; i++)
         {
-            if(score > mode.HighScores[i])
+            if(score > Ranking[mode][i])
             {
                 posInRanking = i;
-                mode.HighScores.Insert(i, score);
-                mode.HighScores.RemoveAt(_recordedScores);
-                SaveData(mode.HighScores, mode.ModeID);
+                Ranking[mode].Insert(i, score);
+                Ranking[mode].RemoveAt(_rankedScoresNumber);
                 break;
             }
         }
+        SaveData();
         return posInRanking;
     }
+    public string GameName { get; set; }
+    public List<List<int>> Ranking { get; set; }
 
-    public List<int> InitializeEmptyRanking()
+    public RankingManager(string name, int number)
     {
-        List<int> ranking = new List<int>();
-        for (int i = 0; i < _recordedScores; i++)
+        GameName = name;
+        this._modesNumber = number;
+        LoadData();
+    }
+
+    public void LoadData()
+    {
+        string jsonString = PlayerPrefs.GetString(GameName);
+        if (jsonString != "")
         {
-            ranking.Add(0);
+            HighScoreData data = new HighScoreData();
+            data = JsonConvert.DeserializeObject<HighScoreData>(jsonString);
+            Ranking =  data.highScores;
         }
-        return ranking;
+        else
+        {
+            Debug.LogWarning("Save data not found!");
+            Ranking = InitializeEmptyRanking();
+        }
+            
+    }
+
+    public List<List<int>> InitializeEmptyRanking()
+    {
+        var newRanking = new List<List<int>>();
+        for (int i = 0; i < _modesNumber; i++)
+        {
+            var temp = new List<int>();
+            newRanking.Add(temp);
+            for (int j = 0; j < _rankedScoresNumber; j++)
+            {
+                newRanking[i].Add(0);
+            }
+        }
+        return newRanking;
     }
 
     public void DeleteData()
@@ -45,30 +73,12 @@ public class RankingManager
         PlayerPrefs.DeleteKey(GameName);
     }
 
-    public List<int> LoadData(int gameMode)
-    {
-        string name = GameName + gameMode;
-        string jsonString = PlayerPrefs.GetString(name);
-        if(jsonString != "")
-        {
-            HighScoreData data = new HighScoreData();
-            data = JsonUtility.FromJson<HighScoreData>(jsonString);
-            return data.highScores;
-        }
-        else
-        {
-            Debug.LogWarning("Save data not found!");
-            return InitializeEmptyRanking();
-        }
-    }
-
-    public void SaveData(List<int> ranking, int gameMode)
+    public void SaveData()
     {
         HighScoreData data = new HighScoreData();
-        data.highScores = ranking;
-        string json = JsonUtility.ToJson(data);
-        string name = GameName + gameMode;
-        PlayerPrefs.SetString(name, json);
+        data.highScores = Ranking;
+        string json = JsonConvert.SerializeObject(data);
+        PlayerPrefs.SetString(GameName, json);
         PlayerPrefs.Save();
     }
 }
