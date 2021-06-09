@@ -556,6 +556,14 @@ MonoBehaviour:
     - Accessory5
     - Glasses4
     - Glasses5
+    - Glasses6
+    - Glasses7
+    - Hat6
+    - Hat7
+    - Shirt6
+    - Shirt7
+    - Accessory6
+    - Accessory7
     m_values:
     - {fileID: 21300000, guid: 6ad2b381f941f604590c75afe675029d, type: 3}
     - {fileID: 21300000, guid: 0e08ec0d0b8a8ee4886db19a3aa7064e, type: 3}
@@ -568,7 +576,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 6ad2b381f941f604590c75afe675029d, type: 3}
     - {fileID: 21300000, guid: f3c49e09c42661640ba00d0f3fd05791, type: 3}
     - {fileID: 21300000, guid: 0ef8b8c786104434dadc4bae96b5aa6d, type: 3}
-    - {fileID: 21300000, guid: 715d2ad4d68d2934e88894278c1578e8, type: 3}
+    - {fileID: 21300000, guid: 2b1a587ae33e52f4f8e6b10967f072b6, type: 3}
     - {fileID: 21300000, guid: 6ad2b381f941f604590c75afe675029d, type: 3}
     - {fileID: 21300000, guid: 43359a97bac21ba41a030d4a31ee8cf2, type: 3}
     - {fileID: 21300000, guid: 31371a5ebea0bcf49b8b020f06b7c25f, type: 3}
@@ -581,6 +589,14 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 7f986359b0df9574cadef5e5c4c50db6, type: 3}
     - {fileID: 21300000, guid: 5ada932d74e730f41a02659288b82bba, type: 3}
     - {fileID: 21300000, guid: a54d265938936064e8155a13fac537a9, type: 3}
+    - {fileID: 21300000, guid: 4ea007f7f8e19e44da9282db372f5351, type: 3}
+    - {fileID: 21300000, guid: 83e0dc8afdac1e84eafc5f926f68b95b, type: 3}
+    - {fileID: 21300000, guid: 4c485c5a4f9d82b46afa5f5513b5411b, type: 3}
+    - {fileID: 21300000, guid: da4bbfd588392dc49bc35e890e72d706, type: 3}
+    - {fileID: 21300000, guid: 08b72c85fbf59d648bb564dd8cac885e, type: 3}
+    - {fileID: 21300000, guid: efbe1232b6f6ad949adb5f83c2ee4c37, type: 3}
+    - {fileID: 21300000, guid: 5f067ad988d7cc04bbc03ae26d0b8d6b, type: 3}
+    - {fileID: 21300000, guid: 7bd2c75ef7b2a384fb3e9a74ef9db0a7, type: 3}
 --- !u!114 &4084566037476516195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff863ccaf7bdfba47aaddfd706679f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userDataManager: {fileID: 0}
 --- !u!1 &2834898688287195966
 GameObject:
   m_ObjectHideFlags: 0
