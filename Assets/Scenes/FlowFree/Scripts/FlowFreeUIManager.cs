@@ -8,7 +8,9 @@ public class FlowFreeUIManager : MonoBehaviour
 {
     public static FlowFreeUIManager instance;
 
-    private FlowFreeGameManager gameManager = new FlowFreeGameManager();
+    //private FlowFreeGameManager gameManager = new FlowFreeGameManager();
+    private GenerateLevel generateLevel = new GenerateLevel();
+
     public GameObject levelLabel;
     private TextMeshProUGUI levelTmpLabel;
 
@@ -20,33 +22,33 @@ public class FlowFreeUIManager : MonoBehaviour
 
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<FlowFreeGameManager>();
+        generateLevel = GameObject.Find("GenerateLevel").GetComponent<GenerateLevel>();
         levelTmpLabel = levelLabel.GetComponent<TextMeshProUGUI>();
     }
 
     public void NextLevel()
     {
 
-        if (gameManager.LevelIndexList < gameManager.LevelsList.Count - 1)
+        if (generateLevel.LevelIndexList < generateLevel.LevelsList.Count - 1)
         {
             print(levelTmpLabel.text);
-            gameManager.LevelIndexList += 1;
-            gameManager.LoadLevel();
+            generateLevel.LevelIndexList += 1;
+            //generateLevel.LoadLevel();
         }
     }
 
     public void PreviusLevel()
     {
-        if (gameManager.LevelIndexList > 0)
+        if (generateLevel.LevelIndexList > 0)
         {
             print(levelTmpLabel.text);
-            gameManager.LevelIndexList -= 1;
-            gameManager.LoadLevel();
+            generateLevel.LevelIndexList -= 1;
+            //generateLevel.LoadLevel();
         }
     }
 
     public void SetLevelTmpLabel()
     {
-        levelTmpLabel.text = gameManager.levelsList2[gameManager.LevelIndexList].name;
+        levelTmpLabel.text = generateLevel.levelsList2[generateLevel.LevelIndexList].name;
     }
 }

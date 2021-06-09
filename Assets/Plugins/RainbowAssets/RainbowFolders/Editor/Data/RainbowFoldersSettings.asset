@@ -607,3 +607,30 @@ MonoBehaviour:
     BackgroundType: 0
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
+  - Type: 1
+    Key: Assets/Scenes/SpaceShip
+    IconType: 1
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 2800000, guid: 236e9af7af5e04d46b997aabf34cee8a, type: 3}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+  - Type: 1
+    Key: Assets/Scenes/Frutas
+    IconType: 1
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 2800000, guid: fc406f323cf3b4140829720e3645673d, type: 3}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+  - Type: 1
+    Key: Assets/Scenes/Prueba
+    IconType: 1
+    SmallIcon: {fileID: 2800000, guid: 8ba57bc0d02adcb4d99f7a55c2dd3513, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 8ba57bc0d02adcb4d99f7a55c2dd3513, type: 3}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0

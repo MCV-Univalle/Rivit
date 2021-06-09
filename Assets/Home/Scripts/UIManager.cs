@@ -28,7 +28,7 @@ namespace Home
 
         private void Start()
         {
-            whiteScreen.FadeAlpha(1, 0, 0.35F, 1.25F);
+            whiteScreen.FadeOut(0.25F, 0.35F);
         }
 
         public IEnumerator BlockUI()
@@ -50,7 +50,7 @@ namespace Home
 
         public void SwitchScene(string sceneName)
         {
-            whiteScreen.FadeAlpha(0, 1F, 0.25F, 0F);
+            whiteScreen.FadeIn(0.25F, 0.1F);
             LeanTween.delayedCall(gameObject, 0.9F, () => SceneManager.LoadScene(sceneName));
         }
 

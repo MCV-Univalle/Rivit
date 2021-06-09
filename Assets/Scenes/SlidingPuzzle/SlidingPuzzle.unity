@@ -1310,6 +1310,11 @@ PrefabInstance:
       propertyPath: isScoreRepresentedAsTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4792232512968925661, guid: 4ea5f02d07fa9844389b558a4a1977cd,
+        type: 3}
+      propertyPath: m_ChildForceExpandWidth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4827220127707487245, guid: 4ea5f02d07fa9844389b558a4a1977cd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1425,6 +1430,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686863630379506808, guid: 4ea5f02d07fa9844389b558a4a1977cd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7856467070224176004, guid: 4ea5f02d07fa9844389b558a4a1977cd,
         type: 3}

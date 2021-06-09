@@ -32,51 +32,39 @@ namespace Cuentaranas
             if (_difficultyLevel < 5)
                 _difficultyLevel++;
             gameManager.IterationNumber++;
+            GameParameters parameters = new GameParameters(0, 0, 0, 0, 0);
             switch (_difficultyLevel)
             {
                 case 0:
-                    gameManager.IterationNumber = 8;
-                    gameManager.WaitTime = 1.7f;
-                    gameManager.NormalSpeed = 0.4f;
-                    gameManager.SpeedVariance = 0.045f;
-                    gameManager.ActiveFrogsNumber = 1;
+                    parameters = new GameParameters(8, 1.7F, 0.4F, 0.045F, 1);
                     break;
                 case 1:
-                    gameManager.IterationNumber = 10;
-                    gameManager.WaitTime = 1.5F;
-                    gameManager.NormalSpeed = 0.5f;
-                    gameManager.SpeedVariance = 0.045f;
-                    gameManager.ActiveFrogsNumber = 1;
+                    parameters = new GameParameters(10, 1.5F, 0.5F, 0.045F, 1);
                     break;
                 case 2:
-                    gameManager.IterationNumber = 14;
-                    gameManager.WaitTime = 1.4f;
-                    gameManager.NormalSpeed = 0.55f;
-                    gameManager.SpeedVariance = 0.05f;
-                    gameManager.ActiveFrogsNumber = 2;
+                    parameters = new GameParameters(14, 1.4F, 0.55F, 0.05F, 2);
                     break;
                 case 3:
-                    gameManager.IterationNumber = 16;
-                    gameManager.WaitTime = 1.2f;
-                    gameManager.NormalSpeed = 0.61f;
-                    gameManager.SpeedVariance = 0.055f;
-                    gameManager.ActiveFrogsNumber = 2;
+                    parameters = new GameParameters(16, 1.2F, 0.61F, 0.055F, 2);
                     break;
                 case 4:
-                    gameManager.IterationNumber = 20;
-                    gameManager.WaitTime = 1f;
-                    gameManager.NormalSpeed = 0.67f;
-                    gameManager.SpeedVariance = 0.06f;
-                    gameManager.ActiveFrogsNumber = 3;
+                    parameters = new GameParameters(20, 1F, 0.67F, 0.06F, 3);
                     break;
                 case 5:
-                    gameManager.IterationNumber = 22;
-                    gameManager.WaitTime = 0.8f;
-                    gameManager.NormalSpeed = 0.72f;
-                    gameManager.SpeedVariance = 0.065f;
-                    gameManager.ActiveFrogsNumber = 3;
+                    parameters = new GameParameters(22, 0.8F, 0.72F, 0.064F, 3);
                     break;
             }
+            SetParameters(parameters);
+        }
+
+        private void SetParameters(GameParameters parameters)
+        {
+            var gameManager = (FrogsCounterGameManager)_gameManager;
+            gameManager.IterationNumber = parameters.iterationNumber;
+            gameManager.WaitTime = parameters.waitTime;
+            gameManager.NormalSpeed = parameters.normalSpeed;
+            gameManager.SpeedVariance = parameters.speedVariance;
+            gameManager.ActiveFrogsNumber = parameters.activeFrogs;
         }
 
         public void ReduceLife()
@@ -95,5 +83,23 @@ namespace Cuentaranas
                 
         }
 
+    }
+
+    struct GameParameters
+    {
+        public int iterationNumber;
+        public float waitTime;
+        public float normalSpeed;
+        public float speedVariance;
+        public int activeFrogs;
+
+        public GameParameters(int iterationNumber, float waitTime, float normalSpeed, float speedVariance, int activeFrogs)
+        {
+            this.iterationNumber = iterationNumber;
+            this.waitTime = waitTime;
+            this.normalSpeed = normalSpeed;
+            this.speedVariance = speedVariance;
+            this.activeFrogs = activeFrogs;
+        }
     }
 }

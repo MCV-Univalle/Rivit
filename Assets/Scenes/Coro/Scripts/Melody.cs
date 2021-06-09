@@ -33,7 +33,7 @@ namespace CoroMelodia
             int num = GenerateRandomNote();
             _notes.Add(num);
             _index = 0;
-            updateNotes(_notes.Count);
+            updateNotes?.Invoke(_notes.Count);
         }
 
         public void AddNotes(int num)

@@ -6,7 +6,7 @@ using TMPro;
 
 namespace Cuentaranas
 {
-    public class FrogsCounterGameManager : GameManager
+    public class FrogsCounterGameManager : ModeSystemGameManager
     {
         public override string Name { get => "CuentaRanas"; }
         [SerializeField] private Countdown countdown;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SlidingPuzzle
 {
-    public class SlidingPuzzleGameManager : GameManager
+    public class SlidingPuzzleGameManager : ModeSystemGameManager
     {
         [SerializeField] PuzzleState puzzleState;
         [SerializeField] GridGenerator gridGenerator;

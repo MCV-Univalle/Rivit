@@ -11,26 +11,27 @@ namespace FlowFree
         private Color colorDrag = new Color();
         private FlowFreeGameManager gameManager = new FlowFreeGameManager();
         private TableroLayout tableroLayout = new TableroLayout();
+        private GenerateLevel generateLevel = new GenerateLevel();
 
         private void Start()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             //paintCell = false;
 
-            gameManager = GameObject.Find("GameManager").GetComponent<FlowFreeGameManager>();
+            generateLevel = GameObject.Find("GenerateLevel").GetComponent<GenerateLevel>();
         }
 
 
         private void OnMouseDown()
         {
             //print("OnMouseDown ");
-            if (gameManager.CellsInputPathGroup[containedValueCell].Count > 0 && containedValueCell != 0 && gameManager.PaintCell == false)
+            if (generateLevel.CellsInputPathGroup[containedValueCell].Count > 0 && containedValueCell != 0 && generateLevel.PaintCell == false)
             {
-                gameManager.BreakCellImputPath(row, col, containedValueCell);
+                generateLevel.BreakCellImputPath(row, col, containedValueCell);
             }
-            gameManager.ColorPaint = spriteRenderer.color;
-            gameManager.PaintCell = true;
-            gameManager.contenCellMouseDown = containedValueCell;
+            generateLevel.ColorPaint = spriteRenderer.color;
+            generateLevel.PaintCell = true;
+            generateLevel.contenCellMouseDown = containedValueCell;
 
         }
 
@@ -38,19 +39,19 @@ namespace FlowFree
         private void OnMouseDrag()
         {
             //print("OnMouseDrag ");
-            gameManager.ColorPaint = spriteRenderer.color;
-            gameManager.PaintCell = true;
+            generateLevel.ColorPaint = spriteRenderer.color;
+            generateLevel.PaintCell = true;
 
         }
 
         private void OnMouseEnter()
         {
             //print("OnMpuseEnter()");
-            if (gameManager.PaintCell && containedValueCell == 0 )
+            if (generateLevel.PaintCell && containedValueCell == 0 )
             {
-                spriteRenderer.color = gameManager.ColorPaint;
-                containedValueCell = gameManager.contenCellMouseDown;
-                gameManager.CellsInputPathGroup[containedValueCell].Add(gameObject.name);
+                spriteRenderer.color = generateLevel.ColorPaint;
+                containedValueCell = generateLevel.contenCellMouseDown;
+                generateLevel.CellsInputPathGroup[containedValueCell].Add(gameObject.name);
 
                 //print("OnMouseEnter " + gameObject.name + " " + gameObject.GetComponent<Cell>().containedValueCell);
             }
@@ -59,7 +60,7 @@ namespace FlowFree
         private void OnMouseUp()
         {
             //print("OnMouseUp ");
-            gameManager.PaintCell = false;
+            generateLevel.PaintCell = false;
         }
 
         private void OnMouseOver()

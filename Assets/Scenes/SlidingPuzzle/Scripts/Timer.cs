@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
 {
     public float CurrentTime { get; set; }
     public bool Started { get; set; }
+    public bool IsIncrementing { get; set; }
     [SerializeField] TextMeshProUGUI timeText;
 
     void DisplayTime(float timeToDisplay)
@@ -21,7 +22,13 @@ public class Timer : MonoBehaviour
     void Update()
     {
         if(Started)
-            CurrentTime += Time.deltaTime;
+        {
+            if (IsIncrementing)
+                CurrentTime += Time.deltaTime;
+            else
+                CurrentTime -= Time.deltaTime;
+        }
+            
         DisplayTime(CurrentTime);
     }
 }

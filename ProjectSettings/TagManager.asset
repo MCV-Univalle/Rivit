@@ -47,6 +47,10 @@ TagManager:
   - boton
   - Asteroid
   - Trigger
+  - Fruit
+  - GameOverPanel
+  - bottomNavigationBar
+  - UserDataManager
   layers:
   - Default
   - TransparentFX

@@ -6,22 +6,15 @@ public class BlackPanel : UIComponent
 {
     void Start()
     {
-        positionY = -675;
-        UIManager.executeHelpButton += FadeInMoveY;
-        UIManager.executeCloseInstructions += FadeOutMoveY;
-        UIManager.executePlayButton += FadeInMoveY;
-        UIManager.executeCloseModeSelectionButton += FadeOutMoveY;
-        UIManager.executeStartGame += FadeOutMoveY;
-        UIManager.executeGameOver += FadeInMoveY;
+        UIManager.executeHelpButton += () => gameObject.SetActive(true);
+        UIManager.executeStartGame += () => gameObject.SetActive(false);
+        UIManager.executeGameOver += () => gameObject.SetActive(true);
     }
 
     void OnDestroy()
     {
-        UIManager.executeHelpButton -= FadeInMoveY;
-        UIManager.executeCloseInstructions -= FadeOutMoveY;
-        UIManager.executePlayButton -= FadeInMoveY;
-        UIManager.executeCloseModeSelectionButton -= FadeOutMoveY;
-        UIManager.executeStartGame -= FadeOutMoveY;
-        UIManager.executeGameOver -= FadeInMoveY;
+        UIManager.executeHelpButton -= () => gameObject.SetActive(true);
+        UIManager.executeStartGame -= () => gameObject.SetActive(false);
+        UIManager.executeGameOver -= () => gameObject.SetActive(true);
     }
 }

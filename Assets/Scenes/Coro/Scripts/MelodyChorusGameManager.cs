@@ -5,7 +5,7 @@ using Zenject;
 
 namespace CoroMelodia
 {
-    public class MelodyChorusGameManager : GameManager
+    public class MelodyChorusGameManager : ModeSystemGameManager
     {
         public override string Name => "MelodyChorus";
         public int MelodyLong => _melody.Notes.Count;

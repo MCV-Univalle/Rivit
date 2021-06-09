@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Eat_frog_Game
 {
-    public class InsectEaterGameManager : GameManager
+    public class InsectEaterGameManager : ModeSystemGameManager
     {
 
         public bool Active { get; set; }

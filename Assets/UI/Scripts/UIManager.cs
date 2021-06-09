@@ -26,9 +26,9 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        whiteScreen.FadeAlpha(1, 0, 0.35F, 0.75F);
+        whiteScreen.FadeOut(0.25F, 0.35F);
         GameManager.showResults += EndGame;
-        if(_gameManager.IsRecordEmpty())  LeanTween.delayedCall(gameObject, 0.5F, () => OnHelpButton());
+        LeanTween.delayedCall(gameObject, 0.5F, () => OnHelpButton());
     }
 
     void OnDestroy()
@@ -85,18 +85,19 @@ public class UIManager : MonoBehaviour
     public void OnPlayAgainButton()
     {
         RiseEvent(() => executePlayAgainButton(), 0.15F);
+        whiteScreen.FadeInAndOut(0.25F, 0.5F);
     }
 
     public void OnPauseButton()
     {
-        RiseEvent(() => executePauseButton(), 0.15F);
-        _gameManager.ChangePauseState(0.25F);
+        RiseEvent(() => executePauseButton(), 0F);
+        _gameManager.PauseGame();
     }
 
     public void ResumeFromPause()
     {
-        _gameManager.ChangePauseState(0.15F);
-        RiseEvent(() => executeResumeFromPause(), 0.3F);
+        _gameManager.ResumeGame();
+        RiseEvent(() => executeResumeFromPause(), 0F);
         
     }
 
@@ -113,10 +114,10 @@ public class UIManager : MonoBehaviour
 
     public void OnQuitButton()
     {
-        _gameManager.ChangePauseState(0.15F);
+        _gameManager.ResumeGame();
         _gameManager.EndGame();
-        RiseEvent(() => executeQuitGame(), 0.3F); 
-        whiteScreen.FadeInAndOut(0, 1, 0.25F, 0.5F);
+        RiseEvent(() => executeQuitGame(), 0F); 
+        whiteScreen.FadeInAndOut(0.25F, 0.5F);
     }
 
     public void OnReturnToHomeButton()
@@ -126,7 +127,7 @@ public class UIManager : MonoBehaviour
             whiteScreen.gameObject.SetActive(true);
             whiteScreen.FadeIn();
             LeanTween.delayedCall(gameObject, 0.3F, () => SceneManager.LoadScene("Home"));
-            StartCoroutine(LockTemporally(0.3F));
+            StartCoroutine(LockTemporally(0.2F));
         }
     }
 
@@ -140,9 +141,20 @@ public class UIManager : MonoBehaviour
         if (!_isLocked)
         {
             LeanTween.delayedCall(gameObject, 0.4F, () => executeStartGame());
-            whiteScreen.FadeInAndOut(0, 1, 0.25F, 0.5F);
-            LeanTween.delayedCall(gameObject, 0.41F, () => _gameManager.InitializeGame(mode));
-            StartCoroutine(LockTemporally(0.3F));
+            whiteScreen.FadeInAndOut(0.25F, 0.5F);
+            LeanTween.delayedCall(gameObject, 0.41F, () => (_gameManager as ModeSystemGameManager).InitializeGame(mode));
+            StartCoroutine(LockTemporally(0.2F));
+        }
+    }
+
+    public void SelectLevel(int level)
+    {
+        if (!_isLocked)
+        {
+            LeanTween.delayedCall(gameObject, 0.4F, () => executeStartGame());
+            whiteScreen.FadeInAndOut(0.25F, 0.5F);
+            LeanTween.delayedCall(gameObject, 0.41F, () => (_gameManager as LevelSystemGameManager).InitializeGame(level));
+            StartCoroutine(LockTemporally(0.2F));
         }
     }
 }

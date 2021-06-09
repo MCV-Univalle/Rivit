@@ -9,16 +9,17 @@ public class PausePanel : UIComponent
         _fadeTime = 0.075f;
         _moveTimeY = 0.075f;
         _delay = 0.01f;
-        positionY = 475;
-        UIManager.executePauseButton += FadeInMoveY;
-        UIManager.executeResumeFromPause += FadeOutMoveY;
-        UIManager.executeQuitGame += FadeOutMoveY;
+        UIManager.executePauseButton += () => this.gameObject.SetActive(true);
+        UIManager.executeResumeFromPause += () => this.gameObject.SetActive(false);
+        UIManager.executeQuitGame += () => this.gameObject.SetActive(false);
+
+        this.gameObject.SetActive(false);
     }
 
     void OnDestroy()
     {
-        UIManager.executePauseButton -= FadeInMoveY;
-        UIManager.executeResumeFromPause -= FadeOutMoveY;
-        UIManager.executeQuitGame -= FadeOutMoveY;
+        UIManager.executePauseButton -= () => this.gameObject.SetActive(true);
+        UIManager.executeResumeFromPause -= () => this.gameObject.SetActive(false);
+        UIManager.executeQuitGame -= () => this.gameObject.SetActive(false);
     }
 }

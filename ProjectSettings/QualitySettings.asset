@@ -134,7 +134,7 @@ QualitySettings:
     softVegetation: 1
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
-    vSyncCount: 1
+    vSyncCount: 2
     lodBias: 1
     maximumLODLevel: 0
     streamingMipmapsActive: 0
@@ -223,7 +223,7 @@ QualitySettings:
     customRenderPipeline: {fileID: 0}
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
-    Android: 0
+    Android: 2
     Standalone: 0
     WebGL: 0
     iPhone: 0

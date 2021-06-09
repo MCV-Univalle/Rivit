@@ -10,8 +10,8 @@ public class InGameScreen : UIComponent
         gameObject.GetComponent<CanvasGroup>().alpha = 0;
         gameObject.GetComponent<CanvasGroup>().interactable = false;
         UIManager.executeStartGame += FadeIn;
-        UIManager.executePauseButton += FadeOut;
-        UIManager.executeResumeFromPause += FadeIn;
+        UIManager.executePauseButton += () => gameObject.SetActive(false);
+        UIManager.executeResumeFromPause += () => gameObject.SetActive(true);
         UIManager.executeQuitGame += FadeOut;
         UIManager.executeGameOver += FadeOut;
     }
@@ -19,8 +19,8 @@ public class InGameScreen : UIComponent
     void OnDestroy() 
     {
         UIManager.executeStartGame -= FadeIn;
-        UIManager.executePauseButton -= FadeOut;
-        UIManager.executeResumeFromPause -= FadeIn;
+        UIManager.executePauseButton -= () =>gameObject.SetActive(false);
+        UIManager.executeResumeFromPause -= () =>gameObject.SetActive(true); ;
         UIManager.executeQuitGame -= FadeOut;
         UIManager.executeGameOver -= FadeOut;
     }

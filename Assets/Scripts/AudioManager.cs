@@ -24,6 +24,11 @@ public class AudioManager : MonoBehaviour
         _audioSource.Stop();
     }
 
+    public AudioClip GetAudio(string audioName)
+    {
+        return audioDictionary[audioName];
+    }
+
     public void PlayAudio(string audioName)
     {
         AudioClip currentClip = audioDictionary[audioName];

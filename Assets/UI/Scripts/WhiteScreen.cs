@@ -5,18 +5,25 @@ using System;
 
 public class WhiteScreen : UIComponent
 {
-    public void FadeAlpha(float initial, float final, float velocity, float waitTime)
+    public void FadeIn(float velocity, float delayTime)
     {
         gameObject.SetActive(true);
-        GetComponent<CanvasGroup>().alpha = initial;
-        LeanTween.alphaCanvas(gameObject.GetComponent<CanvasGroup>(), final, velocity);
-        if(final == 0)
-            LeanTween.delayedCall(gameObject, waitTime + (velocity * 2), () => gameObject.SetActive(false));
+        GetComponent<CanvasGroup>().alpha = 0F;
+        LeanTween.alphaCanvas(gameObject.GetComponent<CanvasGroup>(), 1F, velocity).setDelay(delayTime);
     }
 
-    public void FadeInAndOut(float initial, float final, float velocity, float waitTime)
+    public void FadeOut(float velocity, float delayTime)
     {
-        FadeAlpha(initial, final, velocity, waitTime);
-        LeanTween.delayedCall(gameObject, waitTime, () => FadeAlpha(final, initial, velocity, waitTime));
+        gameObject.SetActive(true);
+        GetComponent<CanvasGroup>().alpha = 1F;
+        LeanTween.alphaCanvas(gameObject.GetComponent<CanvasGroup>(), 0F, velocity).setDelay(delayTime);
+        LeanTween.delayedCall(gameObject, velocity + delayTime, () => gameObject.SetActive(false));
+
+    }
+
+    public void FadeInAndOut(float velocity, float waitTime)
+    {
+        FadeIn(velocity, 0);
+        FadeOut(velocity, waitTime);
     }
 }

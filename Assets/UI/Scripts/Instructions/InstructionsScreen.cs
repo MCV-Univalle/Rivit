@@ -13,10 +13,11 @@ public class InstructionsScreen : UIComponent
 
     void Start()
     {
-        positionY = -675;
-        positionX = 0;
+        var pos = transform.position;
+        positionY = pos.y;
+        positionX = pos.x;
         UIManager.executeHelpButton += ShowCurrentPage;
-        UIManager.executeCloseInstructions += FadeOutMoveY;
+        UIManager.executeCloseInstructions += FadeOutMoveX;
 
         DesactivePages();
         UpdatePageNumber(_index, pagesContainer.transform.childCount);
@@ -50,7 +51,7 @@ public class InstructionsScreen : UIComponent
         pages.GetChild(_index).gameObject.GetComponent<CanvasGroup>().alpha = 1;
         pages.GetChild(_index).gameObject.SetActive(true);
         pages.GetChild(_index).transform.localPosition = new Vector3(0, 0, 0);
-        FadeInMoveY();
+        FadeInMoveX();
     }
 
 

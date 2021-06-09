@@ -7,8 +7,15 @@ public abstract class GameMode : MonoBehaviour
 {
     protected GameManager _gameManager;
     public int ModeID {get; set;}
-    [SerializeField] GameModeButton _modeButton;
-    public GameModeButton ModeButton { get => _modeButton; set => _modeButton = value; }
+    public string ModeName { get => modeName; set => modeName = value; }
+    public Sprite Icon { get => icon; set => icon = value; }
+    public GameMode PreviousMode { get => previousMode; set => previousMode = value; }
+    public int[] ScoreStandards { get => scoreStandards; set => scoreStandards = value; }
+
+    [SerializeField] private Sprite icon;
+    [SerializeField] private string modeName;
+    [SerializeField] private GameMode previousMode;
+    [SerializeField] private int[] scoreStandards = new int[3];
     public abstract void InitializeSettings();
     public abstract void IncreaseDifficulty(int score);
 

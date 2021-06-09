@@ -54,6 +54,8 @@ MonoBehaviour:
     - LightOff
     - Pop
     - Falling
+    - Sparkle
+    - Beep
     m_values:
     - {fileID: 8300000, guid: 62f93bf85ed239a4fb1e91e91b75b7cf, type: 3}
     - {fileID: 8300000, guid: c81efa08c9ab99b4ba804c4a8880a883, type: 3}
@@ -63,6 +65,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 39b02bb53dbb52d418271eb35d5f6dfc, type: 3}
     - {fileID: 8300000, guid: 99b620b67dd11a247b4e3767a0facbc8, type: 3}
     - {fileID: 8300000, guid: c2fd0f063ebbf5a478953dbeac5652e3, type: 3}
+    - {fileID: 8300000, guid: a3b0466ded7214446a2611e2afc7a9e9, type: 3}
+    - {fileID: 8300000, guid: ef580e981d774d849b3988aff0add101, type: 3}
 --- !u!82 &2250876339521362000
 AudioSource:
   m_ObjectHideFlags: 0
