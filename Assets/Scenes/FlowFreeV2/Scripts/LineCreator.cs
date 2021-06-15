@@ -20,7 +20,7 @@ namespace FlowFreeV2
         public int IndexBreak { get => indexBreak; set => indexBreak = value; }
         public Color ColorLine { get => colorLine; set => colorLine = value; }
 
-        public string posPointIni, posPointFin;
+        public string posPointIni, posPointFin, currentPoint;
 
         [System.Obsolete]
         private void Start()
@@ -100,6 +100,9 @@ namespace FlowFreeV2
                 cont++;
             }
             CreateLines(points);
+
+            int index = gameObjectsList.Count -1;
+            currentPoint = gameObjectsList[index].name;
         }
 
         public void SetColorLine()

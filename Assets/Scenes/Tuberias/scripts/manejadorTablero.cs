@@ -109,7 +109,7 @@ public class manejadorTablero : MonoBehaviour
 
     public void LlenarLista(List<string[]> nivel, List<int> ver, int i, GameObject boton)
     {
-        if (i != 0)
+        if ((i != 0) && (angulos.Any()))
         {
             if ((ver.Contains(i)))
             {

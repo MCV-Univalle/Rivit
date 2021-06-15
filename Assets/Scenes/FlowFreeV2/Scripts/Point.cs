@@ -67,18 +67,7 @@ namespace FlowFreeV2
                 LineManager._instance.pathLineList[content - 1].Add(gameObject.transform.parent.name);
             }
 
-            
-
             inputM.MostarLongitudEnterLists();
-
-            //inputM.IsPressingClick = true;
-            //inputM.ActiveCircularPointer(true);
-            ////inputM.mouseEnterPoint.Clear();
-            ////line.AddListPositionsLine(InputMouse._instance.mouseEnterPoint);
-            //if (inputM.mouseEnterPoint.Count == 0) inputM.AddEnterPoint(gameObject);
-            //line.ColorLine = gameObjectColor;
-            //line.SetColorLine();
-
         }
 
         private void OnMouseDrag()

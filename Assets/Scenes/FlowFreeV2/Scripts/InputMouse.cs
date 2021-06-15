@@ -52,10 +52,6 @@ namespace FlowFreeV2
             worldPositionMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        //public void AddEnterPoint(GameObject gameObject)
-        //{
-        //    mouseEnterPoint.Add(gameObject);
-        //}
         public void AddEnterPoint(GameObject gameObject, int content)
         {
             mouseEnterPointList[content-1].Add(gameObject);

@@ -13,7 +13,7 @@ namespace Tuberias
         [InjectOptional(Id = "SFXManager")] private AudioManager _SFXManager;
         public int LevelIndexList { get => levelIndexList; set => levelIndexList = value; }
         public List<Object> LevelsList { get => levelsList; set => levelsList = value; }
-        public bool Validar { get => validar; set => validar = value; }
+        public int Validar { get => validar; set => validar = value; }
 
         public int levelIndexList;
         public int tamaño;
@@ -23,9 +23,10 @@ namespace Tuberias
         public List<TextAsset> levelsList2;
         public GameObject[] listaObjetos;
         public List<int> listaVer;
-        private bool validar;
+        private int validar = 0;
         private GameObject boton;
         public int cantidad;
+        public GameObject panelLevelComplete;
 
         public override void EndGame()
         {
@@ -52,12 +53,13 @@ namespace Tuberias
 
         public void LoadLevel()
         {
-            validar = false;
+            validar = 1;
             nivelCompletado.SetActive(false);
             tablero.SetActive(true);
             TuberiasUIManager.instance.SetLevelTmpLabel();
             tamaño = manejadorTablero.instance.Cols*manejadorTablero.instance.Rows;
-
+            panelLevelComplete.SetActive(false);
+        
         }
          
         public void ReLoadLevel()
@@ -69,7 +71,7 @@ namespace Tuberias
         {
             listaObjetos = GameObject.FindGameObjectsWithTag("boton");
             if (listaObjetos.Length > 0)
-            {
+            {   
                 for (int i = 0; i < tamaño; i++)
                 {
                     boton = listaObjetos[i];
@@ -77,18 +79,20 @@ namespace Tuberias
                 }
 
                 if (listaVer.Count == tamaño-2)
-                    validar = true;
+                    validar = 2;
 
-                if (validar)
+                if (validar==2)
                 {
                     print("Game Over: Gano");
                     tablero.SetActive(false);
                     nivelCompletado.SetActive(true);
                     levelIndexList++;
                     manejadorTablero.instance.angulos.Clear();
+                    panelLevelComplete.SetActive(true);
+                    validar = 0;
                     //manejadorTablero.instance.AcomodarTablero(ReadLevelTxt.ReadTxt(levelsList2[levelIndexList]));
                 
-                    LoadLevel();
+                    //LoadLevel();
                 }
             }
 

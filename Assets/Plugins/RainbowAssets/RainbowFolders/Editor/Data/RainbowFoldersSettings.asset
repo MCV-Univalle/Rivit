@@ -634,3 +634,12 @@ MonoBehaviour:
     BackgroundType: 0
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
+  - Type: 1
+    Key: Assets/UI/Prefabs/UIMejorada
+    IconType: 1
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 2800000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
+    IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0

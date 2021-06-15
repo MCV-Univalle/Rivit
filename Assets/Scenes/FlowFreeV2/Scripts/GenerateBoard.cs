@@ -55,11 +55,13 @@ namespace FlowFreeV2
         public void CreateBoardVoid()
         {
             CreateBoard(ReadTxt(levelVoid));
+            FlowFreeV2UIManager._instance.ChangeLevelNameCurrent();
         }
 
         public void CreateBoard(List<string[]> level)
         {
             ClearChildren();
+            FlowFreeV2UIManager._instance.ChangeLevelNameCurrent();
 
             TamBoard = int.Parse(level[0][0]);
             CantLines = int.Parse(level[0][1]);
@@ -79,6 +81,7 @@ namespace FlowFreeV2
                 {
                     GameObject cell = Instantiate(cellPrefab, transform);
                     cell.name = "[" + i + "," + j + "]";
+                    GetChildWithName(cell, "circulo_blanco").name = cell.name;
                     cells.Add(cell);
                     GameObject cosa = cell.transform.GetChild(0).gameObject;
 
@@ -161,5 +164,20 @@ namespace FlowFreeV2
             coloresList.Add(Color.cyan);
             coloresList.Add(Color.magenta);
         }
+
+        private GameObject GetChildWithName(GameObject obj, string name)
+        {
+            Transform trans = obj.transform;
+            Transform childTrans = trans.Find(name);
+            if (childTrans != null)
+            {
+                return childTrans.gameObject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

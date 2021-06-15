@@ -13,10 +13,12 @@ public class LevelsHandler : MonoBehaviour
 
     public int NumberOfLevels { get => levelsList.Count; }
     public int CurrentLevel { get => levelIndex; set => levelIndex = value; }
+    public string NameLevelCurrent = "";
 
     public void GenerateLevel(int level)
     {
         CurrentLevel = level;
+        SetLevelCurrentName(CurrentLevel);
         var levelData = ReadLevelTxt.ReadTxt(levelsList[CurrentLevel-1]);
         levelGenerator.GetComponent<ILevelGenerator>().GenerateLevel(levelData);
     }
@@ -32,7 +34,7 @@ public class LevelsHandler : MonoBehaviour
 
     public void ToPreviousLevel()
     {
-        if (CurrentLevel > 0)
+        if (CurrentLevel - 1 > 0)
         {
             CurrentLevel--;
             GenerateLevel(CurrentLevel);
@@ -42,6 +44,11 @@ public class LevelsHandler : MonoBehaviour
     public void ReloadLevel()
     {
         GenerateLevel(CurrentLevel);
+    }
+
+    public void SetLevelCurrentName(int index)
+    {
+        NameLevelCurrent = levelsList[index - 1].name;
     }
 
 }

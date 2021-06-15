@@ -22,12 +22,13 @@ public class LevelSelectionScreen : UIComponent
 
     void Start()
     {
-        positionY = -675;
-        positionX = -500;
-        UIManager.executePlayButton += Open;
-        UIManager.executeCloseModeSelectionButton += FadeOutMoveY;
-        UIManager.executeStartGame += FadeOutMoveY;
-        UIManager.executePlayAgainButton += FadeInMoveX;
+        var pos = transform.position;
+        positionX = pos.x;
+        positionY = pos.y;
+        UIManager.executeStartGame += FadeOutMoveX;
+        UIManager.executePlayAgainButton += Open;
+        UIManager.executeHelpButton += FadeInMoveX;
+        UIManager.executeCloseInstructions += Open;
 
         NumberOfLevels = (_gameManager as LevelSystemGameManager).NumberOfLevels;
         GenerateLevelButtons();
@@ -35,7 +36,7 @@ public class LevelSelectionScreen : UIComponent
 
     private void Open()
     {
-        FadeInMoveY();
+        FadeInMoveX();
         confirmButton.GetComponent<Button>().interactable = false;
         DeselectEveryButton();
     }

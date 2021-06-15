@@ -110,13 +110,13 @@ namespace FlowFreeV2
         public void CountLinesComplete()
         {
             puntosOcupados.Clear();
-            for (int i=0; i< lineList.Count; i++)
+            for (int i = 0; i < lineList.Count; i++)
             {
                 puntosOcupados.Add(lineList[i].transform.childCount);
             }
         }
 
-        public bool ContainsStartEndPoints( int i,string poinIni, string pointFin)
+        public bool ContainsStartEndPoints(int i, string poinIni, string pointFin)
         {
             return (pathLineList[i].Contains(poinIni) && pathLineList[i].Contains(pointFin));
         }
@@ -147,6 +147,13 @@ namespace FlowFreeV2
         }
 
 
+        public void WhichLineTouched()
+        {
+            foreach (GameObject element in lineList)
+            {
+                print(element.name);
+            }
+        }
 
     }
 }

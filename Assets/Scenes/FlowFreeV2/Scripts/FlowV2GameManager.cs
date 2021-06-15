@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace FlowFreeV2
@@ -16,7 +15,7 @@ namespace FlowFreeV2
 
         public override void EndGame()
         {
-           
+            FlowFreeV2UIManager._instance.ActivePanelControlsFlow(false);
         }
 
         public override void StartGame()
@@ -26,7 +25,6 @@ namespace FlowFreeV2
 
         private void Update()
         {
-            //DebugGUI._instance.flujosGUI = "Teimpo de juego = " + Time.realtimeSinceStartup;
             if (LineManager._instance.pathLineList.Count > 0)
             {
                 gameOver = GameOver();

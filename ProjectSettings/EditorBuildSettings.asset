@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Home/Welcome.unity
+    guid: 49fb76f76839fc04eb95e4840de4e6a0
+  - enabled: 1
     path: Assets/Home/Home.unity
-    guid: 02f7b4e64586b534eb12bea5504bd9b5
+    guid: dd92b55947c9f624391673e6fc4651f1
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Coro/Coro.unity
     guid: 12130504a0dbbf941a8a0cbeb159404c
@@ -44,6 +50,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Frutas/Fruits.unity
     guid: 1ac9a8062fb88f04ea030ed85fbe560b
+  - enabled: 1
+    path: Assets/Scenes/FlowFreeV2/FlowFreeV2.unity
+    guid: b0665fcce0d94be47ba9288bc2c8cc4e
   - enabled: 1
     path: Assets/Home/Personalization.unity
     guid: 25d7987fedd03fc478b9087319c83f42

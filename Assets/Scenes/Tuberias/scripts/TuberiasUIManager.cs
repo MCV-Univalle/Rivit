@@ -1,4 +1,5 @@
-﻿using Tuberias;
+﻿using System.Diagnostics;
+using Tuberias;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,8 +52,5 @@ public class TuberiasUIManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
