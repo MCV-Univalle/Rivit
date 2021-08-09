@@ -52,11 +52,7 @@ namespace SlidingPuzzle
                 temp.GetChild(0).gameObject.SetActive(true);
                 temp.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = Id + "";
             }
-            else
-            {
-                temp.GetChild(1).gameObject.SetActive(true);
-                temp.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = Id + "";
-            }
+
         }
 
         public void BecomeEmpty(int max)
@@ -67,7 +63,6 @@ namespace SlidingPuzzle
                 Empty = true;
                 BecomeTransparent();
                 temp.GetChild(0).gameObject.SetActive(false);
-                temp.GetChild(1).gameObject.SetActive(false);
             }
         }
 

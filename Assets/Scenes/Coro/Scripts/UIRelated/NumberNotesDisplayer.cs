@@ -20,6 +20,7 @@ namespace CoroMelodia
 
         public void UpdateNotes(int num)
         {
+            Debug.Log(noteNumberText);
             noteNumberText.text = num + "";
         }
     }

@@ -62,7 +62,7 @@ public class GestureDetector : MonoBehaviour
         float verticalDistance = Mathf.Abs(endTouchPosition.y - beginTouchPosition.y);
         Direction direction = new Direction();
 
-        if((horizontalDistance > 1.5F) || (verticalDistance > 1.5F))
+        if((horizontalDistance > 1F) || (verticalDistance > 1F))
         {
             if (horizontalDistance > verticalDistance)
                 direction = beginTouchPosition.x - endTouchPosition.x > 0 ? Direction.Left : Direction.Right;

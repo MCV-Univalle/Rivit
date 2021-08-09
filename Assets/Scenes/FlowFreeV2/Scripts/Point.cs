@@ -23,17 +23,18 @@ namespace FlowFreeV2
 
         private void OnMouseEnter()
         {
-            if (inputM.pointToush > 0 && inputM.mouseEnterPointList[inputM.pointToush -1].Count != 0 && inputM.IsPressingClick)
+            if (inputM.pointToush > 0 && inputM.mouseEnterPointList[inputM.pointToush - 1].Count != 0 && inputM.IsPressingClick)
             {
-                
-                inputM.AddEnterPoint(gameObject, inputM.pointToush);
-                lineManager.AddListPositionsLine(inputM.pointToush, InputMouse._instance.mouseEnterPointList[inputM.pointToush-1]);
+                int index = InputMouse._instance.mouseEnterPointList[inputM.pointToush - 1].Count;
+                GameObject previousCell = InputMouse._instance.mouseEnterPointList[inputM.pointToush - 1][index - 1];
 
-                //print("Esta entrando: " + gameObject.transform.parent.name);
-                //print(LineManager._instance.pathLineList.Count);
-                LineManager._instance.pathLineList[inputM.pointToush - 1].Add(gameObject.transform.parent.name);
+                if (ValidateCellAvailability(previousCell))
+                {
+                    inputM.AddEnterPoint(gameObject, inputM.pointToush);
+                    lineManager.AddListPositionsLine(inputM.pointToush, InputMouse._instance.mouseEnterPointList[inputM.pointToush - 1]);
+                    LineManager._instance.pathLineList[inputM.pointToush - 1].Add(gameObject.transform.parent.name);
+                }
             }
-
 
             if (inputM.pointToush > 0)
             {
@@ -43,7 +44,7 @@ namespace FlowFreeV2
 
         private void OnMouseDown()
         {
-            gameObjectColor =  gameObject.GetComponent<Renderer>().material.GetColor("_Color");
+            gameObjectColor = gameObject.GetComponent<Renderer>().material.GetColor("_Color");
 
             string lineToName = "Color" + content;
 
@@ -57,7 +58,7 @@ namespace FlowFreeV2
             if (inputM.pointToush > 0 && inputM.mouseEnterPointList[inputM.pointToush - 1].Count == 0)
             {
                 //print("se asañadio el primero en la lista "+ inputM.pointToush);
-                
+
                 inputM.AddEnterPoint(gameObject, inputM.pointToush);
 
                 lineManager.lineList[inputM.pointToush - 1].GetComponent<LineCreator>().ColorLine = gameObjectColor;
@@ -82,6 +83,32 @@ namespace FlowFreeV2
             LineManager._instance.CountLinesComplete();
         }
 
-    }
+        private bool ValidateCellAvailability(GameObject previousCell)
+        {
+            string up, down, left, right;
+            List<string> cellsAvailable = new List<string>();
+            char[] myChars = previousCell.name.ToCharArray();
+            string newCell = gameObject.name;
+            int i = int.Parse(myChars[1].ToString());
+            int j = int.Parse(myChars[3].ToString());
 
+            up = "[" + (i - 1) + "," + j + "]";
+            down = "[" + (i + 1) + "," + j + "]";
+            left = "[" + i + "," + (j - 1) + "]";
+            right = "[" + i + "," + (j + 1) + "]";
+
+            if (GenerateBoard._instance.ExitsCell(up)) cellsAvailable.Add(up);
+            if (GenerateBoard._instance.ExitsCell(down)) cellsAvailable.Add(down);
+            if (GenerateBoard._instance.ExitsCell(left)) cellsAvailable.Add(left);
+            if (GenerateBoard._instance.ExitsCell(right)) cellsAvailable.Add(right);
+
+            //print("cell enter = " + gameObject.name);
+            //foreach (string s in cellsAvailable)
+            //{
+            //    print(s);
+            //}
+
+            return cellsAvailable.Contains(newCell);
+        }
+    }
 }

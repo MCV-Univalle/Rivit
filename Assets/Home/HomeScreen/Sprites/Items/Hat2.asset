@@ -15,4 +15,4 @@ MonoBehaviour:
   clotheName: Hat2
   sprite: {fileID: 21300000, guid: 6b7fa7d6f618cc04aaffd680738ae67d, type: 3}
   type: 0
-  price: 0
+  price: 400

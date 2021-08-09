@@ -22,6 +22,7 @@ namespace SpaceShip
         public bool HasBonus { get; set; }
 
         [SerializeField] private GameObject explosion;
+        [SerializeField] private ParticleSystem particleSystem;
 
         public ShipState State { get => state; set => state = value; }
 
@@ -33,7 +34,10 @@ namespace SpaceShip
         void Update()
         {
             if((State == ShipState.Dead || State == ShipState.Inactive) && gameObject.activeSelf)
+            {
                 this.gameObject.SetActive(false);
+                particleSystem.gameObject.SetActive(false);
+            }          
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 Shift(-1);
@@ -84,6 +88,12 @@ namespace SpaceShip
             var explosionInstance = Instantiate(explosion, this.transform.position, Quaternion.identity);
             LeanTween.delayedCall(this.gameObject, 0.9F, () => Destroy(explosionInstance));
             State = ShipState.Dead;
+        }
+
+        public void SpreadParticles()
+        {
+            particleSystem.gameObject.SetActive(true);
+            particleSystem.Play();
         }
     }
 }

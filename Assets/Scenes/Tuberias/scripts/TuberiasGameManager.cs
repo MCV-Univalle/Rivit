@@ -1,20 +1,23 @@
-﻿using System.Collections;
+﻿using System.Threading;
+using System.Diagnostics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
 using Tuberias;
+using System.Diagnostics;
+ using Debug = UnityEngine.Debug;
 
 namespace Tuberias
 {
     public class TuberiasGameManager : LevelSystemGameManager
     {
         public override string Name => "Tuberias";
-        [InjectOptional(Id = "SFXManager")] private AudioManager _SFXManager;
+        [InjectOptional(Id = "SFXManager")] private AudioManager SFXManager;
         public int LevelIndexList { get => levelIndexList; set => levelIndexList = value; }
         public List<Object> LevelsList { get => levelsList; set => levelsList = value; }
         public int Validar { get => validar; set => validar = value; }
-
         public int levelIndexList;
         public int tamaño;
         public GameObject tablero;
@@ -24,20 +27,26 @@ namespace Tuberias
         public GameObject[] listaObjetos;
         public List<int> listaVer;
         private int validar = 0;
+        private int ValidarAudio = 0;
+        private float tiempoEspera = 1f;
         private GameObject boton;
         public int cantidad;
         public GameObject panelLevelComplete;
+        private bool gameOver;
 
         public override void EndGame()
         {
             Debug.Log("EndGameEnter");
+            validar=0;
+            tamaño=2;
+            TuberiasUIManager.instance.ActivePanelControlsTuberias(false);
         }
-
         public override void StartGame()
         {
             Debug.Log("Metodo Start: Tuberias");
-            
+            gameOver = false;
             levelIndexList = 0;
+
             LoadLevel();
         }
 
@@ -49,16 +58,25 @@ namespace Tuberias
         private void Update()
         {
             GameOver();
+
+            if(gameOver)
+            {
+                TuberiasUIManager.instance.ActivePanelGameOver(gameOver);
+                TuberiasUIManager.instance.EraseBoard(false);
+            }
+
         }
 
         public void LoadLevel()
         {
             validar = 1;
-            nivelCompletado.SetActive(false);
+            ValidarAudio=1;
+            //nivelCompletado.SetActive(false);
+            TuberiasUIManager.instance.EraseBoard(true);
             tablero.SetActive(true);
-            TuberiasUIManager.instance.SetLevelTmpLabel();
+            //TuberiasUIManager.instance.SetLevelTmpLabel();
             tamaño = manejadorTablero.instance.Cols*manejadorTablero.instance.Rows;
-            panelLevelComplete.SetActive(false);
+            //panelLevelComplete.SetActive(false);
         
         }
          
@@ -72,30 +90,41 @@ namespace Tuberias
             listaObjetos = GameObject.FindGameObjectsWithTag("boton");
             if (listaObjetos.Length > 0)
             {   
-                for (int i = 0; i < tamaño; i++)
+                for (int i = 0; i < listaObjetos.Length; i++)
                 {
                     boton = listaObjetos[i];
                     manejadorTablero.instance.LlenarLista(ReadLevelTxt.ReadTxt(levelsList2[levelIndexList]), listaVer, i, boton);
                 }
-
+               
                 if (listaVer.Count == tamaño-2)
-                    validar = 2;
+                    gameOver = true;
 
-                if (validar==2)
-                {
+
+                if(validar==2){
+
+                    //SFXManager.PlayAudio("Correct");
+
+                   /* for(int i=0; i<tamaño;i++)
+                        manejadorTablero.instance.CambioPiezas(listaObjetos[i]);
+                    */
                     print("Game Over: Gano");
-                    tablero.SetActive(false);
-                    nivelCompletado.SetActive(true);
-                    levelIndexList++;
                     manejadorTablero.instance.angulos.Clear();
-                    panelLevelComplete.SetActive(true);
-                    validar = 0;
+
+                    EndGame();
+
+                    //StartCoroutine(FinalizarJuego());
                     //manejadorTablero.instance.AcomodarTablero(ReadLevelTxt.ReadTxt(levelsList2[levelIndexList]));
-                
                     //LoadLevel();
                 }
             }
 
+        }
+
+
+        void acabarJuego(){
+            //tablero.SetActive(false);
+            //panelLevelComplete.SetActive(true);
+            EndGame();
         }
     }
 }

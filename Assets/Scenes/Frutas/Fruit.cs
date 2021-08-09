@@ -14,7 +14,11 @@ namespace Fruits
         Strawberry,
         Cherry,
         Banana,
-        Peach
+        Peach,
+        Lemon,
+        Orange,
+        Kiwi,
+        Watermelon
     }
 
     public class Fruit : MonoBehaviour

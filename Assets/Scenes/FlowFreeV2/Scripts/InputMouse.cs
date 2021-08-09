@@ -54,7 +54,17 @@ namespace FlowFreeV2
 
         public void AddEnterPoint(GameObject gameObject, int content)
         {
-            mouseEnterPointList[content-1].Add(gameObject);
+            if (mouseEnterPointList[content - 1].Contains(gameObject))
+            {
+                int index = mouseEnterPointList[content - 1].IndexOf(gameObject);
+                //print("En la lista ya se encuentra " + gameObject.name + " en la posicion " + index);
+
+                SublistEnterpoints(content ,index);
+            }
+            else
+            {
+                mouseEnterPointList[content - 1].Add(gameObject);
+            }
         }
 
         public void ActiveCircularPointer(bool value)
@@ -67,11 +77,11 @@ namespace FlowFreeV2
             circularPointer.transform.localPosition = worldPositionMouse;
         }
 
-        public void SublistEnterpoints(int index)
+        public void SublistEnterpoints(int content, int index)
         {
-            List<GameObject> sublist =  mouseEnterPoint.GetRange(0, index + 1);
-            mouseEnterPoint.Clear();
-            mouseEnterPoint = sublist;
+            List<GameObject> sublist = mouseEnterPointList[content - 1].GetRange(0, index + 1);
+            mouseEnterPointList[content - 1].Clear();
+            mouseEnterPointList[content - 1] = sublist;
         }
 
 
@@ -89,7 +99,6 @@ namespace FlowFreeV2
                 cont++;
             }
         }
-
 
     }
 

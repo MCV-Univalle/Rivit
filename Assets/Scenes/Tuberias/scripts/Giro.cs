@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+
+namespace Tuberias
+{
 
 public class Giro : MonoBehaviour
 {
+    AudioSource MyAudioSource;
+    bool play;
     public float z;
     public float angulo;
 
@@ -11,7 +17,7 @@ public class Giro : MonoBehaviour
 
     void Start()
     {
-
+        MyAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,24 +30,10 @@ public class Giro : MonoBehaviour
     {
         transform.Rotate(new Vector3(0, 0, z + 90));
         angulo = transform.eulerAngles.z;
+        MyAudioSource.Play();
     }
 
-   /* public void Verificar() 
-    {
-        for (int i = 0; i < cantidad; i++)
-        {
-            boton = gameObject.name;
-            angulo = transform.eulerAngles.z;
-
-            if ((boton == "Boton"+i) && (nivel1.angulos[i] == angulo))
-            {
-                correcto = true;
-            }
-            else
-            {
-                correcto = false;
-            }
-        }
-    }*/
+}
 
 }
+

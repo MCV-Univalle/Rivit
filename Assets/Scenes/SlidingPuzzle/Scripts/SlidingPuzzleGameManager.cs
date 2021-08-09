@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,6 @@ namespace SlidingPuzzle
     {
         [SerializeField] PuzzleState puzzleState;
         [SerializeField] GridGenerator gridGenerator;
-        [SerializeField] ImageSelector imageSelector;
         [SerializeField] Timer timer;
         [SerializeField] GameObject imageSelectScreen;
         [SerializeField] GameObject inGamePanel;
@@ -17,16 +17,21 @@ namespace SlidingPuzzle
 
         private int _size;
 
+        private SliddingPuzzleAdditionalData additionalData;
+
         public bool IsStandardPuzzle { get; set; }
 
         public int Moves { get; set; }
         
-
         public override string Name => "SliddingPuzzle";
+
+        public int Size { get => _size; set => _size = value; }
 
         public override void NotifyGameOver()
         {
-            Score = (int) timer.CurrentTime * -1 + 100000;
+            double movesCalification = Math.Log10(Moves);
+            double timeCalification = Math.Log10(timer.CurrentTime / 10);
+            Score = ((int)((int)1000 * (1 / (movesCalification + timeCalification))));
             base.NotifyGameOver();
         }
 
@@ -37,36 +42,43 @@ namespace SlidingPuzzle
             puzzleBackground.gameObject.SetActive(false);
         }
 
+        public override string RegisterAdditionalData()
+        {
+            additionalData.Moves = this.Moves;
+            additionalData.TotalTime = timer.CurrentTime;
+            return JsonConvert.SerializeObject(additionalData);
+        }
+
         public override void StartGame()
         {
+            additionalData = new SliddingPuzzleAdditionalData();
+            timer.IsIncrementing = true;
             DestroyTides();
             Moves = 0;
             inGamePanel.SetActive(false);
+            imageSelectScreen.GetComponent<CanvasGroup>().alpha = 1;
             imageSelectScreen.SetActive(true);
             _size = (_gameMode as SlidingPuzzleGameMode).Size;
+            imageSelectScreen.transform.GetChild(0).GetComponent<ImageSelectionScreen>().GenerateButtons();
             gridGenerator.AdjustGridScale(_size);
-            imageSelector.Initialize();
-            puzzleBackground.ClearBackground();
-            puzzleBackground.gameObject.transform.localScale = gridGenerator.transform.localScale * _size;
         }
 
-        public void SelectImage()
+        public void SelectImage(Texture2D image)
         {
             inGamePanel.SetActive(true);
-            imageSelectScreen.SetActive(false);
             timer.CurrentTime = 0;
             timer.Started = true;
-            if(!IsStandardPuzzle)
-                GenerateBoard(_size);
+            puzzleBackground.ClearBackground();
+            puzzleBackground.gameObject.transform.localScale = gridGenerator.transform.localScale * _size;
+            GenerateBoard(image, _size);
             puzzleBackground.DarkenBackground();
-            LeanTween.delayedCall(this.gameObject, 0.7F, () => puzzleState.MakeTransparentTheLastTile());
+            LeanTween.delayedCall(this.gameObject, 0.9F, () => puzzleState.MakeTransparentTheLastTile());
             StartCoroutine(puzzleState.DivideAndShuffle());
 
         }
 
-        public void GenerateBoard(int size)
+        public void GenerateBoard(Texture2D image, int size)
         {
-            var image = imageSelector.GetCurrentImage();
             gridGenerator.GenerateGrid(size, image);
             puzzleState.Initialize(size);
         }
@@ -74,12 +86,11 @@ namespace SlidingPuzzle
         internal void HandleVictory()
         {
             puzzleBackground.ClearBackground();
+            LeanTween.delayedCall(this.gameObject, 0.25F, () => puzzleBackground.DarkenBackground());
         }
 
         public void GenerateStandardPuzzle()
         {
-            var image = imageSelector.GetCurrentImage();
-            gridGenerator.GenerateGrid(_size, image);
             puzzleState.Initialize(_size);
             puzzleState.ActiveIdTexts(true);
         }

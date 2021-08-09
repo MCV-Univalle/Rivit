@@ -23,8 +23,11 @@ public class DefaultInstaller : MonoInstaller
 
     private void InstallGameManager()
     {
-        Container.Bind<GameManager>().FromInstance(gameManager).AsSingle();
-        Container.Bind<PlaySessionDataHandler>().AsSingle();
+        if(gameManager != null)
+        {
+            Container.Bind<GameManager>().FromInstance(gameManager).AsSingle();
+            Container.Bind<PlaySessionDataHandler>().AsSingle();
+        } 
         Container.Bind<UserDataManager>().FromInstance((UserDataManager)FindObjectOfType(typeof(UserDataManager))).AsSingle();
     }
 }

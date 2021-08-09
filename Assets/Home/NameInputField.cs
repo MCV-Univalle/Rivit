@@ -11,14 +11,14 @@ public class NameInputField : MonoBehaviour
     void Start()
     {
         userDataManager = FindObjectOfType<UserDataManager>();
-        if (userDataManager.UserData.PlayerName != "")
+        if (userDataManager.PersonalData.PlayerName != "")
             SceneSwitcher.GoToHomeScreen();
     }
 
     public void SaveData()
     {
         string name = inputField.text;
-        userDataManager.UserData.PlayerName = name;
+        userDataManager.PersonalData.PlayerName = name;
         userDataManager.SaveData();
         SceneSwitcher.GoToHomeScreen();
     }

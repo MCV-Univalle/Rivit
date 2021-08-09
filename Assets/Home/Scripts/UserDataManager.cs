@@ -9,7 +9,21 @@ public class UserDataManager : MonoBehaviour
     private readonly string keyString = "UserData";
     private UserData userData;
 
-    public UserData UserData { get => userData; set => userData = value; }
+    public UserData PersonalData { get => userData; set => userData = value; }
+
+    public int Coins
+    {
+        get
+        {
+            LoadData();
+            return PersonalData.Coins;
+        }
+        set
+        {
+            PersonalData.Coins += value;
+            SaveData();
+        }
+    }
 
     void Awake()
     {
@@ -31,7 +45,7 @@ public class UserDataManager : MonoBehaviour
         {
             UserData data = new UserData();
             data = JsonConvert.DeserializeObject<UserData>(jsonString);
-            UserData = data;
+            PersonalData = data;
         }
         else
         {
@@ -42,52 +56,70 @@ public class UserDataManager : MonoBehaviour
 
     private void CreateNewDataFile()
     {
-        UserData = new UserData();
-        UserData.PlayerName = "";
-        UserData.TopScores = new Dictionary<string, string>();
-        UserData.PlaySessionsData = new List<PlaySessionData>();
+        PersonalData = new UserData();
+        PersonalData.PlayerName = "";
+        PersonalData.Clothes = "{ \"hat\":\"Hat0\",\"glasses\":\"Glasses0\",\"accessory\":\"Accessory0\",\"shirt\":\"Shirt0\",\"color\":\"#67CA55\"}";
+        PersonalData.PurchasedClothes = new List<string>();
+        PersonalData.Coins = 0;
+        PersonalData.TopScores = new Dictionary<string, string>();
+        PersonalData.PlaySessionsData = new List<PlaySessionData>();
     }
 
     public string GetTopScoresOfGame(string gameName)
     {
         string topScores;
-        bool keyExists = UserData.TopScores.TryGetValue(gameName, out topScores);
+        bool keyExists = PersonalData.TopScores.TryGetValue(gameName, out topScores);
         if(keyExists)
-            return UserData.TopScores[gameName];
+            return PersonalData.TopScores[gameName];
         else
         {
             var temp = RankingManager.InitializeEmptyRanking();
-            UserData.TopScores.Add(gameName, JsonConversor.ConvertRankingToJson(temp));
-            return UserData.TopScores[gameName];
+            PersonalData.TopScores.Add(gameName, JsonConversor.ConvertRankingToJson(temp));
+            return PersonalData.TopScores[gameName];
         }
     }
 
     public void UpdateTopScoresOfGame(string gameName, string ranking)
     {
-        UserData.TopScores[gameName] = ranking;
+        PersonalData.TopScores[gameName] = ranking;
         SaveData();
     }
 
     public void UpdatePlaySessionDates(PlaySessionData data)
     {
-        UserData.PlaySessionsData.Add(data);
+        if (PersonalData.PlaySessionsData.Count > 10000)
+            PersonalData.PlaySessionsData.RemoveAt(0);
+        PersonalData.PlaySessionsData.Add(data);    
         SaveData();
     }
 
     public void SaveClothes(string clothesJson)
     {
-        UserData.Clothes = clothesJson;
+        PersonalData.Clothes = clothesJson;
         SaveData();
     }
 
     public string LoadClothes()
     {
-        return UserData.Clothes;
+        LoadData();
+        return PersonalData.Clothes;
+    }
+
+    public void AddPurchasedClothes(string clothesName)
+    {
+        PersonalData.PurchasedClothes.Add(clothesName);
+        SaveData();
+    }
+
+    public List<string> LoadPurchasedClothes()
+    {
+        LoadData();
+        return PersonalData.PurchasedClothes;
     }
 
     public void SaveData()
     {
-        string json = JsonConvert.SerializeObject(UserData);
+        string json = JsonConvert.SerializeObject(PersonalData);
         PlayerPrefs.SetString(keyString, json);
         PlayerPrefs.Save();
     }

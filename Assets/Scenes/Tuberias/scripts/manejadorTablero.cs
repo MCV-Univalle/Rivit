@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 using Tuberias;
+using System.Diagnostics;
+ using Debug = UnityEngine.Debug;
 
 public class manejadorTablero : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class manejadorTablero : MonoBehaviour
     private List<int> correctos = new List<int>();
     private GridLayoutGroup div;
     public GameObject button;
-    public Sprite tuboL, tuboCruz, tuboC, tuboT;
+    public Sprite tuboL, tuboCruz, tuboC, tuboT,tuboRemL,tuboRemCruz,tuboRemC,tuboRemT;
 
     public int Cols { get => cols; set => cols = value; }
     public int Rows { get => rows; set => rows = value; }
@@ -31,6 +33,8 @@ public class manejadorTablero : MonoBehaviour
 
     public void AcomodarTablero(List<string[]> nivel)
     {
+        print("si entro");
+
         Cols = int.Parse(nivel[0][0]);
         Rows = int.Parse(nivel[1][0]);
         primeraPieza = int.Parse(nivel[3][0]);
@@ -187,7 +191,18 @@ public class manejadorTablero : MonoBehaviour
         }
 
     }
-
+    
+    public void CambioPiezas(GameObject boton)
+    {
+        if(boton.GetComponent<Image>().sprite==tuboC){
+            boton.GetComponent<Image>().sprite=tuboRemC;
+        }else if(boton.GetComponent<Image>().sprite==tuboCruz){
+            boton.GetComponent<Image>().sprite=tuboRemCruz;
+        }else if(boton.GetComponent<Image>().sprite==tuboL){
+            boton.GetComponent<Image>().sprite=tuboRemL;
+        }else if(boton.GetComponent<Image>().sprite==tuboT)
+            boton.GetComponent<Image>().sprite=tuboRemT;
+    }
     void Start()
     {
 

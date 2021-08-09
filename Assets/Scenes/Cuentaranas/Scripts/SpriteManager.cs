@@ -18,13 +18,11 @@ namespace Cuentaranas
         {
             if (initialPoint.x < 0 || finalPoint.x > 0)
             {
-                spriteRenderer.flipX = false;
-                _direction = false;
+                spriteRenderer.flipY = false;
             }
             else
             {
-                spriteRenderer.flipX = true;
-                _direction = true;
+                spriteRenderer.flipY = true;
             }
         }
 

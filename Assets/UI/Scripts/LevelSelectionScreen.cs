@@ -25,6 +25,8 @@ public class LevelSelectionScreen : UIComponent
         var pos = transform.position;
         positionX = pos.x;
         positionY = pos.y;
+
+        UIManager.executeLevelCompleted += FadeOutMoveX;
         UIManager.executeStartGame += FadeOutMoveX;
         UIManager.executePlayAgainButton += Open;
         UIManager.executeHelpButton += FadeInMoveX;
@@ -37,8 +39,8 @@ public class LevelSelectionScreen : UIComponent
     private void Open()
     {
         FadeInMoveX();
-        confirmButton.GetComponent<Button>().interactable = false;
-        DeselectEveryButton();
+        //confirmButton.GetComponent<Button>().interactable = false;
+        //DeselectEveryButton();
     }
 
     public void ActivateConfirmButton()
@@ -53,7 +55,7 @@ public class LevelSelectionScreen : UIComponent
             var button = Instantiate(levelButtonPrefab, levelButtonsContainer.transform);
             button.gameObject.GetComponent<LevelButton>().Id = i + 1;   
         }
-        DeselectEveryButton();  
+        //DeselectEveryButton();  
     }
 
     public void DeselectEveryButton()

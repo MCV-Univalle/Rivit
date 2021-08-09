@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893af90d0d44b9d4097b0481e7e6f388, type: 3}
   m_Name: Accessory7
   m_EditorClassIdentifier: 
-  clotheName: Accessory5
+  clotheName: Accessory7
   sprite: {fileID: 21300000, guid: ab4eefc5a34a40b49acafdd7eab874bd, type: 3}
   type: 2
-  price: 0
+  price: 120

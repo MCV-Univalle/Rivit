@@ -10,6 +10,11 @@ public class Timer : MonoBehaviour
     public bool IsIncrementing { get; set; }
     [SerializeField] TextMeshProUGUI timeText;
 
+    private void Start()
+    {
+        Started = false;
+    }
+
     void DisplayTime(float timeToDisplay)
     {
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
@@ -23,12 +28,11 @@ public class Timer : MonoBehaviour
     {
         if(Started)
         {
+            DisplayTime(CurrentTime);
             if (IsIncrementing)
                 CurrentTime += Time.deltaTime;
             else
                 CurrentTime -= Time.deltaTime;
         }
-            
-        DisplayTime(CurrentTime);
     }
 }

@@ -19,7 +19,7 @@ namespace FlowFreeV2
             {
                 _instance = this;
                 DontDestroyOnLoad(this.gameObject);
-                panelGameOver = GetChildWithName(panelUserInterface, "GameOverPanelFlow");
+                panelGameOver = GetChildWithName(panelUserInterface, "LevelCompletedPanelFlow");
                 panelControlsFlow = GetChildWithName(panelUserInterface, "ControlsFlow");
             }
             else
@@ -31,6 +31,11 @@ namespace FlowFreeV2
         private void Start()
         {
             
+        }
+
+        private void Update()
+        {
+            ChangeFlowsCompleted();
         }
 
         public void ActivePanelGameOver(bool value)
@@ -52,6 +57,16 @@ namespace FlowFreeV2
             string valueName = levelsHandler.GetComponent<LevelsHandler>().NameLevelCurrent;
 
             tLevelName.GetComponent<TMPro.TextMeshProUGUI>().text = valueName;
+        }
+
+        public void ChangeFlowsCompleted()
+        {
+            string flowsCompleted = "Flujos: " + LineManager._instance.CountFowCompleted() + "/" + GenerateBoard._instance.CantLines;
+
+            GameObject lvInformation =  GetChildWithName(panelControlsFlow, "LevelInformation");
+            GameObject lvInformationFlows = GetChildWithName(lvInformation, "Flows");
+
+            lvInformationFlows.GetComponent<TMPro.TextMeshProUGUI>().text = flowsCompleted;
         }
 
         private GameObject GetChildWithName(GameObject obj, string name)

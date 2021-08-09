@@ -163,6 +163,20 @@ namespace FlowFreeV2
             coloresList.Add(Color.green);
             coloresList.Add(Color.cyan);
             coloresList.Add(Color.magenta);
+
+
+            ColorUtility.TryParseHtmlString("#F2533A", out color);
+            coloresList[1] = color;
+            ColorUtility.TryParseHtmlString("#F9D91E", out color);
+            coloresList[2] = color;
+            ColorUtility.TryParseHtmlString("#3A7FF2", out color);
+            coloresList[3] = color;
+            ColorUtility.TryParseHtmlString("#BF46F2", out color);
+            coloresList[4] = color;
+            ColorUtility.TryParseHtmlString("#23F997", out color);
+            coloresList[5] = color;
+            ColorUtility.TryParseHtmlString("#BAF222", out color);
+            coloresList[6] = color;
         }
 
         private GameObject GetChildWithName(GameObject obj, string name)
@@ -179,5 +193,16 @@ namespace FlowFreeV2
             }
         }
 
+        public bool ExitsCell(string name)
+        {
+            if (GetChildWithName(gameObject, name) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

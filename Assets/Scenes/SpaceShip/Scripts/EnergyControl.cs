@@ -7,31 +7,42 @@ using Zenject;
 namespace SpaceShip
 {
     public delegate void Notify();
-    public class EnergyControl : MonoBehaviour
+    public abstract class EnergyControl : MonoBehaviour
     {
-        private List<int> numberStack = new List<int>();
-        private int[] correctOrder = new int[5];
-        private int _index = 1;
-        private AudioSource _audioSource;
 
-        [SerializeField] private Image energyGauge;
-        [SerializeField] private EnergyControlButton[] buttonsArray = new EnergyControlButton[5];
-        [SerializeField] private List<Color> colorLists = new List<Color>(3);
+        protected AudioSource _audioSource;
 
-        [SerializeField] private AudioSource xD;
+        [SerializeField] protected Image energyGauge;
+        [SerializeField] protected GameObject extraPanel;
+        [SerializeField] protected EnergyControlButton[] buttonsArray = new EnergyControlButton[5];
+        [SerializeField] protected List<Color> colorLists = new List<Color>(3);
+
+        [SerializeField] protected AudioSource tempoSound;
 
         public static event Notify energyRunOut;
+        public static event Notify energyCharged;
 
-        [Inject(Id = "SFXManager")] AudioManager sfxManager;
+        [Inject(Id = "SFXManager")] protected AudioManager _sfxManager;
+        protected SpaceShipGameManager _gameManager;
 
         private bool isGaugeCharged;
 
+        private float passedTime = 0f;
+
         public float EnergyDecreaseRate { get; set; }
+        public bool IsGaugeCharged { get => isGaugeCharged; set => isGaugeCharged = value; }
+
+        public bool IsActive { get; set; }
+
+        [Inject]
+        private void Init(GameManager gameManager)
+        {
+            _gameManager = gameManager as SpaceShipGameManager;
+        }
 
         void Start()
         {
             this._audioSource = GetComponent<AudioSource>();
-            GenerateOrder();
         }
 
         void Update()
@@ -39,62 +50,73 @@ namespace SpaceShip
             if (energyGauge.fillAmount == 0 && energyRunOut != null)
                 energyRunOut();
             else if (energyGauge.fillAmount > 0 && isGaugeCharged == false)
-                energyGauge.fillAmount -= Time.deltaTime * EnergyDecreaseRate;
+            {
+                passedTime += Time.deltaTime;
+                energyGauge.fillAmount -= Time.deltaTime * _gameManager.EnergyGaugeDecreaseRate;
+            }
             else if (energyGauge.fillAmount < 1 && isGaugeCharged == true)
-                energyGauge.fillAmount += Time.deltaTime * 2.5F;
+                ChargeEnergy();
+            
+                
         }
 
-        private void OnEnable()
-        {
-            energyGauge.fillAmount = 1;
-            xD.Play();
-            this.gameObject.GetComponent<CanvasGroup>().alpha = 0;
-            LeanTween.alphaCanvas(this.gameObject.GetComponent<CanvasGroup>(), 1F, 0.25F);
-            isGaugeCharged = false;
-            UnlockButtons();
-        }
-
-        private void OnDestroy()
+        private void OnDestroy()    
         {
             energyRunOut = null;
         }
 
-        public bool ValidateInput(int num)
+        public void ChargeEnergy()
         {
+            energyGauge.fillAmount = 1;
             
-            if (num == _index)
-            {
-                if(_index == 5)
-                {
-                    this.gameObject.GetComponent<Image>().color = colorLists[1];
-                    ChangeButtonsColor(colorLists[1]);
-                    _audioSource.clip = sfxManager.GetAudio("Correct");
-                    _audioSource.Play();
-                    StartCoroutine(StartNewSequence(3.5F));
-                    isGaugeCharged = true;
-                    xD.Stop();
-                }
-                else
-                {
-                    _index++;
-                    _audioSource.clip = sfxManager.GetAudio("Beep");
-                    _audioSource.Play();
-                }
-                    
-                return true;
-            }
-            else
-            {
-                this.gameObject.GetComponent<Image>().color = colorLists[2];
-                ChangeButtonsColor(colorLists[2]);
-                _audioSource.clip = sfxManager.GetAudio("Wrong");
-                _audioSource.Play();
-                StartCoroutine(StartNewSequence(0.75F));
-                return false;
-            }
+            LeanTween.alphaCanvas(this.gameObject.GetComponent<CanvasGroup>(), 0F, 0.15F).setDelay(0.45F);
+            LeanTween.delayedCall(this.gameObject, 0.65F, ()=> gameObject.SetActive(false));
         }
 
-        private void LockButtons()
+        private void OnEnable()
+        {
+            SetToDefault();
+            StartTask();
+            passedTime = 0;
+        }
+
+        private void SetToDefault()
+        {
+            energyGauge.fillAmount = 1;
+            ChangeColor(colorLists[0]);
+            tempoSound.Play();
+            this.gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            LeanTween.alphaCanvas(this.gameObject.GetComponent<CanvasGroup>(), 1F, 0.15F);
+            isGaugeCharged = false;
+            UnlockButtons();
+        }
+
+        protected void ShowPositiveFeedback()
+        {
+            _gameManager.AdditionalData.CorrectAnswers++;
+            _gameManager.TotalTime += passedTime;
+            _gameManager.ContinueWithTask();
+            ChangeColor(colorLists[2]);
+            _audioSource.clip = _sfxManager.GetAudio("Correct");
+            _audioSource.Play();
+            isGaugeCharged = true;
+            tempoSound.Stop();
+        }
+
+        protected void ShowNegativeFeedBack()
+        {
+            _gameManager.AdditionalData.WrongAnswers++;
+            ChangeColor(colorLists[1]);
+            _audioSource.clip = _sfxManager.GetAudio("Wrong");
+            _audioSource.Play();
+        }
+
+        public abstract void ValidateInput(int num);
+        public abstract void StartTask();
+
+        
+
+        protected void LockButtons()
         {
             foreach (var item in buttonsArray)
             {
@@ -103,7 +125,7 @@ namespace SpaceShip
             }
         }
 
-        private void UnlockButtons()
+        protected void UnlockButtons()
         {
             foreach (var item in buttonsArray)
             {
@@ -112,40 +134,28 @@ namespace SpaceShip
             }
         }
 
-        private void ChangeButtonsColor(Color tempColor)
+        protected void ChangeColor(Color tempColor)
         {
+            this.gameObject.GetComponent<Image>().color = tempColor;
+            if(extraPanel != null) extraPanel.gameObject.GetComponent<Image>().color = tempColor;
             foreach (var item in buttonsArray)
             {
                 item.gameObject.GetComponent<Image>().color = tempColor;
             }
         }
 
-        public IEnumerator StartNewSequence(float waitTime)
+        public IEnumerator RestartTask(float waitTime)
         {
             LockButtons();
             yield return new WaitForSeconds(waitTime);
             UnlockButtons();
-            GenerateOrder();
             isGaugeCharged = false;
-            xD.Play();
-            _index = 1;
+            tempoSound.Play();
+            StartTask();
         }
 
 
 
-        public void GenerateOrder()
-        {
-            this.gameObject.GetComponent<Image>().color = colorLists[0];
-            ChangeButtonsColor(colorLists[0]);
-            _index = 1;
-            numberStack = new List<int>();
-            var tempList = new List<int> { 1, 2, 3, 4, 5 };
-            for (int i = 0; i < correctOrder.Length; i++)
-            {
-                int num = Random.Range(0, tempList.Count);
-                buttonsArray[i].NumberIdText.text = tempList[num] + "";
-                tempList.RemoveAt(num);
-            }
-        }
+        
     }
 }

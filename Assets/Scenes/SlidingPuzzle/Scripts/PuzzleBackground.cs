@@ -6,7 +6,6 @@ namespace SlidingPuzzle
     public class PuzzleBackground : MonoBehaviour
     {
         [SerializeField] GridGenerator gridGenerator;
-        [SerializeField] ImageSelector imageSelector;
         SpriteRenderer spriteRenderer;
         
 
@@ -24,7 +23,7 @@ namespace SlidingPuzzle
 
         public void DarkenBackground()
         {
-            spriteRenderer.color = new Color(0.25F, 0.25F, 0.25F, 0.35F);
+            spriteRenderer.color = new Color(0, 0F, 0F, 0.2F);
         }
 
         public void ChangeImage(Texture2D image)

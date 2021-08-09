@@ -41,6 +41,7 @@ namespace SpaceShip
                 if (IsBonus)
                 {
                     collision.GetComponent<Ship>().HasBonus = true;
+                    collision.GetComponent<Ship>().SpreadParticles();
                     Destroy(this.gameObject);
                 }           
                 else

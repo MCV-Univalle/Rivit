@@ -8,7 +8,6 @@ namespace Cuentaranas
     {
         private Vector3 _initialPoint;
         private Vector3 _finalPoint;
-        private Vector3 _middlePoint;
         private float _speed = 1f;
         private float _count = 0.0f;
         private SpriteManager spriteManager;
@@ -60,17 +59,17 @@ namespace Cuentaranas
         {
             _initialPoint = DetermineInitialPoint();
             _finalPoint = DetermineFinalPoint();
-            _middlePoint = DetermineMiddlePoint(_initialPoint, _finalPoint);
             spriteManager.Flip(_initialPoint, _finalPoint);
+            Vector3 direction = _initialPoint - _finalPoint;
+            Vector3 dir = _finalPoint - _initialPoint;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
         }
 
         public Vector3 SelectRandomPoint()
         {
-            float[] posibleX = { -5, 5 };
-            float posX = posibleX[Random.Range(0, 2)];
-            float posY = Random.Range(-2.5f, 3.5f);
-
-            return new Vector3(posX, posY, 0);
+            return Random.insideUnitCircle.normalized * 8;
         }
 
         public Vector3 DetermineInitialPoint()
@@ -104,13 +103,8 @@ namespace Cuentaranas
             {
                 _count += _speed * Time.deltaTime;
 
-                Vector3 m1 = Vector3.Lerp(_initialPoint, _middlePoint, _count);
-                Vector3 m2 = Vector3.Lerp(_middlePoint, _finalPoint, _count);
+                transform.position = Vector3.Lerp(_initialPoint, _finalPoint, _count);
 
-                transform.position = Vector3.Lerp(m1, m2, _count);
-
-                if (_count > 0.5F || _count < 0.6F)
-                    spriteManager.Rotate(gameObject, 30F, 0.5F);
             }
             else
             {

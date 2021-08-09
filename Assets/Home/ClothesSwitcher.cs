@@ -21,7 +21,6 @@ public class ClothesSwitcher : MonoBehaviour
     void Start()
     {
         ClotheButton.changeClothes += ChangeClothes;
-        
     }
 
     private void OnDestroy()
@@ -38,24 +37,27 @@ public class ClothesSwitcher : MonoBehaviour
 
     public void ChangeClothes(ClotheType type, string name)
     {
-        switch (type)
+        if(name != "" && name != null)
         {
-            case ClotheType.Hat:
-                hat.GetComponent<Image>().sprite = clothesDictionary[name];
-                dataHandler.Hat = name;
-                break;
-            case ClotheType.Glasses:
-                glasses.GetComponent<Image>().sprite = clothesDictionary[name];
-                dataHandler.Glasses = name;
-                break;
-            case ClotheType.Accessory:
-                accessory.GetComponent<Image>().sprite = clothesDictionary[name];
-                dataHandler.Accessory = name;
-                break;
-            case ClotheType.Shirt:
-                shirt.GetComponent<Image>().sprite = clothesDictionary[name];
-                dataHandler.Shirt = name;
-                break;
+            switch (type)
+            {
+                case ClotheType.Hat:
+                    hat.GetComponent<Image>().sprite = clothesDictionary[name];
+                    dataHandler.Hat = name;
+                    break;
+                case ClotheType.Glasses:
+                    glasses.GetComponent<Image>().sprite = clothesDictionary[name];
+                    dataHandler.Glasses = name;
+                    break;
+                case ClotheType.Accessory:
+                    accessory.GetComponent<Image>().sprite = clothesDictionary[name];
+                    dataHandler.Accessory = name;
+                    break;
+                case ClotheType.Shirt:
+                    shirt.GetComponent<Image>().sprite = clothesDictionary[name];
+                    dataHandler.Shirt = name;
+                    break;
+            }
         }
     }
 }

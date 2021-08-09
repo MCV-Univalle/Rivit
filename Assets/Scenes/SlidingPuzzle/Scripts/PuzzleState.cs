@@ -10,7 +10,6 @@ namespace SlidingPuzzle
     {
         [SerializeField] GridGenerator gridGenerator;
         [SerializeField] GameObject flashUnderMask;
-        [SerializeField] GameObject puzzleBackground;
         SlidingPuzzleGameManager _gameManager;
         public bool Locked { get; set; }
         public int Size { get; set; }
@@ -29,9 +28,9 @@ namespace SlidingPuzzle
 
         public IEnumerator DivideAndShuffle()
         {
-            yield return new WaitForSeconds(0.25F);
+            yield return new WaitForSeconds(0.35F);
             StartCoroutine(HighlightTides());
-            yield return new WaitForSeconds(0.5F);
+            yield return new WaitForSeconds(0.6F);
             SetFramesDisplay(true);
             Shuffle();
         }
@@ -53,8 +52,6 @@ namespace SlidingPuzzle
                 child.gameObject.GetComponent<Tile>().BecomeEmpty(max);
             }
         }
-
-
 
         public int GetAdjacentEmptyTileID(int pos)
         {
@@ -157,8 +154,6 @@ namespace SlidingPuzzle
             LeanTween.color(transform.GetChild(max - 1).gameObject, new Color(1, 1, 1, 1), 0.5f).setDelay(0.3f);
             StartCoroutine(HighlightTides());
             SetFramesDisplay(false);
-            if(!_gameManager.IsStandardPuzzle)
-                LeanTween.delayedCall(this.gameObject, 0.7F, () => _gameManager.DestroyTides());
         }
 
         public IEnumerator HighlightTides()

@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public static event OnButtonClickDelegate executeGameOver;
     public static event OnButtonClickDelegate executeQuitGame;
     public static event OnButtonClickDelegate executeStartGame;
+    public static event OnButtonClickDelegate executeLevelCompleted;
 
     [SerializeField] private WhiteScreen whiteScreen;
     [Inject] private GameManager _gameManager;
@@ -44,6 +45,7 @@ public class UIManager : MonoBehaviour
         executeGameOver = null;
         executeQuitGame = null;
         executeStartGame = null;
+        executeLevelCompleted = null;
 }
 
     public IEnumerator LockTemporally(float delayTime)
@@ -75,6 +77,11 @@ public class UIManager : MonoBehaviour
     public void OnCloseInstructionsScreen()
     {
         RiseEvent(() => executeCloseInstructions(), 0.15F);
+    }
+
+    public void OnCloseLevelCompletedScreen()
+    {
+        RiseEvent(() => executeLevelCompleted(), 0.15F);
     }
 
     public void OnCloseModeSelectionButton()

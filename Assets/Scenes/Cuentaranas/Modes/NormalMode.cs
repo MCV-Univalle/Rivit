@@ -11,10 +11,10 @@ namespace Cuentaranas
             var gameManager = (FrogsCounterGameManager)_gameManager;
             gameManager.Rounds = 5;
             gameManager.IterationNumber = 10;
-            gameManager.WaitTime = 1.6F;
+            gameManager.WaitTime = 1.5F;
             gameManager.NormalSpeed = 0.5F;
             gameManager.SpeedVariance = 0.04F;
-            gameManager.ActiveFrogsNumber = 1;
+            gameManager.ActiveFrogsNumber = 2;
         }
         public override void IncreaseDifficulty(int round)
         {
@@ -28,7 +28,7 @@ namespace Cuentaranas
             }
             else
             {
-                gameManager.ActiveFrogsNumber = 2;
+                gameManager.ActiveFrogsNumber = 3;
                 gameManager.NormalSpeed += 0.03f;
                 gameManager.SpeedVariance += 0.0045f;
                 gameManager.WaitTime -= 0.08f;

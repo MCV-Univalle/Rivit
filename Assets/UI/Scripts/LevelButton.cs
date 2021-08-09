@@ -23,9 +23,9 @@ public class LevelButton : MonoBehaviour
     {
         var levelSelectionScript = gameObject.transform.parent.parent.GetComponent<LevelSelectionScreen>();
         levelSelectionScript.DeselectEveryButton();
-        levelSelectionScript.ActivateConfirmButton();
         this.gameObject.GetComponent<Image>().color = new Color(1F, 1F, 1F, 1F);
         IsActive = true;
         levelSelectionScript.ActiveButton = this.gameObject;
+        levelSelectionScript.SelectLevel();
     }
 }

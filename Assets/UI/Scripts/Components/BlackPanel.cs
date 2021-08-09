@@ -9,6 +9,7 @@ public class BlackPanel : UIComponent
         UIManager.executeHelpButton += () => gameObject.SetActive(true);
         UIManager.executeStartGame += () => gameObject.SetActive(false);
         UIManager.executeGameOver += () => gameObject.SetActive(true);
+        UIManager.executeQuitGame += () => gameObject.SetActive(true);
     }
 
     void OnDestroy()
@@ -16,5 +17,6 @@ public class BlackPanel : UIComponent
         UIManager.executeHelpButton -= () => gameObject.SetActive(true);
         UIManager.executeStartGame -= () => gameObject.SetActive(false);
         UIManager.executeGameOver -= () => gameObject.SetActive(true);
+        UIManager.executeQuitGame -= () => gameObject.SetActive(true);
     }
 }

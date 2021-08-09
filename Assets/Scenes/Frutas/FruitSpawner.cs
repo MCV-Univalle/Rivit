@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace Fruits
 {
@@ -12,6 +13,8 @@ namespace Fruits
         [SerializeField] bool active = true;
         private bool selected = false;
         private FrutalTree tree;
+
+        [Inject(Id = "SFXManager")] private AudioManager SFXManager;
 
         public GameObject Fruit { get => fruit; set => fruit = value; }
         public bool IsSelected { get => selected; set => selected = value; }
@@ -50,6 +53,13 @@ namespace Fruits
             FruitType type = GetAvailableFruitType();
             fruit = fruitsFactory.CreateFruit(type);
             fruit.transform.position = gameObject.transform.position;
+            fruit.GetComponent<DragAndDrop2D>().SFXManager = this.SFXManager;
+        }
+
+        public void DestroyFruit()
+        {
+            if(Fruit != null)
+                Destroy(Fruit.gameObject);
         }
     }
 }

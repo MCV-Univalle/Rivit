@@ -66,6 +66,23 @@ public abstract class ModeSystemGameManager : GameManager
         return _gameMode.ScoreStandards;
     }
 
+    public int AddCoins()
+    {
+        var standards = GetStandardsOfCurrentMode();
+        int coins = 0;
+        if (_score > standards[2])
+            coins = 25;
+        else if (_score > standards[1])
+            coins = 10;
+        else if (_score > standards[0])
+            coins = 3;
+        else
+            coins = 1;
+
+        Coins = coins;
+        return coins;
+    }
+
     public void RecordScore()
     {
         string highScores = RankingManager.RecordScore(LoadRankingData(), _gameMode.ModeID, Score);

@@ -14,6 +14,8 @@ public class AchievementStars : MonoBehaviour
 
     public IEnumerator CheckScore(int score, int[] standars)
     {
+        var layoutGroup = this.GetComponent<HorizontalLayoutGroup>();
+        layoutGroup.enabled = false;
         speechBubble.gameObject.SetActive(false);
         string text = felicitaciones[0];
         for (int i = 0; i < 3; i++)
@@ -28,6 +30,7 @@ public class AchievementStars : MonoBehaviour
         }
         speechBubble.gameObject.SetActive(true);
         speechBubble.Speech.text = text;
+        layoutGroup.enabled = true;
     }
 
     public void DesactiveStars()

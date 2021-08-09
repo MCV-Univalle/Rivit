@@ -48,21 +48,20 @@ namespace Cuentaranas
             for (int i = reps; i > 0; i--)
             {
                 int num = Random.Range(1, ActiveFrogsNumber);
-                MakeJump(num, normalSpeed, speedVariance);
+                MakeJump(num, normalSpeed);
                 yield return new WaitForSeconds(waitTime);
             }
             yield return new WaitForSeconds(waitTime * 2);
             _gameManager.ShowQuestionPanel();
         }
 
-        public void MakeJump(int num, float normalSpeed, float speedVariance)
+        public void MakeJump(int num, float normalSpeed)
         {
             for (int i = 0; i < num; i++)
             {
                 int selectedFrog = SelectFrog();
 
-                float speed = Random.Range(normalSpeed - speedVariance, normalSpeed + speedVariance);
-                frogsList[selectedFrog].GetComponent<Frog>().Jump(speed);
+                frogsList[selectedFrog].GetComponent<Frog>().Jump(normalSpeed);
             }
         }
 

@@ -22,6 +22,12 @@ public abstract class GameManager : MonoBehaviour
     public static event GameDelegate startGame;
     public static event GameDelegate endGame;
     public static event GameDelegate showResults;
+
+    public int Coins
+    {
+        get => _userDataManager.Coins;
+        set => _userDataManager.Coins = value;
+    }
     
 
 
@@ -32,17 +38,25 @@ public abstract class GameManager : MonoBehaviour
         _userDataManager = userDataManager;
     }
 
+    public virtual string RegisterAdditionalData()
+    {
+        return "";
+    }
+
     public virtual void NotifyGameOver()
     {
-        var data = _dataHandler.RegisterEndTime();
-        _userDataManager.UpdatePlaySessionDates(data);
         showResults();
         EndGame();
+        var data = _dataHandler.RegisterSessionEnd();
+        data.Score = _score;
+        data.GameName = Name;
+        data.AdditionalData = RegisterAdditionalData();
+        _userDataManager.UpdatePlaySessionDates(data);
     }
 
     public void RecordStartTimeAndStartGame(string levelOrMode)
     {
-        _dataHandler.RegisterStartTime(levelOrMode);
+        _dataHandler.RegisterSessionStar(Name, levelOrMode);
         StartGame();
     }
 

@@ -25,22 +25,6 @@ public static class RankingManager
         }
         return JsonConversor.ConvertRankingToJson(rank);
     }
-
-    //private void LoadData(string topScores)
-    //{
-    //    if (topScores != "")
-    //    {
-    //        HighScoreData data = new HighScoreData();
-    //        data = JsonConvert.DeserializeObject<HighScoreData>(topScores);
-    //        Ranking = data.highScores;
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Save data not found!");
-    //        Ranking = InitializeEmptyRanking();
-    //    }
-    //}
-
     public static List<List<int>> InitializeEmptyRanking()
     {
         var newRanking = new List<List<int>>();
@@ -55,13 +39,4 @@ public static class RankingManager
         }
         return newRanking;
     }
-
-    //public void SaveData()
-    //{
-    //    HighScoreData data = new HighScoreData();
-    //    data.highScores = Ranking;
-    //    string json = JsonConvert.SerializeObject(data);
-    //    PlayerPrefs.SetString(GameName, json);
-    //    PlayerPrefs.Save();
-    //}
 }

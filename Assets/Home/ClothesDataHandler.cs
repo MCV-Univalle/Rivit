@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 [System.Serializable]
 public class ClothesData
@@ -21,7 +22,7 @@ public class ClothesDataHandler : MonoBehaviour
     public string Accessory { get; set; }
     public string Shirt { get; set; }
 
-    [SerializeField] private UserDataManager userDataManager;
+    [Inject] private UserDataManager userDataManager;
 
     public void SaveData()
     {
@@ -61,9 +62,9 @@ public class ClothesDataHandler : MonoBehaviour
             Debug.LogWarning("Save data not found!");
         }
     }
+
     void Start()
     {
-        userDataManager = FindObjectOfType<UserDataManager>();
         LoadData();
     }
 }

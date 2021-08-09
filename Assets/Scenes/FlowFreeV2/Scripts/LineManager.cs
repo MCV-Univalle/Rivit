@@ -8,15 +8,15 @@ namespace FlowFreeV2
     {
         public static LineManager _instance;
         public List<GameObject> lineList;
-        [SerializeField] private Material lineMaterialPrefab;
-        [SerializeField] private List<Material> lineMaterialList;
-
         List<Vector3> pointPrueba = new List<Vector3>();
         bool complete = false;
 
         [SerializeField] private List<int> puntosOcupados = new List<int>();
         [SerializeField] public List<List<string>> pathLineList = new List<List<string>>();
         [SerializeField] public List<bool> flowCompleted = new List<bool>();
+        private int cantFlows;
+
+        public int CantFlows { get => cantFlows; set => cantFlows = value; }
 
         void Awake()
         {
@@ -35,6 +35,7 @@ namespace FlowFreeV2
         {
             AddLineTolist();
             InstanciarPathLineList();
+            CantFlows = 0;
         }
 
         public void AddLineTolist()
@@ -77,7 +78,13 @@ namespace FlowFreeV2
             obj.transform.SetParent(gameObject.transform);
             obj.AddComponent<LineRenderer>();
             obj.AddComponent<LineCreator>();
-            obj.GetComponent<LineCreator>().lineMaterial = lineMaterialList[index];
+            //obj.GetComponent<LineCreator>().lineMaterial = lineMaterialList[index];
+
+            Material mat = new Material(Shader.Find("Standard"))
+            {
+                color = Color.magenta
+            };
+            obj.GetComponent<LineCreator>().lineMaterial = mat;
 
             return obj;
         }
@@ -95,14 +102,16 @@ namespace FlowFreeV2
         public GameObject CrearLine(GameObject padre)
         {
             GameObject obj = new GameObject();
+            obj.AddComponent<LineRenderer>();
+            LineRenderer objLr = obj.GetComponent<LineRenderer>();
+
             obj.name = "LinePrefab";
             obj.transform.SetParent(padre.transform);
-            obj.AddComponent<LineRenderer>();
-            obj.GetComponent<LineRenderer>().startWidth = 0.2f;
-            obj.GetComponent<LineRenderer>().endWidth = 0.2f;
-            obj.GetComponent<LineRenderer>().useWorldSpace = true;
-            obj.GetComponent<LineRenderer>().numCapVertices = 10;
-            obj.GetComponent<LineRenderer>().numCornerVertices = 10;
+            objLr.startWidth = 0.2f;
+            objLr.endWidth = 0.2f;
+            objLr.useWorldSpace = true;
+            objLr.numCapVertices = 10;
+            objLr.numCornerVertices = 10;
 
             return obj;
         }
@@ -138,6 +147,7 @@ namespace FlowFreeV2
         public int CountFowCompleted()
         {
             int cont = 0;
+            CantFlows = flowCompleted.Count - 1;
             CompletedFlowValidation();
             foreach (bool element in flowCompleted)
             {
@@ -145,15 +155,5 @@ namespace FlowFreeV2
             }
             return cont;
         }
-
-
-        public void WhichLineTouched()
-        {
-            foreach (GameObject element in lineList)
-            {
-                print(element.name);
-            }
-        }
-
     }
 }

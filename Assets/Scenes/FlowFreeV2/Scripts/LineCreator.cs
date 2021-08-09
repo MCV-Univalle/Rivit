@@ -17,10 +17,14 @@ namespace FlowFreeV2
         public List<Vector3> points = new List<Vector3>();
         public List<Vector3> sublistPoints;
 
+        public List<string> namesPoints = new List<string>();
+
         public int IndexBreak { get => indexBreak; set => indexBreak = value; }
         public Color ColorLine { get => colorLine; set => colorLine = value; }
 
         public string posPointIni, posPointFin, currentPoint;
+
+        public bool isTouchedLine;
 
         [System.Obsolete]
         private void Start()
@@ -80,12 +84,14 @@ namespace FlowFreeV2
                 fin = list[i + 1];
 
                 GameObject obj = CrearLine(gameObject);
+                LineRenderer lrObj = obj.GetComponent<LineRenderer>();
 
                 obj.name = "LineChild" + i;
-                obj.GetComponent<LineRenderer>().SetPosition(0, inicio);
-                obj.GetComponent<LineRenderer>().SetPosition(1, fin);
-                obj.GetComponent<LineRenderer>().material.SetColor("_Color", colorLine);
-                obj.GetComponent<LineRenderer>().material.shader = Shader.Find("Sprites/Default");
+                lrObj.SetPosition(0, inicio);
+                lrObj.SetPosition(1, fin);
+                lrObj.material.SetColor("_Color", colorLine);
+                lrObj.material.shader = Shader.Find("Sprites/Default");
+                lrObj.sortingOrder = 1;
             }
         }
 
@@ -94,9 +100,11 @@ namespace FlowFreeV2
             lineRenderer = lr;
             points.Clear();
             int cont = 0;
+            namesPoints.Clear();
             foreach (GameObject element in gameObjectsList)
             {
                 points.Add(element.transform.position);
+                namesPoints.Add(element.name);
                 cont++;
             }
             CreateLines(points);
@@ -110,5 +118,6 @@ namespace FlowFreeV2
             lineMaterial.SetColor("_Color", colorLine);
             lineRenderer.material = lineMaterial;
         }
+
     }
 }
