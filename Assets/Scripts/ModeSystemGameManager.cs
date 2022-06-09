@@ -29,8 +29,8 @@ public abstract class ModeSystemGameManager : GameManager
         _gameMode = mode;
         CurrentGameMode = mode.ModeID;
         _gameMode.InitializeSettings();
-        Score = 0;
         RecordStartTimeAndStartGame(mode.ModeName);
+        Score = 0;
     }
 
     public virtual void IncreaseDifficulty()
@@ -43,7 +43,7 @@ public abstract class ModeSystemGameManager : GameManager
         EndGame();
         Score = 0;
         InitializeGame(this._gameMode);
-        StartGame();
+        //StartGame();
     }
 
     public string LoadRankingData()

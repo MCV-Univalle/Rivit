@@ -92,7 +92,7 @@ namespace Sisus
 		private static EditorKey GetKey(Editor editor)
 		{
 			#if UNITY_2018_1_OR_NEWER
-			return new EditorKey(editor.targets, editor is UnityEditor.Experimental.AssetImporters.AssetImporterEditor);
+			return new EditorKey(editor.targets, editor is UnityEditor.AssetImporters.AssetImporterEditor);
 			#else
 			return new EditorKey(editor.targets, false);
 			#endif

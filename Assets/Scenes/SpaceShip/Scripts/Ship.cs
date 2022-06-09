@@ -31,6 +31,11 @@ namespace SpaceShip
             GestureDetector.OnSwipe += DetectSwipe;
             State = ShipState.Inactive;
         }
+
+        private void OnDestroy()
+        {
+            GestureDetector.OnSwipe -= DetectSwipe;
+        }
         void Update()
         {
             if((State == ShipState.Dead || State == ShipState.Inactive) && gameObject.activeSelf)

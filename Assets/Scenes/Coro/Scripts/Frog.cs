@@ -81,10 +81,6 @@ namespace CoroMelodia
             StartCoroutine(fadingCoroutine);
         }
 
-        public void Appear()
-        {
-            _frogAnimation.AppearFrog(true);
-        }
 
         void OnEnable()
         {

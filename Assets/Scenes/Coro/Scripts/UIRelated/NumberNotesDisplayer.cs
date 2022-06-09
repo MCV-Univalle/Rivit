@@ -8,6 +8,7 @@ namespace CoroMelodia
     public class NumberNotesDisplayer : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI noteNumberText;
+        public int Limit { get; set; }
         private void Start()
         {
             Melody.updateNotes += UpdateNotes;
@@ -20,8 +21,10 @@ namespace CoroMelodia
 
         public void UpdateNotes(int num)
         {
-            Debug.Log(noteNumberText);
-            noteNumberText.text = num + "";
+            if (Limit > 0)
+                noteNumberText.text = string.Format("{0}/{1}", num, Limit);
+            else
+                noteNumberText.text = num + "";
         }
     }
 }

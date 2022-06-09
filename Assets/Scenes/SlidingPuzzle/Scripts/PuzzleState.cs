@@ -168,7 +168,10 @@ namespace SlidingPuzzle
             foreach (Transform child in transform)
             {
                 child.gameObject.GetComponent<Tile>().Locked = !value;
+                if(child.gameObject.GetComponent<Tile>().Id != Size * Size)
+                    child.gameObject.GetComponent<Tile>().ShowSmallNumber(value);
                 child.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = value;
+                
             }
         }
     }

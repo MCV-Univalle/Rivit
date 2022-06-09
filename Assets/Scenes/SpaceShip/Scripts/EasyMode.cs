@@ -17,6 +17,7 @@ namespace SpaceShip
             manager.ShowIndicativeText("Desliza tu dedo para desplazar la nave", 4F);
             hand.SetActive(true);
             yield return new WaitForSeconds(4F);
+            manager.GameStarted = true;
             manager.RunEverything();
             hand.SetActive(false);
         }

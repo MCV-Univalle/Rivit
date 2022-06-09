@@ -40,7 +40,7 @@ public class GestureDetector : MonoBehaviour
                         Direction direction = DetectSwipe();
                         var data = ToData(direction);
                         sendingSwipesIsEnabled = false;
-                        OnSwipe(data);
+                        OnSwipe?.Invoke(data);
                     }
                     break;
                 case TouchPhase.Ended:
@@ -49,7 +49,7 @@ public class GestureDetector : MonoBehaviour
                     {
                         Direction direction = DetectSwipe();
                         var data = ToData(direction);
-                        OnReleaseSwipe(data);
+                        OnReleaseSwipe?.Invoke(data);
                     }
                     break;
             }
@@ -62,7 +62,7 @@ public class GestureDetector : MonoBehaviour
         float verticalDistance = Mathf.Abs(endTouchPosition.y - beginTouchPosition.y);
         Direction direction = new Direction();
 
-        if((horizontalDistance > 1F) || (verticalDistance > 1F))
+        if((horizontalDistance > 0.5F) || (verticalDistance > 0.5F))
         {
             if (horizontalDistance > verticalDistance)
                 direction = beginTouchPosition.x - endTouchPosition.x > 0 ? Direction.Left : Direction.Right;

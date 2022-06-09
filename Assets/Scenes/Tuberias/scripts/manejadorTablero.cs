@@ -19,7 +19,7 @@ public class manejadorTablero : MonoBehaviour
     private GridLayoutGroup div;
     public GameObject button;
     public Sprite tuboL, tuboCruz, tuboC, tuboT,tuboRemL,tuboRemCruz,tuboRemC,tuboRemT;
-
+    [SerializeField] private TextAsset levelVoid;
     public int Cols { get => cols; set => cols = value; }
     public int Rows { get => rows; set => rows = value; }
     public int CantidadPiezas { get => cantidadPiezas; set => cantidadPiezas = value; }
@@ -31,10 +31,29 @@ public class manejadorTablero : MonoBehaviour
         instance = this;
     }
 
+           public static List<string[]> ReadTxt(TextAsset txt)
+        {
+            List<string[]> myList = new List<string[]>();
+            try
+            {
+                List<string> lines = new List<string>(txt.text.Split('\n'));
+                char letter = ' ';
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    myList.Add(lines[i].Split(letter));
+                    letter = '\t';
+                }
+            }
+            catch (System.Exception e)
+            {
+                print("The file could not be read:");
+                print(e.Message);
+            }
+            return myList;
+        }
+
     public void AcomodarTablero(List<string[]> nivel)
     {
-        print("si entro");
-
         Cols = int.Parse(nivel[0][0]);
         Rows = int.Parse(nivel[1][0]);
         primeraPieza = int.Parse(nivel[3][0]);
@@ -202,6 +221,12 @@ public class manejadorTablero : MonoBehaviour
             boton.GetComponent<Image>().sprite=tuboRemL;
         }else if(boton.GetComponent<Image>().sprite==tuboT)
             boton.GetComponent<Image>().sprite=tuboRemT;
+    }
+
+    public void CrearTableroVacio()
+    {
+        AcomodarTablero(ReadTxt(levelVoid));
+        TuberiasUIManager.instance.ChangeLevelNameCurrent();
     }
     void Start()
     {

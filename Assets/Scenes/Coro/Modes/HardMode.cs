@@ -9,7 +9,9 @@ namespace CoroMelodia
         public override void InitializeSettings()
         {
             var gameManager = (MelodyChorusGameManager)_gameManager;
-            Limit = 12;
+            gameManager.FreeMode = false;
+            Limit = 15;
+            notesDisplayer.Limit = this.Limit;
             gameManager.Speed = 0.8F;
         }
         public override void IncreaseDifficulty(int score)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace FlowFreeV2
 {
@@ -35,13 +36,15 @@ namespace FlowFreeV2
 
         private void Update()
         {
-            ChangeFlowsCompleted();
+            //ChangeFlowsCompleted();
         }
 
         public void ActivePanelGameOver(bool value)
         {
-            panelGameOver.SetActive(value);
-            panelControlsFlow.SetActive(!value);
+            //panelGameOver.SetActive(value);
+            //panelControlsFlow.SetActive(!value);
+
+            //UIManager.executeGameOver -= ShowResults;
         }
 
         public void ActivePanelControlsFlow(bool value)

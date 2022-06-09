@@ -11,7 +11,6 @@ namespace Colores
 {
     public class Señales : MonoBehaviour
     {
-    
         public static Señales instance;
        [Inject(Id = "SFXManager")] AudioManager SFXManager;
         public Sprite bien, error, vacio, racha;
@@ -29,16 +28,16 @@ namespace Colores
             if(senal == 1)
             {
                 tiempo = 0.2f;
-                gameObject.GetComponent<Image>().sprite = bien;
+                gameObject.GetComponent<SpriteRenderer>().sprite = bien;
                 SFXManager.PlayAudio("Boing");
-                gameObject.GetComponentInChildren<Text>().text = " ";
+                gameObject.GetComponentInChildren<TextMesh>().text = " ";
                 senal = 0;
             }
             else if(senal == 2)
             {
                 tiempo = 0.2f;
-                gameObject.GetComponent<Image>().sprite = error;
-                gameObject.GetComponentInChildren<Text>().text = " ";
+                gameObject.GetComponent<SpriteRenderer>().sprite = error;
+                gameObject.GetComponentInChildren<TextMesh>().text = " ";
                 SFXManager.PlayAudio("Wrong");
                 senal = 0;
             }               
@@ -48,17 +47,17 @@ namespace Colores
         {
             if(senal == 1)
             {
-                gameObject.GetComponent<Image>().sprite = racha;
+                gameObject.GetComponent<SpriteRenderer>().sprite = racha;
                 SFXManager.PlayAudio("Boing");
-                gameObject.GetComponentInChildren<Text>().text = Convert.ToString(puntajeAcumulado);
+                gameObject.GetComponentInChildren<TextMesh>().text = Convert.ToString(puntajeAcumulado);
                 senal = 0;
             }
             else if(senal == 2)
             {
                 tiempo = 0.2f;
-                gameObject.GetComponent<Image>().sprite = error;
+                gameObject.GetComponent<SpriteRenderer>().sprite = error;
                 SFXManager.PlayAudio("Wrong");
-                gameObject.GetComponentInChildren<Text>().text = " ";
+                gameObject.GetComponentInChildren<TextMesh>().text = " ";
                 senal = 0;
             } 
         }
@@ -67,7 +66,7 @@ namespace Colores
         {
             if (tiempo <= 0)
             {
-                gameObject.GetComponent<Image>().sprite = vacio;
+                gameObject.GetComponent<SpriteRenderer>().sprite = vacio;
             }
         }
 

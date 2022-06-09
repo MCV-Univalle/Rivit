@@ -24,15 +24,15 @@ namespace Cuentaranas
                 gameManager.IterationNumber++;
                 gameManager.NormalSpeed += 0.025f;
                 gameManager.SpeedVariance += 0.0035f;
-                gameManager.WaitTime -= 0.08f;
+                gameManager.WaitTime -= 0.09f;
             }
             else
             {  
                 gameManager.IterationNumber += 2;
                 gameManager.ActiveFrogsNumber = 3;
-                gameManager.NormalSpeed += 0.035f;
+                gameManager.NormalSpeed += 0.03f;
                 gameManager.SpeedVariance += 0.0075f;
-                gameManager.WaitTime -= 0.125f;
+                gameManager.WaitTime -= 0.1f;
             }
         }
 

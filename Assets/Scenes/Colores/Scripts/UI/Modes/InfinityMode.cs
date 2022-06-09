@@ -26,7 +26,7 @@ namespace Colores
             gameManager.comienzoDeTiempo = CambiarFrecuencia(etapa);
             gameManager.velocidad = CambiarVelocidad(etapa);
         
-            gameManager.velocidadExtra = CambiarVelocidad(etapa)+30;
+            gameManager.velocidadExtra = CambiarVelocidad(etapa)+0.5f;
             gameManager.comienzoDeTiempoExtra = Random.Range(1,11);
         }
 
@@ -59,19 +59,19 @@ namespace Colores
             switch (etapa)
             {
                 case 1:
-                    return 70;
+                    return 1;
                     break;
 
                 case 2:
-                    return 100;
+                    return 2;
                     break;
 
                 case 3:
-                    return 130;
+                    return 3;
                     break;
 
                 case 4:
-                    return 160;
+                    return 4;
                     break;
             }
 

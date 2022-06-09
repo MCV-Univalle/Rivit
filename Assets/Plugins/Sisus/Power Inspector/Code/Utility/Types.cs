@@ -158,7 +158,7 @@ namespace Sisus
 		public static readonly Type MonoScript = typeof(MonoScript);
 		public static readonly Type DefaultAsset = typeof(DefaultAsset);
 		#if UNITY_2017_2_OR_NEWER
-		public static readonly Type AssetImporterEditor = typeof(UnityEditor.Experimental.AssetImporters.AssetImporterEditor);
+		public static readonly Type AssetImporterEditor = typeof(UnityEditor.AssetImporters.AssetImporterEditor);
 		#endif
 		#endif
 		

@@ -51,6 +51,7 @@ TagManager:
   - GameOverPanel
   - bottomNavigationBar
   - UserDataManager
+  - APIHelper
   layers:
   - Default
   - TransparentFX

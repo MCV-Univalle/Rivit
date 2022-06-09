@@ -17,15 +17,13 @@ public class TuberiasUIManager : MonoBehaviour
     private GameObject panelGameOver;
     private GameObject panelControlsTuberias;
 
-    private TuberiasGameManager gameManager = new TuberiasGameManager();
-
         void Awake()
         {
             if (instance == null)
             {
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
-                panelGameOver = GetChildWithName(panelUserInterface, "GameOverPanelTuberias");
+                panelGameOver = GetChildWithName(panelUserInterface, "LevelCompletedPanelTuberias");
                 panelControlsTuberias = GetChildWithName(panelUserInterface, "ControlsTuberias");
             }
             else
@@ -37,16 +35,15 @@ public class TuberiasUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // gameManager = GameObject.Find("GameManager").GetComponent<TuberiasGameManager>();
-        //levelTmpLabel = levelLabel.GetComponent<TextMeshProUGUI>();
 
     }
 
-    private void Update() {
-        
+    private void Update() 
+    {
+            TuberiasCompleted();
     }
 
-    public void EraseBoard(bool value)
+    public void DesactiveBoard(bool value)
     {
         panelBoard.SetActive(value);
     }
@@ -61,26 +58,7 @@ public class TuberiasUIManager : MonoBehaviour
     {
         panelControlsTuberias.SetActive(value);
     }
-/*    public void NextLevel()
-    {
 
-        if (gameManager.LevelIndexList < gameManager.LevelsList.Count - 1)
-        {
-            print(levelTmpLabel.text);
-            gameManager.LevelIndexList += 1;
-        }
-    }
-
-    public void PreviusLevel()
-    {
-        if (gameManager.LevelIndexList > 0)
-        {
-            print(levelTmpLabel.text);
-            gameManager.LevelIndexList -= 1;
-            gameManager.LoadLevel();
-        }
-    }
-*/
     public void ChangeLevelNameCurrent()
     {
         GameObject lnCurrent = GetChildWithName(panelControlsTuberias, "LevelNameCurrent");
@@ -91,10 +69,10 @@ public class TuberiasUIManager : MonoBehaviour
         tLevelName.GetComponent<TMPro.TextMeshProUGUI>().text = valueName;
     }
 
-    /*public void SetLevelTmpLabel()
+    public void TuberiasCompleted()
     {
-        levelTmpLabel.text = gameManager.levelsList2[gameManager.LevelIndexList].name;
-    }*/
+            GameObject lvInformation =  GetChildWithName(panelControlsTuberias, "LevelInformation");
+    }
 
     private GameObject GetChildWithName(GameObject obj, string name)
     {
@@ -109,9 +87,6 @@ public class TuberiasUIManager : MonoBehaviour
             return null;
         }
     }
-
-
-    // Update is called once per frame
 
 }
 

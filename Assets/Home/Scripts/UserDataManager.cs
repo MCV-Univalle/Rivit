@@ -41,6 +41,7 @@ public class UserDataManager : MonoBehaviour
     private void LoadData()
     {
         string jsonString = PlayerPrefs.GetString(keyString);
+        Debug.Log(jsonString);
         if (jsonString != "")
         {
             UserData data = new UserData();
@@ -58,6 +59,7 @@ public class UserDataManager : MonoBehaviour
     {
         PersonalData = new UserData();
         PersonalData.PlayerName = "";
+        PersonalData.Password = "";
         PersonalData.Clothes = "{ \"hat\":\"Hat0\",\"glasses\":\"Glasses0\",\"accessory\":\"Accessory0\",\"shirt\":\"Shirt0\",\"color\":\"#67CA55\"}";
         PersonalData.PurchasedClothes = new List<string>();
         PersonalData.Coins = 0;
@@ -115,6 +117,13 @@ public class UserDataManager : MonoBehaviour
     {
         LoadData();
         return PersonalData.PurchasedClothes;
+    }
+
+    public void RegisterEmailAndPassword(string email, string password)
+    {
+        PersonalData.Email = email;
+        PersonalData.Password = password;
+        SaveData();
     }
 
     public void SaveData()

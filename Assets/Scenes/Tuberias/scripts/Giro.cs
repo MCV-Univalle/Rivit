@@ -12,6 +12,7 @@ public class Giro : MonoBehaviour
     bool play;
     public float z;
     public float angulo;
+    public int clicks;
 
     // Start is called before the first frame update
 
@@ -31,6 +32,7 @@ public class Giro : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, z + 90));
         angulo = transform.eulerAngles.z;
         MyAudioSource.Play();
+        clicks +=1;
     }
 
 }

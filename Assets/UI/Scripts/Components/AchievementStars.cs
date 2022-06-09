@@ -12,7 +12,7 @@ public class AchievementStars : MonoBehaviour
     [SerializeField] private SpeechBubble speechBubble;
     private string[] felicitaciones = {"Intentalo de nuevo", "Bien hecho", "¡Excelente!"};
 
-    public IEnumerator CheckScore(int score, int[] standars)
+    public IEnumerator CheckScore(int score, int[] standards, int oldScore)
     {
         var layoutGroup = this.GetComponent<HorizontalLayoutGroup>();
         layoutGroup.enabled = false;
@@ -21,16 +21,28 @@ public class AchievementStars : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(0.5F);
-            if (score > standars[i])
+            if (score > standards[i])
             {
                 layout.transform.GetChild(i).gameObject.GetComponent<Animator>().SetBool("active", true);
                 text = felicitaciones[i];
             }
-                
         }
         speechBubble.gameObject.SetActive(true);
         speechBubble.Speech.text = text;
         layoutGroup.enabled = true;
+        VerifyRecord(oldScore, score, standards[1]);
+    }
+
+    public void VerifyRecord(int oldScore, int newScore, int standard)
+    {
+        if(newScore > oldScore)
+        {
+            if (oldScore < standard && newScore > standard)
+                speechBubble.Speech.text = "¡Desbloqueaste un nuevo modo!";
+            else
+                speechBubble.Speech.text = "¡Nuevo record!";
+
+        }
     }
 
     public void DesactiveStars()

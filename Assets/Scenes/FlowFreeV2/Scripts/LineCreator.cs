@@ -91,7 +91,7 @@ namespace FlowFreeV2
                 lrObj.SetPosition(1, fin);
                 lrObj.material.SetColor("_Color", colorLine);
                 lrObj.material.shader = Shader.Find("Sprites/Default");
-                lrObj.sortingOrder = 1;
+                lrObj.sortingOrder = 2;
             }
         }
 

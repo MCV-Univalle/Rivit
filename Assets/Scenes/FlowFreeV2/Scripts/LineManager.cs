@@ -146,14 +146,20 @@ namespace FlowFreeV2
 
         public int CountFowCompleted()
         {
-            int cont = 0;
+            int contFlowFin = 0;
+            foreach (bool element in flowCompleted)if (element == true) contFlowFin++;
+            int contFlowIni = contFlowFin;
+            contFlowFin = 0;
             CantFlows = flowCompleted.Count - 1;
             CompletedFlowValidation();
-            foreach (bool element in flowCompleted)
-            {
-                if (element == true) cont++;
-            }
-            return cont;
+            foreach (bool element in flowCompleted)if (element == true) contFlowFin++;
+            PlaySoundFlowCompleted(contFlowIni, contFlowFin);
+            return contFlowFin;
+        }
+
+        private void PlaySoundFlowCompleted(int a, int b)
+        {
+            if (a < b) AudioManagerFlowV2._instance.PlayAudio("EventAction");
         }
     }
 }

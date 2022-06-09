@@ -14,6 +14,7 @@ namespace Tuberias
         void ILevelGenerator.GenerateLevel(List<string[]> nivel)
         {
             manejadorTablero.instance.AcomodarTablero(nivel);
+            TuberiasUIManager.instance.ActivePanelGameOver(false);
         }
 
     }

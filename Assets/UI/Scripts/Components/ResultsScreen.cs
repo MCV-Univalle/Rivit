@@ -39,16 +39,20 @@ public class ResultsScreen : UIComponent
     {
         FadeInMoveY();
         achievementStars.DesactiveStars();
-        (_gameManager as ModeSystemGameManager).RecordScore();
-        int top = (_gameManager as ModeSystemGameManager).GetCurrentRanking()[0];
-        topScore.text = "Puntaje máximo: " + top;
-        currentCoins.text = (_gameManager as ModeSystemGameManager).Coins + "";
-        int score = (_gameManager as ModeSystemGameManager).Score;
-        var standards = (_gameManager as ModeSystemGameManager).GetStandardsOfCurrentMode();
-        StartCoroutine(achievementStars.CheckScore(score, standards));
-        int obtainedCoins = (_gameManager as ModeSystemGameManager).AddCoins();
-        StartCoroutine(CountCoins(obtainedCoins, 0.01F));
-        StartCoroutine(CountFinalScore(score, 0.01F));
+        if(_gameManager is ModeSystemGameManager)
+        {
+            int oldRecord = (_gameManager as ModeSystemGameManager).GetCurrentRanking()[0];
+            (_gameManager as ModeSystemGameManager).RecordScore();
+            int top = (_gameManager as ModeSystemGameManager).GetCurrentRanking()[0];
+            topScore.text = "Puntaje máximo: " + top;
+            currentCoins.text = (_gameManager as ModeSystemGameManager).Coins + "";
+            int score = (_gameManager as ModeSystemGameManager).Score;
+            var standards = (_gameManager as ModeSystemGameManager).GetStandardsOfCurrentMode();
+            StartCoroutine(achievementStars.CheckScore(score, standards, oldRecord));
+            int obtainedCoins = (_gameManager as ModeSystemGameManager).AddCoins();
+            StartCoroutine(CountCoins(obtainedCoins, 0.01F));
+            StartCoroutine(CountFinalScore(score, 0.01F));
+        }
     }
 
     public IEnumerator CountCoins(int num, float waitTime)

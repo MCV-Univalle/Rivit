@@ -40,15 +40,15 @@ namespace Colores
         {
             GameObject guia = Instantiate(esfera) as GameObject;
             guia.transform.SetParent(panel.transform, false);
-            guia.GetComponentInChildren<Text>().color = colores[color];
-            guia.GetComponentInChildren<Text>().text = palabrasGuias[palabra];
+            guia.GetComponentInChildren<TextMesh>().color = colores[color];
+            guia.GetComponentInChildren<TextMesh>().text = palabrasGuias[palabra];
         }
 
         public void EnemigosExtra(GameObject enemigo,GameObject panel, List<Color> colores, int color)
         {
             GameObject extra = Instantiate(enemigo) as GameObject;
             extra.transform.SetParent(panel.transform, false);
-            extra.GetComponent<Image>().color = colores[color];
+            extra.GetComponent<SpriteRenderer>().color = colores[color];
         }
     }
 }

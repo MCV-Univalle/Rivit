@@ -426,7 +426,7 @@ namespace Sisus
 			}
 			#endif
 
-			var importerEditor = editor as UnityEditor.Experimental.AssetImporters.AssetImporterEditor;
+			var importerEditor = editor as UnityEditor.AssetImporters.AssetImporterEditor;
 			if(importerEditor == null)
 			{
 				isAssetImporter = false;
@@ -451,7 +451,7 @@ namespace Sisus
 				return;
 			}
 			
-			var setTargetEditorMethod = typeof(UnityEditor.Experimental.AssetImporters.AssetImporterEditor).GetMethod("InternalSetAssetImporterTargetEditor", BindingFlags.Instance | BindingFlags.NonPublic);
+			var setTargetEditorMethod = typeof(UnityEditor.AssetImporters.AssetImporterEditor).GetMethod("InternalSetAssetImporterTargetEditor", BindingFlags.Instance | BindingFlags.NonPublic);
 			if(setTargetEditorMethod == null)
 			{
 				#if DEV_MODE

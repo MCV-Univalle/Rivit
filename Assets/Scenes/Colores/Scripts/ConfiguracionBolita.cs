@@ -35,7 +35,7 @@ namespace Colores{
         {
             for (int i=0; i<4;i++)
             {
-                if (gameObject.GetComponent<Image>().color == colores[i])
+                if (gameObject.GetComponent<SpriteRenderer>().color == colores[i])
                     auxiliar = i + 1;
             }
 
@@ -53,6 +53,7 @@ namespace Colores{
             {
                 coloresGameManager.correctosSeguidos = 0;
                 señales.senal = 2;
+                Destroy(gameObject);
                 coloresGameManager.fallas++;
             }
                 

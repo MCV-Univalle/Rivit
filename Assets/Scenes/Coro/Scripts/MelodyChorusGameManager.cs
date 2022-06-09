@@ -21,6 +21,8 @@ namespace CoroMelodia
         private bool _isGameStarted = false;
         private bool _gameOver = false;
 
+        public bool FreeMode { get; set; }
+
         private void Start()
         {
             Frog.singNote += CatchNote;
@@ -82,8 +84,11 @@ namespace CoroMelodia
         }
         public override void StartGame()
         {
-            StartNewMelody(3);
-            PrepareToShowMelody("Memoriza esta melodía");
+            if(!FreeMode)
+            {
+                StartNewMelody(3);
+                PrepareToShowMelody("Memoriza esta melodía");
+            }
         }
         public void CatchNote(int note)
         {

@@ -1,11 +1,15 @@
-﻿using System.Threading;
+﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
+using Newtonsoft.Json;
 using Debug = UnityEngine.Debug;
+using Random=UnityEngine.Random;
 namespace Colores
 {
 
@@ -33,6 +37,11 @@ namespace Colores
         private int auxiliar = 2;
         private bool randomBoolean;
         public List<int> numeros;
+        public GameObject botones;
+        public GameObject señal;
+        public GameObject ptjObtenido;
+
+        private AdditionalDataColores additionalData;
 
         public override string Name => "Colores";
         [InjectOptional(Id = "SFXManager")] private AudioManager _SFXManager;
@@ -41,7 +50,16 @@ namespace Colores
         {
             Debug.Log("EndGameEnter");
             auxiliar=0;
+            botones.SetActive(false);
+            señal.SetActive(false);
+            ptjObtenido.SetActive(false);
             RaiseEndGameEvent();
+        }
+
+        public override string RegisterAdditionalData()
+        {
+            additionalData.Score = this.Score;
+            return JsonConvert.SerializeObject(additionalData);
         }
 
         public override void IncreaseDifficulty()
@@ -50,6 +68,11 @@ namespace Colores
         }
         public void LoadLevel()
         {   
+            additionalData = new AdditionalDataColores();
+            botones.SetActive(true);
+            señal.SetActive(true);
+            ptjObtenido.SetActive(true);
+
             switch(verificacion){
                 case true:
                     if (tiempoEntreGuias <= 0){
@@ -73,17 +96,17 @@ namespace Colores
                     break;
             }
 
-            if((!verificacion)&&(tiempoEntreGuiasExtra <= 0))
+            /*if((!verificacion)&&(tiempoEntreGuiasExtra <= 0))
             {
                     GeneracionGuias.instance.EnemigosExtra(bolitaExtra, panel, colores, numColor);
                     tiempoEntreGuiasExtra = comienzoDeTiempoExtra;
-            }
+            }*/
         }
 
         public override void StartGame()
         {
             Debug.Log("Metodo StartGame: Colores");
-            LoadLevel();
+            //LoadLevel();
         }
 
         private void GameOver()
@@ -163,7 +186,7 @@ namespace Colores
             numPalabra = Random.Range(numeros[0], numeros.Count);
             numeros.Add(numColor);
             randomBoolean = Random.value < 0.15;
-
+            
             if(tiempoEntreGuias > 0)
                 tiempoEntreGuias -= Time.deltaTime;
             

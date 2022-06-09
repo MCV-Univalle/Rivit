@@ -40,7 +40,7 @@ namespace Colores
         {
             for (int i=0; i<4;i++)
             {
-                if (gameObject.GetComponentInChildren<Text>().text == colores[i])
+                if (gameObject.GetComponentInChildren<TextMesh>().text == colores[i])
                     auxiliar = i + 1;
             }
 
@@ -58,6 +58,7 @@ namespace Colores
             {
                 señales.senal = 2;
                 coloresGameManager.correctosSeguidos = 0;
+                Destroy(gameObject);
                 coloresGameManager.fallas++;
             }
         }
@@ -74,8 +75,9 @@ namespace Colores
 
         public void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == "Finish")
+            if (collision.gameObject.tag == "Finish"){
                 contador++;
+            }
 
 
             if (collision.gameObject.tag == "Respawn")

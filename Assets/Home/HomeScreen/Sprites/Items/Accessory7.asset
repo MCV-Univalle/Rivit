@@ -15,4 +15,4 @@ MonoBehaviour:
   clotheName: Accessory7
   sprite: {fileID: 21300000, guid: ab4eefc5a34a40b49acafdd7eab874bd, type: 3}
   type: 2
-  price: 120
+  price: 100

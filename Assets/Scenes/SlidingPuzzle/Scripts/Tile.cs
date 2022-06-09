@@ -26,10 +26,10 @@ namespace SlidingPuzzle
             temp.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = Id + "";
         }
 
-        public void ShowSmallNumber()
+        public void ShowSmallNumber(bool value)
         {
             var temp = this.gameObject.transform.GetChild(2).transform;
-            temp.GetChild(0).gameObject.SetActive(true);
+            temp.GetChild(0).gameObject.SetActive(value);
         }
 
         public void ShowBigNumber()

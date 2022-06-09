@@ -84,7 +84,6 @@ namespace CoroMelodia
             foreach (var frog in _frogsList)
             {
                 _SFXManager.PlayAudio("Boing");
-                frog.GetComponent<Frog>().Appear();
                 yield return new WaitForSeconds(waitTime);
             }
         }

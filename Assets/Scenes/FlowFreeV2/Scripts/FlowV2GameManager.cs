@@ -15,7 +15,8 @@ namespace FlowFreeV2
 
         public override void EndGame()
         {
-            FlowFreeV2UIManager._instance.ActivePanelControlsFlow(false);
+            //FlowFreeV2UIManager._instance.ActivePanelControlsFlow(false);
+            
         }
 
         public override void StartGame()
@@ -31,9 +32,16 @@ namespace FlowFreeV2
 
                 DegugGUIUpdates();
 
+
+                if (gameOver)
+                {
+                    GenerateBoard._instance.CreateBoardVoid();
+                    EndGame();
+                    LeanTween.delayedCall(gameObject, 0.2F, () => NotifyGameOver());
+                }
+                //FlowFreeV2UIManager._instance.ActivePanelGameOver(gameOver);
                 
-                if (gameOver) GenerateBoard._instance.CreateBoardVoid();
-                FlowFreeV2UIManager._instance.ActivePanelGameOver(gameOver);
+                //AudioManagerFlowV2._instance.PlayAudio("Completed");
             }
         }
 

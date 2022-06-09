@@ -58,19 +58,19 @@ namespace Colores
             switch (etapa)
             {
                 case 1:
-                    return 70;
+                    return 1;
                     break;
 
                 case 2:
-                    return 100;
+                    return 2;
                     break;
 
                 case 3:
-                    return 130;
+                    return 3;
                     break;
 
                 case 4:
-                    return 160;
+                    return 4;
                     break;
             }
 
